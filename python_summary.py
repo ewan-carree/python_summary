@@ -285,3 +285,284 @@ new_list = [map_function(x) for x in liste if x%2!=0]
 print(f"before : {liste} and now : {new_list}")
 
 
+
+
+
+"""
+Astuce pour éviter de devoir utiliser math pour avoir le nombre entier d'une division
+
+"""
+
+print(f"10 / 3 = {10 / 3}")
+print(f"10 // 3 = {10 // 3}")
+
+
+
+
+
+"""
+Boucle for enumerate : utile pour avoir chaque élément d'une liste associé à leur position, le tout sous forme d'un tuple
+
+"""
+liste = ['a', 'b', 'c']
+for index, elem in enumerate(liste):
+	print(f"{elem} at position {index}")
+
+
+
+
+
+"""
+Fonction qui acceptent un nombre inconnu de paramètre : def func(*en_tuple, **en_dictionnaire):
+
+"""
+def parameters(*args, **kwargs):
+	print(f"I received these unnamed args : {args}")
+	print(f"I received these named args : {kwargs}")
+parameters(1,"azerty",[1,2], couleur="rouge", taille_en_cm=172)
+both
+
+
+
+"""
+Ecrire les nombres longs de façon plus claire
+"""
+nb = 1_000_000
+print(nb)
+
+
+
+
+
+"""
+Conditions if/else plus claire
+
+"""
+conditions = False
+
+#Mauvaise solution :
+
+if conditions:
+	x=1
+else:
+	x=0
+print(x)
+
+#Bonne solution
+x = 1 if conditions else 0
+print(x)
+
+
+
+
+
+"""
+Associer des éléments de deux listes : zip()
+
+"""
+names = ["Peter Parker", "Clark Kent", "Wade Wilson", "Bruce Wayne"]
+heroes = ["Spiderman", "Superman", "Deadpool", "Batman"]
+universes = ["Marvel", "DC", "Marvel", "DC"]
+
+for name, hero, universe in zip(names, heroes, universes):
+	print(f"{name} is actually {hero} from {universe}")
+
+
+
+
+
+"""
+ignorer une variable unpackée
+
+"""
+my_tuple = (1,2)
+my_tuple2 = (1,2,3,4,5)
+#unpack :
+a, b = my_tuple
+print(f"{a} and {b}")
+
+#We don't need b :
+a, _ = my_tuple
+print(a)
+
+#Another exemple :
+for _ in range(2):
+	print("I d'ont care about i")
+
+#Another exemple :
+a, b, *_ = my_tuple2 #On ignore tout ce qui suit les 2 premières variables, le reste est stocké dans une liste
+a, b, *c, d = my_tuple2 
+print(f"{a}, {b}, {c}, {d}")
+
+
+
+
+
+"""
+Entrer un mpd de façon sécurisée en input :
+
+"""
+from getpass import getpass
+password = getpass("Password : ")
+print(password)
+
+
+
+
+
+"""
+lambda function
+
+"""
+def equivalent_lambda(x):
+	return x+5
+real_lambda = lambda x : x+5
+print(f"equivalent_lambda : {equivalent_lambda(5)} and real_lambda : {real_lambda(5)}")
+
+
+
+
+
+"""
+Inspecter le code source d'un élément
+
+"""
+import inspect
+from queue import Queue
+#print(f"Code source : \n{inspect.get_source(Queue)}")
+
+
+
+
+
+"""
+Decorators : utile pour qualifier une fonction et effectuer des tests généraux dessus
+
+"""
+import time
+def timer(func):
+	def wrapper(*args, **kwargs):
+		start = time.time()
+		rv = func(*args, **kwargs)
+		total = time.time() - start
+		print("Time to execute : "+ str(total))
+		return rv
+	return wrapper
+
+@timer
+def exemple(x):
+	string = "je suis "+str(x)
+	return string
+result = exemple(5)
+print(result)
+
+
+
+
+
+
+"""
+Generators : utile pour économiser de la mémoire lors de parcours de grandes listes
+
+"""
+def square(n):
+	num = 0
+	while True:
+		yield num
+		if num == n:
+			return
+		else:
+			num+=1
+for i in square(100):
+	print(i*i, end = " - ")
+print()
+
+
+
+
+
+"""
+Connaitre la mémoire utilisée par une variable
+
+"""
+import sys
+var = [1]*100
+print(f"mémoire utilisée par var : {sys.getsizeof(var)} bytes")
+
+
+
+
+
+
+
+
+
+
+"""
+Class
+
+"""
+"""
+Héritage
+
+"""
+class Dog:
+	def __init__(self, age):
+		self.age = age
+class Cat(Dog):
+	"""Cat hérite de Dog : elle possède ses fonctions et méthodes"""
+	def __init__(self, age, nom):
+		super().__init__(age)
+		self.nom = nom
+
+
+
+
+
+"""
+Dunder methods
+
+"""
+class Point:
+	def __init__(x,y):
+		self.x = x
+		self.y = y
+	def __add__(self, p):
+		"""la fonction add surcharge l'opérateur +"""
+		return Point(self.x + p.x, self.y + p.y)
+
+	"""Autres surcharges : 
+	__sub__(self,p) : -
+	__mul__(self,p) : *
+	__str__(self) / __repr__(self) : écriture en texte
+	__gt__(self,p)  : >
+	__ge__(self,p) 	: >=
+	__lt__(self,p)  : <
+	__le__(self,p)  : <=
+	__eq__(self,p) : == 
+	__call__(self, arg) > objet(arg)"""
+
+
+
+
+
+"""
+Méthodes static/class
+
+"""
+class StaticClass:
+	nb_class=0
+	def __init__(self):
+		print("une nouvelle classe vient d'être créée")
+		nb_class+=1
+	
+	@classmethod
+	def ma_func(cls): #pas de self, obligatoirement cls
+		"""Agit avec les variables de la classe"""
+		return cls.nb_class
+
+	@staticmethod
+	def ma_func2(arg1, arg2):#pas de self
+	"""N'agit pas avec les composants de la classe mais est quand même en lien avec la classe"""
+	return arg1 + arg2
+
