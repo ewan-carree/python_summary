@@ -520,27 +520,64 @@ class Cat(Dog):
 
 
 """
-Dunder methods
+Dunder methods / Surcharge opérateurs
 
 """
-class Point:
-	def __init__(x,y):
+class Point(object):
+	def __init__(self, x=0,y=0):
 		self.x = x
 		self.y = y
+		self.conteneur = [1,2,3,4,5,6,7]
+		self.__my_private_attr = "Je suis privé"
+
+	def __str__(self):
+		print("I'm the class Point")
+
 	def __add__(self, p):
 		"""la fonction add surcharge l'opérateur +"""
 		return Point(self.x + p.x, self.y + p.y)
 
+#	def __getattr__(self, name):
+#		print(f"{name} didn't found")
+
+	def __setattr__(self, name, value):
+		object.__setattr__(self, name, value) #Chaque classe crée hérite de base de la classe object
+
+	def __delattr__(self, name):
+		print(f"Deleting {name} ...")
+
+	def __getitem__(self, index):
+		return self.conteneur[index]
+
+	def __setitem__(self, index, value):
+		self.conteneur[index] = value
+
+	def __contains__(self, value): # 8 in ma_liste  <==>  ma_liste.__contains__(8)
+		return True if value in self.conteneur else False
+
+	def __len__(self):
+		return len(self.conteneur)
+
 	"""Autres surcharges : 
+
 	__sub__(self,p) : -
 	__mul__(self,p) : *
-	__str__(self) / __repr__(self) : écriture en texte
+	__truediv__(self, p) : /
+	__floordiv__(self, p) : //
+	__mod__(self, p) : %
+	__pow__(self, p) : **
+
 	__gt__(self,p)  : >
 	__ge__(self,p) 	: >=
 	__lt__(self,p)  : <
 	__le__(self,p)  : <=
 	__eq__(self,p) : == 
-	__call__(self, arg) > objet(arg)"""
+
+	__iadd__(self,p) : +=
+	__isub__(self,p) : -=
+	__imul__(self,p) : *=
+	__itruediv__(self, p) : /=	
+	"""
 
 
 
@@ -563,6 +600,52 @@ class StaticClass:
 
 	@staticmethod
 	def ma_func2(arg1, arg2):#pas de self
-	"""N'agit pas avec les composants de la classe mais est quand même en lien avec la classe"""
-	return arg1 + arg2
+		"""N'agit pas avec les composants de la classe mais est quand même en lien avec la classe"""
+		return arg1 + arg2
+
+
+
+
+
+"""
+See every methods from a class / See every attributs from class
+
+"""
+ma_class = Point()
+print(dir(ma_class))
+print(ma_class.__dict__)
+print(ma_class.__my_private_attr)
+
+
+
+
+
+"""
+Property : permet d'offrir des accesseurs et mutateurs pour définir un attribut privé
+
+La méthode donnant accès à l'attribut
+
+La méthode modifiant l'attribut
+
+La méthode appelée quand on souhaite supprimer l'attribut
+
+La méthode appelée quand on demande de l'aide sur l'attribut
+
+"""
+class Test(objet):
+	def __init__(self, x=0, y=0):
+		self.x = x
+		self.y = y
+		self._dimension = 2 #Attribut privé
+
+	def _get_dimension(self):
+		return self._dimension
+
+	def _set_dimension(self,value):
+		self._dimension = value
+		
+	dimension = property(_get_dimension, _set_dimension) # lorsqu'on appelera objet.dimension, property redirigera vers les accesseurs/mutateurs privés
+
+
+
 
