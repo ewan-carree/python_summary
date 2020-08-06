@@ -141,6 +141,16 @@ finally:
 
 #Si nous ne voulons pas qu'un élément se produise nous pouvons utiliser le mot clé raise : raise Exception("Le problème")
 
+#Créer notre propre exception : La méthode __str__ de la classe est ce qui est appelé pour afficher le message d'erreur
+class MonException(Exception):
+    """Exception levée dans un certain contexte… qui reste à définir"""
+    def __init__(self, message):
+        """On se contente de stocker le message d'erreur"""
+        self.message = message
+    def __str__(self):
+        """On renvoie le message"""
+        return self.message
+
 
 
 
@@ -449,7 +459,7 @@ def timer(func):
 		return rv
 	return wrapper
 
-@timer
+@timer #on peut chainer plusieurs décorateurs à la suite 
 def exemple(x):
 	string = "je suis "+str(x)
 	return string
@@ -503,7 +513,7 @@ Class
 
 """
 """
-Héritage
+Héritage / Multiple inheritance
 
 """
 class Dog:
@@ -514,6 +524,15 @@ class Cat(Dog):
 	def __init__(self, age, nom):
 		super().__init__(age)
 		self.nom = nom
+
+#multiple
+class Animal(object):
+	pass
+class DessinAnime(object):
+	pass
+class Hamtaro(Animal, DessinAnime): #We can add more than two parent classes
+	pass
+
 
 
 
@@ -541,6 +560,7 @@ class Point(object):
 #		print(f"{name} didn't found")
 
 	def __setattr__(self, name, value):
+		"""On modifie la classe mère directement plutôt que seulement appeler setaatr de cette classe et tourner en boucle sur la même méthode"""
 		object.__setattr__(self, name, value) #Chaque classe crée hérite de base de la classe object
 
 	def __delattr__(self, name):
