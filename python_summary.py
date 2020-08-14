@@ -446,7 +446,7 @@ from queue import Queue
 
 
 """
-Decorators : utile pour qualifier une fonction et effectuer des tests généraux dessus
+Decorators : utile pour qualifier une fonction ou une classe et effectuer des tests généraux dessus
 
 """
 import time
@@ -465,7 +465,6 @@ def exemple(x):
 	return string
 result = exemple(5)
 print(result)
-
 
 
 
