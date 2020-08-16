@@ -1,4 +1,4 @@
-\documentclass{article}
+\documentclass[a4paper, 12pt]{article}
 \usepackage[utf8]{inputenc}
 \usepackage[T1]{fontenc}    
 \usepackage[english]{babel}
@@ -7,16 +7,50 @@
 \author{Ewan Carrée}
 \date{August 2020}
 
+\usepackage{listings}
+\usepackage{xcolor}
+
+%New colors defined below
+\definecolor{codegray}{rgb}{0.5,0.5,0.5}
+\definecolor{backcolour}{rgb}{0.95,0.95,0.92}
+
+%Code listing style named "mystyle"
+\lstdefinestyle{mystyle}{
+  backgroundcolor=\color{backcolour},   commentstyle=\color{codegray},
+  keywordstyle=\color{magenta},
+  numberstyle=\tiny\color{codegray},
+  stringstyle=\color{black},
+  basicstyle=\ttfamily\footnotesize,
+  breakatwhitespace=false,         
+  breaklines=true,                 
+  captionpos=b,                    
+  keepspaces=true,                 
+  numbers=left,                    
+  numbersep=5pt,                  
+  showspaces=false,                
+  showstringspaces=false,
+  showtabs=false,                  
+  tabsize=4
+}
+%"mystyle" code listing set
+\lstset{style=mystyle}
+
 %\usepackage[top=2cm, bottom=2cm, left=2cm, right=2cm]{geometry} 
 
 \usepackage{color}
-\usepackage{hyperref}
+\usepackage{hyperref} %links
 \hypersetup{
     colorlinks=true,
     linkcolor=black,
     urlcolor=blue,
     linktoc=all
 }
+
+\iffalse
+%Python code highlighting
+\begin{lstlisting}[language=Python, caption=Python example]
+\end{lstlisting}
+\fi
 
 \begin{document}
 
@@ -26,23 +60,114 @@
 \tableofcontents
 
 \newpage
-\section{Python words}
+\section{Python reserved words}
+In python 3, there are some reserved words that you can't use in your program as variables, function name, class name, ... \\ \\ \\
 
-\newpage
+\begin{table}[h]
+\begin{center}
+{\renewcommand{\arraystretch}{2} %donne la distance entre les lignes%
+{\setlength{\tabcolsep}{1.5cm} %donne la distance entre les collones%
+\begin{tabular}{|l|c|r|}
+  \hline
+  False & None & True \\
+  \hline
+  and & as & assert \\
+  \hline
+  break & class & continue \\
+  \hline
+  def & del & elif \\
+  \hline
+  else & except & finally \\
+  \hline
+  for & from & global \\
+  \hline
+  if & import & in \\
+  \hline
+  is & lambda & nonlocal \\
+  \hline 
+  not & or & pass \\
+  \hline 
+  raise & return & try \\
+  \hline
+  while & with & yield \\
+  \hline
+\end{tabular}}}
+\end{center}
+\caption{Reserved words}
+\end{table}
+
+
+
+\clearpage
 \section{Types}
+Python offers different basics types that are often enough for your program.\newline
+
 \subsection{Immutable}
+Immutable means that you can't directly modify your variable after you've assigned it. You have to reassign or create a new variable to work on a previous one\newline
+
 \subsubsection{String}
+Python string is an ordered collection of characters which is used to represent and store the text-based information. Strings are stored as individual characters in a contiguous memory location. It can be accessed from both directions: forward and backward. \\
+Here are some methods that you can apply on strings : 
+\begin{itemize}
+\item
+\end{itemize}
+
 \subsubsection{Integer}
+An integer is a number without any comma. \\
+Here are some methods that you can apply on integers : 
+\begin{itemize}
+\item
+\end{itemize}
+
 \subsubsection{Float}
+A float is a number with some digits after the comma, it's preciser than an integer. \\
+Here are some methods that you can apply on floats : 
+\begin{itemize}
+\item
+\end{itemize}
+
 \subsubsection{Tuple}
+A tuple is a container that can contain multiple variables with multiple types that have a link together. \\
+Here are some methods that you can apply on tuples : 
+\begin{itemize}
+\item
+\end{itemize}
+
+\subsubsection{Bool}
+There is only two types of boolean : True and False. \\
+Everything can be considered as True if it diffrent from 0 or False. \\
+Here are some methods that you can apply on booleans : 
+\begin{itemize}
+\item
+\end{itemize}
 
 \subsection{Mutable}
+Mutable means that if you are working on a variable, you directly modify it and don't need to create a new variable or reassign the previous one. It cans cause conflict if two process are using the same variable that can be changed.\newline
+
 \subsubsection{List}
+A list is a container that can contain multiple variables with multiple types that have a link together\\
+Here are some methods that you can apply on lists : 
+\begin{itemize}
+\item
+\end{itemize}
+
 \subsubsection{Dict}
+A dict is an non-organized container that have variables associated to keys to recognize them. Keys are offently strings but we can also use integers\\
+Here are some methods that you can apply on dicts : 
+\begin{itemize}
+\item
+\end{itemize}
+
 \subsubsection{Set}
+A set is a container that are very useful for mathematical operations\\
+Here are some methods that you can apply on sets : 
+\begin{itemize}
+\item
+\end{itemize}
 
 \newpage
 \section{Class}
+Classes are a way of bringing together data and functionality. Creating a new class creates a new type of object and so new instances of this type can be built. Each instance can have its own attributes, which defines its state. An instance can also have methods (defined by the instance class) to modify its state.\newline
 \subsection{Methods}
 \subsection{Dunder methods}
 \subsection{Static and class methods}
@@ -52,6 +177,7 @@
 
 \newpage
 \section{Function}
+A function is a block of organized, reusable code that is used to perform a single, related action. Functions provide better modularity for your application and a high degree of code reusing.\newline
 \subsection{Lambda function}
 \subsection{Default parameters}
 \subsection{Map function}
@@ -59,6 +185,7 @@
 
 \newpage
 \section{Modules}
+Modules are Python programs that contain functions that we often reuse (we also call them libraries or libraries). These are “toolboxes” that will be very useful to you.\newline
 \subsection{Time}
 \subsubsection{Time}
 \subsubsection{Datetime}
@@ -80,12 +207,15 @@
 
 \newpage
 \section{Decorators}
+A decorator is a design pattern in Python that allows a user to add new functionality to an existing object without modifying its structure. Decorators are usually called before the definition of a function you want to decorate.\newline
 \subsection{Function}
 \subsection{Class}
 \subsection{Multiple decorators}
 
 \newpage
 \section{Generators}
+Generators are simple and powerful tools for creating iterators. They are written like regular functions but use the yield statement when they want to return data. Each time it is called by next (), the generator resumes execution where it left off (keeping all of its execution context).\newline
+\subsection{Iterators}
 \subsection{Yield}
 
 \newpage
