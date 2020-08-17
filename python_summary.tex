@@ -170,44 +170,68 @@ string = string*3
 \end{lstlisting}
 
 \item String to List \\
-Return a list that contains every single element separated by the separator argument.
+Transform your string into a list.
 \begin{lstlisting}[language=Python]
 tableau = string.split(' ')
 # ['Hello,', 'dlrow!Hello,', 'dlrow!Hello,', 'dlrow!']
 \end{lstlisting}
 
-\item Fill
+\item Fill \\
 Return a string filled with zero to correspond to have the same digit in every number.
 \begin{lstlisting}[language=Python]
 string = '5'
 string = string.zfill(3)
 # 005
 \end{lstlisting}
-
 \end{itemize}
 
 \subsubsection{Integer}
-An integer is a number without any comma. \\
-You can write very long number in a more readable way with an underscore : 
+You can write very long number in a more readable way with \_ : 
 \begin{lstlisting}[language=Python]
 nb = 1_000_000
-print(nb)
 # 1000000
 \end{lstlisting}
 
 \subsubsection{Float}
-A float is a number with some digits after the comma, it's preciser than an integer. \\
-Here are some methods that you can apply on floats : 
+A float is a decimal number, it's most precise than an integer. \\
 \begin{itemize}
-\item
+\item Decimal handling \\
+Sometimes you don't need to conserve every decimal from a variable. You can modify it by two different ways : 
+\begin{lstlisting}[language=Python]
+my_float = 3.3333333
+print("%.0f" % my_float + "with no decimal and " + "%.2f" % my_float + "with two decimals") #3 with no decimal and 3.33 with two decimals
+round(my_float, 3) # 3.333
+\end{lstlisting}
 \end{itemize}
 
 \subsubsection{Tuple}
 A tuple is a container that can contain multiple variables with multiple types that have a link together. \\
-Here are some methods that you can apply on tuples : 
 \begin{itemize}
-\item
+\item Ignore unpacked variables \\
+When you unpack tuple arguments, sometimes some argument aren't useful, the common way to write it is with \_
+\begin{lstlisting}[language=Python]
+my_tuple = (1,2)
+my_tuple2 = (1,2,3,4,5)
+
+#unpack :
+a, b = my_tuple #1 and 2
+
+#We don't need b :
+a, _ = my_tuple #1
+
+#Another exemple :
+for _ in range(2):
+	print("I d'ont care about i")
+#I d'ont care about i
+#I d'ont care about i
+
+#Another exemple :
+a, b, *_ = my_tuple2 #We ignore everythin after the first two variables, the rest is stored in a list.
+a, b, *c, d = my_tuple2 
+print(f"{a}, {b}, {c}, {d}") #1, 2, [3, 4], 5
+\end{lstlisting}
 \end{itemize}
+
 
 \subsubsection{Bool}
 \label{subsec:Bool}
@@ -218,6 +242,7 @@ a = "Salut"
 b = 0
 if a:
 	print("a fonctionne")
+	# a fonctionne
 else:
 	print("a ne fonctionne pas")
 
@@ -225,15 +250,14 @@ if b:
 	print("b fonctionne")
 else:
 	print("b ne fonctionne pas")
-#a fonctionne
-#b ne fonctionne pas
+	# b ne fonctionne pas
 \end{lstlisting}
 
 \subsection{Mutable}
 Mutable means that if you are working on a variable, you directly modify it and don't need to create a new variable or reassign the previous one. It cans cause conflict if two process are using the same variable that can be changed.\newline
 
 \subsubsection{List}
-A list is a container that can contain multiple variables with multiple types that have a link together\\
+A list is a container that can contain multiple variables with multiple types that have a link together.\\ \\
 Here are some methods that you can apply on lists : 
 
 \begin{lstlisting}[language=Python]
@@ -241,62 +265,63 @@ tableau = ['Hello,', 'dlrow!Hello,', 'dlrow!Hello,', 'dlrow!']
 \end{lstlisting}
 
 \begin{itemize}
-\item Slicing
+\item Slicing \\
+Slicing is a method that concerns containers, you can use slicing on every possible container. \textbf{[start:end:step]} \textit{end argument isn't take in account : [start:end[}
 \begin{itemize}
-    \item Last element
+    \item Last element \\
+    If you don't know the length of a certain container, you can access to the last element with slicing.
     \begin{lstlisting}[language=Python]
     dernier_elem = tableau[-1]
-    print(dernier_elem)
     # dlrow!
     \end{lstlisting}
     
-    \item Cut list
+    \item Trunc \\
+    You can also trunc your list to keep just what you need.
     \begin{lstlisting}[language=Python]
     first_part = tableau[:3]
     second_part = tableau[3:]
-    print(f"first_part : {first_part} and second_part : {second_part}")
     # first_part : ['Hello,', 'dlrow!Hello,', 'dlrow!Hello,'] and second_part : ['dlrow!']
     \end{lstlisting}
     
-    \item Insert
+    \item Insert \\
+    If you need to precisely insert an element into list, slicing is a good way of doing it.
     \begin{lstlisting}[language=Python]
     tableau[1:1] = 'A'
-    print(tableau)
     # ['Hello,', 'A', 'dlrow!Hello,', 'dlrow!Hello,', 'dlrow!']
     \end{lstlisting}
 \end{itemize}
 
-\item Add
+\item Add \\
+You can merge two lists into single one containing elements from both original lists.
 \begin{lstlisting}[language=Python]
 new_tab = first_part + second_part
-print(new_tab)
 # ['Hello,', 'dlrow!Hello,', 'dlrow!Hello,', 'dlrow!']
 \end{lstlisting}
 
-\item Multiply
+\item Multiply \\
+Just like a string, you can multiply your list.
 \begin{lstlisting}[language=Python]
-new_new_tab = new_tab *3
-print(new_new_tab)
+multilpied_new_tab = new_tab *3
 # ['Hello,', 'dlrow!Hello,', 'dlrow!Hello,', 'dlrow!', 'Hello,', 'dlrow!Hello,', 'dlrow!Hello,', 'dlrow!', 'Hello,', 'dlrow!Hello,', 'dlrow!Hello,', 'dlrow!']
 \end{lstlisting}
 
-\item Index
+\item Index \\
+Return an integer which correspond to the position of the element searched.
 \begin{lstlisting}[language=Python]
 position = tableau.index('A')
-print(position)
 # 1
 \end{lstlisting}
 
-\item List to String
+\item List to String \\
+Transfrom your list into a string.
 \begin{lstlisting}[language=Python]
 string = ' '.join(tableau)
-print(string)
 # Hello, A dlrow!Hello, dlrow!Hello, dlrow!
 \end{lstlisting}
 \end{itemize}
 
 \subsubsection{Dict}
-A dict is an non-organized container that have variables associated to keys to recognize them. Keys are offently strings but we can also use integers\\
+A dict is an non-organized container that have variables associated to keys to recognize them. Keys are offently strings but we can also use integers.\\ \\
 Here are some methods that you can apply on dicts : 
 \begin{lstlisting}[language=Python]
 dictionnaire = {"nom":"Jerome", "age":20}
@@ -304,23 +329,23 @@ dictionnaire = {"nom":"Jerome", "age":20}
 
 \begin{itemize}
 \item Keys \\
+Return a (dict)list containing every keys that are into you dictionnary.
 \begin{lstlisting}[language=Python]
 keys = dictionnaire.keys()
-print(keys)
 #dict_keys(['nom', 'age'])
 \end{lstlisting}
 
 \item Values \\
+Return a (dict)list containing every values that are into you dictionnary.
 \begin{lstlisting}[language=Python]
 keys = dictionnaire.keys()
-print(keys)
 #dict_values(['Jerome', 20])
 \end{lstlisting}
 
 \item Items \\
+Return a (dict)tuple containing every keys associated to their values that are into you dictionnary.
 \begin{lstlisting}[language=Python]
 both = dictionnaire.items()
-print(both)
 # dict_items([('nom', 'Jerome'), ('age', 20)])
 \end{lstlisting}
 \end{itemize}
@@ -351,18 +376,19 @@ A function is a block of organized, reusable code that is used to perform a sing
 
 \subsection{Lambda function}
 \label{subsec:Lambda}
+Lambda function are very small function, it's very simple to create them and very often better than a function. \textbf{function\_name = lambda parameter : return\_value}
 \begin{lstlisting}[language=Python]
 def equivalent_lambda(x):
 	return x+5
-
+	
 real_lambda = lambda x : x+5
-
-print(f"equivalent_lambda : {equivalent_lambda(5)} and real_lambda : {real_lambda(5)}")
 
 # equivalent_lambda : 10 and real_lambda : 10
 \end{lstlisting}
 
 \subsection{Default parameters}
+Default parameters are used for parameters that don't necessarily need a value. We assign a default value that can be overloaded if needed. Default parameters are always declared after non-default parameters into function's head. \textbf{def func(non\_default\_parameters, \textit{default\_parameters = value})}
+
 \begin{lstlisting}[language=Python]
 def func(age, nom="Jerome"):
 	print(f"Tu as {age} ans et tu t'appelles {nom}")
@@ -375,35 +401,39 @@ func(20)
 \end{lstlisting}
 
 \subsection{Map function}
+Map function is a special function used to apply a function for each element of a container. \textbf{map(function\_to\_apply, list)}
 \begin{lstlisting}[language=Python]
 liste = [1,2,3]
 def map_function(x):
 	return x**x
 mapped_list = list(map(map_function,liste)) #No () for argument function
-print(f"before : {liste} and now : {mapped_list}")
+
 # before : [1, 2, 3] and now : [1, 4, 27]
 \end{lstlisting}
 
 \subsection{Filter function}
+Filter function is a special function used to apply a selection for each element of a container. \textbf{map(function\_to\_apply, list)}
 \begin{lstlisting}[language=Python]
 liste = [1,2,3]
 def filter_function(x):
 	return x%2!=0
 filtered_list = list(filter(filter_function,liste))
-print(f"before : {liste} and now : {filtered_list}")
+
 # before : [1, 2, 3] and now : [1, 3]
 \end{lstlisting}
 
 \subsection{List Comprehension}
+List comprehension is probably one of the most powerful method that you can apply. It conbines map and filter function into a single way to do it. \textbf{[func\_to\_apply() for elem in list if filter\_condition]}
 \label{subsec:ListComprehension}
 \begin{lstlisting}[language=Python]
 liste = [1,2,3]
 new_list = [map_function(x) for x in liste if x%2!=0]
-print(f"before : {liste} and now : {new_list}")
+
 #before : [1, 2, 3] and now : [1, 27]
 \end{lstlisting}
 
 \subsection{Unknown parameters}
+Sometimes you don't know how many arguments a function is going to receive. Also, it's important to handle unknown parameters. \textit{It's the case for exemple with the print() function}. \textbf{* means unnamed parameters and ** means named parameters}
 \begin{lstlisting}[language=Python]
 def parameters(*args, **kwargs):
 	print(f"I received these unnamed args : {args}")
@@ -417,6 +447,28 @@ both
 \newpage
 \section{Modules}
 Modules are Python programs that contain functions that we often reuse (we also call them libraries or libraries). These are “toolboxes” that will be very useful to you.\newline
+
+\subsection{Import}
+\label{subsec:Import}
+\subsubsection{Import module from another repertory}
+Sometimes you need to import a module that isn't into you actual repertory, rather than copy this module into you repertory you can import it by another way. \\
+
+Tree exemple :
+Main/
+	main.py
+	Test/
+		tes.py
+
+\begin{lstlisting}[language=Python]
+import sys
+sys.path.append("./Test")
+import test # .py file (module)
+\end{lstlisting}
+
+\subsubsection{Import module as}
+Sometimes you import modules but it's very long to write methods from a long module name. Plus, it's not good to use the \textit{import * from module} because it cans creates conflicts between function and class that have the same name in two different modules. Rather than writing module.class you can use the key word \textbf{as}.
+\label{As}
+
 \subsection{Time}
 \subsubsection{Time}
 \subsubsection{Datetime}
@@ -424,7 +476,16 @@ Modules are Python programs that contain functions that we often reuse (we also 
 \subsubsection{Getpass}
 \subsubsection{Hashlib}
 \subsection{Os}
+
 \subsection{Sys}
+\subsubsection{Memory used by a variable}
+Control you memory while programming. 
+\begin{lstlisting}[language=Python]
+import sys
+var = [1]*100
+print(f"memoire utilisee par var : {sys.getsizeof(var)} bytes") #memoire utilisee par var : 856 bytes
+\end{lstlisting}
+
 \subsection{Math}
 \subsection{Random}
 \subsection{Argparse}
@@ -435,11 +496,19 @@ Modules are Python programs that contain functions that we often reuse (we also 
 \subsubsection{Socket}
 \subsubsection{Select}
 \subsection{Threads}
+\subsection{Inspect}
+If you're interested in knowing how a class is built you can use the inspect module. It prints out the full code from the class.
+\begin{lstlisting}[language=Python]
+import inspect
+from queue import Queue
+print(f"Code source : \n{inspect.get_source(Queue)}")
+\end{lstlisting}
 
 \newpage
 \section{Decorators}
-A decorator is a design pattern in Python that allows a user to add new functionality to an existing object without modifying its structure. Decorators are usually called before the definition of a function you want to decorate.\newline
+A decorator is a design pattern in Python that allows a user to add new functionality to an existing object without modifying its structure. Decorators are usually called before the definition of a function you want to decorate. \textbf{@my\_decorator}\newline
 \subsection{Function}
+A decorator can be applied to wrap a function and apply a process on it each time it's called.
 \begin{lstlisting}[language=Python]
 import time
 def timer(func):
@@ -451,19 +520,20 @@ def timer(func):
 		return rv
 	return wrapper
 
-@timer #on peut chainer plusieurs decorateurs a la suite 
+@timer #we can chain decorators
 def exemple(x):
-	string = "je suis "+str(x)
-	return string
-result = exemple(5)
-print(result)
-
+	return "je suis "+str(x)
+	
+exemple(5)
 #Time to execute : 2.384185791015625e-06
 #je suis 5
 \end{lstlisting}
 
 \subsection{Class}
+A decorator can also be used to wrap a class.
+
 \subsection{Multiple decorators}
+You can chain decorators to apply multiple processes on the same function / class.
 
 \newpage
 \section{Generators}
@@ -473,72 +543,57 @@ Generators are simple and powerful tools for creating iterators. They are writte
 \subsection{Yield}
 
 \newpage
-\section{Others}
+\section{Knowledge in bulk}
 \subsection{Break / Continue / Pass / Return}
 \label{subsec:BCPR}
 \begin{lstlisting}[language=Python]
-#pass est une instruction vide
+#pass is similar to an empty instruction.
+if True:
+    pass
 
+#return is used un function to give a response to a call.
 def func():
-	"""
-	Ceci est une docstring, elle permet a l'utilisateur d'en savoir plus sur la fonction en faisait help(func)
-	"""
+	"""this is a docstring, use help(func) to know more about this function."""
 	return "j'ai retourne une phrase"
 
-nb = 1
+#break and continue are used in loop to modify the way the loop is looping.
+nb = 3
 while nb != 20:
-	if nb>10:
-		break #Sort de la boucle while
+	if nb>6:
+		break #End the loop
 	nb+=1
 	if nb==5:
-		continue #Retourne en haut de la boucle sans executer ce qui suit	
+		continue #Go to the top of the loop without executing the rest.	
 	print(nb)
-	
-#2
-#3
+
 #4
 #6
 #7
 \end{lstlisting}
 
-\subsection{Import}
-\label{subsec:Import}
-\subsubsection{Import module from another repertory}
-Exemple d'arbre :
-Main/
-	main.py
-	Test/
-		tes.py
-
-\begin{lstlisting}[language=Python]
-import sys
-sys.path.append("./Test")
-import test #le fichier .py servant comme module
-\end{lstlisting}
-
-\subsubsection{Import module as}
-\label{As}
 \subsection{Context manager}
 \label{subsec:ContextManager}
 
 \subsection{Global variables}
 \label{subsec:Global}
+Variables that are created outside of a function (as in all of the examples above) are known as global variables.\\
+Global variables can be used by everyone, both inside of functions and outside.
 \begin{lstlisting}[language=Python]
 a = b = 5
-print(f"a = {a} et b = {b}")
+#a = 5 et b = 5
 def modify(b):
 	global a #modify the variable outside the function
 	a*=2
 	b*=2
 
 modify(b)
-print(f"a = {a} et b = {b}")
-#a = 5 et b = 5
 #a = 10 et b = 5
 \end{lstlisting}
 
 \subsection{Exception}
+In python you can handle exceptions that may occur when your program is running. \textit{We can always use \textbf{except Exception as e} but it's better to be the most precise possible.}
 \subsubsection{Try / Except / Else / Finally}
+This is the basic stucture to handle exception :
 \label{TEEF}
 \begin{lstlisting}[language=Python]
 nom = "Jerome"
@@ -547,18 +602,19 @@ try:
 except ValueError:
 	print("Votre nom ne peut pas etre convertit en integer")
 else: #done if try is ok
-	print(f"Key as been validated")
+	print("Key as been validated")
 finally: #always done
 	print("end ...")
 	
 #Votre nom ne peut pas etre convertit en integer
 #end ...
 \end{lstlisting}
-\newline
+
+We can also create our own exception by creating a new class.
 \begin{lstlisting}[language=Python]
-#Créer notre propre exception : La méthode __str__ de la classe est ce qui est appelé pour afficher le message d'erreur
+#Creer notre propre exception : La methode __str__ de la classe est ce qui est appele pour afficher le message d'erreur
 class MonException(Exception):
-    """Exception levée dans un certain contexte… qui reste à définir"""
+    """Exception levee dans un certain contexte qui reste a definir"""
     def __init__(self, message):
         """On se contente de stocker le message d'erreur"""
         self.message = message
@@ -569,6 +625,8 @@ class MonException(Exception):
 
 \subsubsection{Raise}
 \label{Raise}
+If you want to personnalize the way a process handle exceptions you can use the \textbf{raise} keyword.
+
 
 \subsubsection{If / Elif / Else}
 \label{IEE}
@@ -582,47 +640,50 @@ if condition:
 	x=1
 else:
 	x=0
-print(x)
+	#0
 
 #Good way :
 x = 1 if condition else 0
-print(x)
-
-#0
 #0
 \end{lstlisting}
 
 \subsection{Files}
 
 \subsection{// and **}
+There are two basics operations in python very useful instead of using a math method.
 \begin{lstlisting}[language=Python]
-print(f"10 / 3 = {10 / 3}")
-print(f"10 // 3 = {10 // 3}")
-# 10 / 3 = 3.3333333333333335
-# 10 // 3 = 3
+print(f"10 / 3 = {10 / 3}") # 10 / 3 = 3.3333333333333335
+print(f"10 // 3 = {10 // 3}") # 10 // 3 = 3
+
+print(f"3**3 = {3**3}"}) # 3**3 = 9
 \end{lstlisting}
 
 \subsection{Assertion}
 \label{subsec:Assertion}
+You can verify a condition before parsing an information by checking the instance type.
 \begin{lstlisting}[language=Python]
 b = 3
 assert isinstance(b, int)
 \end{lstlisting}
 
-\subsubsection{Cast}
+\subsection{Cast}
+Sometimes you need to convert a variable from a certain type to another. Cast is a good way to do it but you've to know that you can lose information by doing it.
 
 \subsection{For}
+For loop are the most powerful way to work on containers.
+\subsubsection{Enumerate}
+Enumerate is a very good way to work with for loop. You can access simultaneously to the element and it's position in a tuple.
 \begin{lstlisting}[language=Python]
 liste = ['a', 'b', 'c']
 for index, elem in enumerate(liste):
 	print(f"{elem} at position {index}")
-	
 # a at position 0
 # b at position 1
 # c at position 2
 \end{lstlisting}
 
-\subsection{Zip}
+\subsubsection{Zip}
+Zip is another loop method. You can combine multiple lists with the same length in the loop. 
 \begin{lstlisting}[language=Python]
 names = ["Peter Parker", "Clark Kent", "Wade Wilson", "Bruce Wayne"]
 heroes = ["Spiderman", "Superman", "Deadpool", "Batman"]
@@ -636,49 +697,5 @@ for name, hero, universe in zip(names, heroes, universes):
 # Wade Wilson is actually Deadpool from Marvel
 # Bruce Wayne is actually Batman from DC
 \end{lstlisting}
-
-\subsection{Source code}
-\begin{lstlisting}[language=Python]
-import inspect
-from queue import Queue
-#print(f"Code source : \n{inspect.get_source(Queue)}")
-\end{lstlisting}
-
-\subsection{Memory used by variable}
-\begin{lstlisting}[language=Python]
-import sys
-var = [1]*100
-print(f"memoire utilisee par var : {sys.getsizeof(var)} bytes")
-#memoire utilisee par var : 856 bytes
-\end{lstlisting}
-
-\subsection{Ignore unpacked variables}
-\begin{lstlisting}[language=Python]
-my_tuple = (1,2)
-my_tuple2 = (1,2,3,4,5)
-#unpack :
-a, b = my_tuple
-print(f"{a} and {b}")
-
-#We don't need b :
-a, _ = my_tuple
-print(a)
-
-#Another exemple :
-for _ in range(2):
-	print("I d'ont care about i")
-
-#Another exemple :
-a, b, *_ = my_tuple2 #On ignore tout ce qui suit les 2 premieres variables, le reste est stocke dans une liste
-a, b, *c, d = my_tuple2 
-print(f"{a}, {b}, {c}, {d}")
-
-#1 and 2
-#1
-#I d'ont care about i
-#I d'ont care about i
-#1, 2, [3, 4], 5
-\end{lstlisting}
-
 
 \end{document}

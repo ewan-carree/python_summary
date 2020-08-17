@@ -336,7 +336,6 @@ def parameters(*args, **kwargs):
 	print(f"I received these unnamed args : {args}")
 	print(f"I received these named args : {kwargs}")
 parameters(1,"azerty",[1,2], couleur="rouge", taille_en_cm=172)
-both
 
 
 
