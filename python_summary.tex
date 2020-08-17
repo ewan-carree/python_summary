@@ -69,27 +69,27 @@ In python 3, there are some reserved words that you can't use in your program as
 {\setlength{\tabcolsep}{1.5cm} %donne la distance entre les collones%
 \begin{tabular}{|l|c|r|}
   \hline
-  False & None & True \\
+  \hyperref[subsec:Bool]{False} & None & \hyperref[subsec:Bool]{True} \\
   \hline
-  and & as & assert \\
+  and & \hyperref[As]{as} & \hyperref[subsec:Assertion]{assert} \\
   \hline
-  break & class & continue \\
+  \hyperref[subsec:BCPR]{break} & \hyperref[sec:Class]{class} & \hyperref[subsec:BCPR]{continue} \\
   \hline
-  def & del & elif \\
+  \hyperref[sec:Function]{def} & del & elif \\
   \hline
-  else & except & finally \\
+  else & \hyperref[TEEF]{except} & \hyperref[TEEF]{finally} \\
   \hline
-  for & from & global \\
+  for & from & \hyperref[subsec:Global]{global} \\
   \hline
-  if & import & in \\
+  if & \hyperref[subsec:Import]{import} & in \\
   \hline
-  is & lambda & nonlocal \\
+  is & \hyperref[subsec:Lambda]{lambda} & nonlocal \\
   \hline 
-  not & or & pass \\
+  not & or & \hyperref[subsec:BCPR]{pass} \\
   \hline 
-  raise & return & try \\
+  \hyperref[Raise]{raise} & \hyperref[subsec:BCPR]{return} & \hyperref[TEEF]{try} \\
   \hline
-  while & with & yield \\
+  while & \hyperref[subsec:ContextManager]{with} & \hyperref[sec:Generators]{yield} \\
   \hline
 \end{tabular}}}
 \end{center}
@@ -134,6 +134,7 @@ Here are some methods that you can apply on tuples :
 \end{itemize}
 
 \subsubsection{Bool}
+\label{subsec:Bool}
 There is only two types of boolean : True and False. \\
 Everything can be considered as True if it diffrent from 0 or False. \\
 Here are some methods that you can apply on booleans : 
@@ -167,7 +168,9 @@ Here are some methods that you can apply on sets :
 
 \newpage
 \section{Class}
+\label{sec:Class}
 Classes are a way of bringing together data and functionality. Creating a new class creates a new type of object and so new instances of this type can be built. Each instance can have its own attributes, which defines its state. An instance can also have methods (defined by the instance class) to modify its state.\newline
+\subsection{Instance}
 \subsection{Methods}
 \subsection{Dunder methods}
 \subsection{Static and class methods}
@@ -177,8 +180,10 @@ Classes are a way of bringing together data and functionality. Creating a new cl
 
 \newpage
 \section{Function}
+\label{sec:Function}
 A function is a block of organized, reusable code that is used to perform a single, related action. Functions provide better modularity for your application and a high degree of code reusing.\newline
 \subsection{Lambda function}
+\label{subsec:Lambda}
 \subsection{Default parameters}
 \subsection{Map function}
 \subsection{Filter function}
@@ -214,20 +219,32 @@ A decorator is a design pattern in Python that allows a user to add new function
 
 \newpage
 \section{Generators}
+\label{sec:Generators}
 Generators are simple and powerful tools for creating iterators. They are written like regular functions but use the yield statement when they want to return data. Each time it is called by next (), the generator resumes execution where it left off (keeping all of its execution context).\newline
 \subsection{Iterators}
 \subsection{Yield}
 
 \newpage
 \section{Others}
-\subsection{Break / Continue / Pass}
-\subsection{Import module from another repertory}
+\subsection{Break / Continue / Pass / Return}
+\label{subsec:BCPR}
+\subsection{Import}
+\label{subsec:Import}
+\subsubsection{Import module from another repertory}
+\subsubsection{Import module as}
+\label{As}
 \subsection{Context manager}
+\label{subsec:ContextManager}
 \subsection{Global variables}
+\label{subsec:Global}
 \subsection{Exception}
 \subsubsection{Try / Except / Else / Finally}
+\label{TEEF}
 \subsubsection{Raise}
+\label{Raise}
 \subsection{Files}
 \subsection{// and **}
+\subsection{Assertion}
+\label{subsec:Assertion}
 
 \end{document}
