@@ -80,7 +80,7 @@ In python 3, there are some reserved words that you can't use in your program as
   \hline
   \hyperref[IEE]{else} & \hyperref[TEEF]{except} & \hyperref[TEEF]{finally} \\
   \hline
-  for & from & \hyperref[subsec:Global]{global} \\
+  \hyperref[subsec:For]{for} & from & \hyperref[subsec:Global]{global} \\
   \hline
   \hyperref[IEE]{if} & \hyperref[subsec:Import]{import} & \hyperref[subsec:ListComprehension]{in} \\
   \hline
@@ -358,16 +358,219 @@ Here are some methods that you can apply on sets :
 \end{itemize}
 
 \newpage
+\subsection{For}
+\label{subsec:For}
+For loop are the most powerful way to work on containers in python.
+
+\subsubsection{Range}
+Range allows user to loop a certain times. \textbf{range(start,end, step)}
+\begin{lstlisting}[language=Python]
+for x in range(2):
+	print(x)
+#0
+#1
+\end{lstlisting}
+
+\subsubsection{Enumerate}
+Enumerate is a very good way to work with for loop. You can access simultaneously to the element and it's position in a tuple.
+\begin{lstlisting}[language=Python]
+liste = ['a', 'b', 'c']
+for index, elem in enumerate(liste):
+	print(f"{elem} at position {index}")
+# a at position 0
+# b at position 1
+# c at position 2
+\end{lstlisting}
+
+\subsubsection{Zip}
+Zip is another loop method. You can combine multiple lists with the same length in the loop. 
+\begin{lstlisting}[language=Python]
+names = ["Peter Parker", "Clark Kent", "Wade Wilson", "Bruce Wayne"]
+heroes = ["Spiderman", "Superman", "Deadpool", "Batman"]
+universes = ["Marvel", "DC", "Marvel", "DC"]
+
+for name, hero, universe in zip(names, heroes, universes):
+	print(f"{name} is actually {hero} from {universe}")
+	
+# Peter Parker is actually Spiderman from Marvel
+# Clark Kent is actually Superman from DC
+# Wade Wilson is actually Deadpool from Marvel
+# Bruce Wayne is actually Batman from DC
+\end{lstlisting}
+
+\newpage
 \section{Class}
 \label{sec:Class}
-Classes are a way of bringing together data and functionality. Creating a new class creates a new type of object and so new instances of this type can be built. Each instance can have its own attributes, which defines its state. An instance can also have methods (defined by the instance class) to modify its state.\newline
+Classes are a way of bringing together data and functionality. Creating a new class creates a new type of object and so new instances of this type can be built.\newline
+
 \subsection{Instance}
+Each instance can have its own attributes, which defines its state. An instance can also have methods (defined by the instance class) to modify its state.
+\begin{lstlisting}[language=Python]
+class MyClass(object):
+	def __init__(self):
+		pass
+
+my_instance = MyClass()
+\end{lstlisting}
+
 \subsection{Methods}
-\subsection{Dunder methods}
-\subsection{Static and class methods}
-\subsection{Property}
+Methods are functions that bellow to the class. A method can be used by the instance as follow  : \textbf{my\_instance.my\_method()}
+\begin{lstlisting}[language=Python]
+class MyClass(object):
+	def __init__(self):
+		pass
+	def my_first_method(self):
+	    print("hello")
+	def my_second_method(self):
+	    print("world")
+
+my_instance = MyClass()
+my_instance.my_second_method()
+\end{lstlisting}
+
 \subsection{Inheritance}
+Inheritance is a concept of relation between classes. Some are parents, the other are children. A children inherit from evevry methods from the parent class but can overload them. A child class can have multiple parents.
+\begin{lstlisting}[language=Python]
+class Dog(object):
+	def __init__(self, age):
+		self.age = age
+	def speak(self):
+		print("Waf")
+class Cat(Dog, Animal): #multiple inheritance
+	"""Cat herite de Dog : elle possede ses fonctions et methodes"""
+	def __init__(self, age, nom):
+		super().__init__(age)
+		self.nom = nom
+	def speak(self):
+		print("Miaou")
+\end{lstlisting}
+
+\subsection{Dunder methods}
+Dunder methods are specific function from a class, they are surrouded by \_\_. A dunder method can be used by the instance as follow :\\ \textbf{my\_instance.\_\_dunder\_method\_\_}
+\begin{lstlisting}[language=Python]
+class Point(object):
+	def __init__(self, x=0,y=0):
+		self.x = x
+		self.y = y
+		self.conteneur = [1,2,3,4,5,6,7]
+
+	def __str__(self):
+		print("I'm the class Point")
+
+	def __add__(self, p):
+		"""la fonction add surcharge l'operateur +"""
+		return Point(self.x + p.x, self.y + p.y)
+
+#	def __getattr__(self, name):
+#		print(f"{name} didn't found")
+
+	def __setattr__(self, name, value):
+		"""On modifie la classe mere directement plutot que seulement appeler setaatr de cette classe et tourner en boucle sur la meme methode"""
+		object.__setattr__(self, name, value) #Chaque classe cree herite de base de la classe object
+
+	def __delattr__(self, name):
+		print(f"Deleting {name} ...")
+
+	def __getitem__(self, index):
+		return self.conteneur[index]
+
+	def __setitem__(self, index, value):
+		self.conteneur[index] = value
+
+	def __contains__(self, value): # 8 in ma_liste  <==>  ma_liste.__contains__(8)
+		return True if value in self.conteneur else False
+
+	def __len__(self):
+		return len(self.conteneur)
+
+	"""Autres surcharges : 
+
+	__sub__(self,p) : -
+	__mul__(self,p) : *
+	__truediv__(self, p) : /
+	__floordiv__(self, p) : //
+	__mod__(self, p) : %
+	__pow__(self, p) : **
+
+	__gt__(self,p)  : >
+	__ge__(self,p) 	: >=
+	__lt__(self,p)  : <
+	__le__(self,p)  : <=
+	__eq__(self,p) : == 
+
+	__iadd__(self,p) : +=
+	__isub__(self,p) : -=
+	__imul__(self,p) : *=
+	__itruediv__(self, p) : /=	
+	...
+	"""
+\end{lstlisting}
+
+\subsection{Static and class methods}
+Static methods have a link with the class but don't use any attribut from it. There is no \textbf{self} in the parameters. \\
+Class methods concerns class variables. There is no \textbf{self} in the parameters but \textbf{cls}.
+\begin{lstlisting}[language=Python]
+class StaticClass:
+	nb_class=0
+	def __init__(self):
+		print("une nouvelle classe vient d'etre creee")
+		nb_class+=1
+	
+	@classmethod
+	def ma_func(cls): #pas de self, obligatoirement cls
+		"""Agit avec les variables de la classe"""
+		return cls.nb_class
+
+	@staticmethod
+	def ma_func2(arg1, arg2):#pas de self
+		"""N'agit pas avec les composants de la classe mais est quand meme en lien avec la classe"""
+		return arg1 + arg2
+\end{lstlisting}
+
+\subsection{Property}
+Property concerns the private and public aspect from a class even though evrything is public in python. In python, a variable or method which start with \_ is considered as "private". Also, we need to create getters and setters to access and modify these privates elements. Property redirect calls of privates elements to these getters and setters.
+\begin{lstlisting}[language=Python]
+"""
+Property : permet d'offrir des accesseurs et mutateurs pour definir un attribut prive
+
+La methode donnant acces a l'attribut
+
+La methode modifiant l'attribut
+
+La methode appelee quand on souhaite supprimer l'attribut (optionnel)
+
+La methode appelee quand on demande de l'aide sur l'attribut (optionnel)
+
+"""
+class Test(object):
+	def __init__(self, x=0, y=0):
+		self.x = x
+		self.y = y
+		self._dimension = 2 #Attribut prive
+
+	def _get_dimension(self):
+		return self._dimension
+
+	def _set_dimension(self,value):
+		self._dimension = value
+		
+	dimension = property(_get_dimension, _set_dimension) # lorsqu'on appelera objet.dimension, property redirigera vers les accesseurs/mutateurs prives
+\end{lstlisting}
+
 \subsection{Metaclass}
+Every class inherit from the \textit{object} class, metaclass is a way to define how to create our own classes without inheriting from \textit{object}.
+
+\subsection{Other}
+In python, everything is public so there isn't any private method or variable from a classe. We can use \_ to tell to the user that we want it private even though it's not really.
+
+In classes you can use self.\_\_my\_private\_attr = "I'm private" 
+It's called name scrambling and it is used to ensure that subclasses don't accidentally override the private methods and attributes of their superclasses. It's not designed to prevent deliberate access from outside. We can see it with : my\_instance.\_\_dict\_\_
+
+There are some tips useful to know concerning class :
+\begin{lstlisting}[language=Python]
+print(dir(ma_instance)) #return a list of every dunder methods, methods and attributs from the class.
+print(ma_instance.__dict__) # return a dict with attributs as keys and their value associated.
+\end{lstlisting}
 
 \newpage
 \section{Function}
@@ -466,7 +669,7 @@ import test # .py file (module)
 \end{lstlisting}
 
 \subsubsection{Import module as}
-Sometimes you import modules but it's very long to write methods from a long module name. Plus, it's not good to use the \textit{import * from module} because it cans creates conflicts between function and class that have the same name in two different modules. Rather than writing module.class you can use the key word \textbf{as}.
+Sometimes you import modules but it's very long to write methods from a long module name. Plus, it's not good to use the \textit{import * from module} because it cans creates conflicts between function and class that have the same name in two different modules. Rather than writing module.class you can use the key word \textbf{as}. It very used for librairies like numpy as np, matplotlib.pyplot as plt and scipy.signal as sig
 \label{As}
 
 \subsection{Time}
@@ -635,7 +838,6 @@ You can write if / else conditions in an easy way in python :
 condition = False
 
 #Bad way :
-
 if condition:
 	x=1
 else:
@@ -667,35 +869,8 @@ assert isinstance(b, int)
 \end{lstlisting}
 
 \subsection{Cast}
-Sometimes you need to convert a variable from a certain type to another. Cast is a good way to do it but you've to know that you can lose information by doing it.
-
-\subsection{For}
-For loop are the most powerful way to work on containers.
-\subsubsection{Enumerate}
-Enumerate is a very good way to work with for loop. You can access simultaneously to the element and it's position in a tuple.
-\begin{lstlisting}[language=Python]
-liste = ['a', 'b', 'c']
-for index, elem in enumerate(liste):
-	print(f"{elem} at position {index}")
-# a at position 0
-# b at position 1
-# c at position 2
-\end{lstlisting}
-
-\subsubsection{Zip}
-Zip is another loop method. You can combine multiple lists with the same length in the loop. 
-\begin{lstlisting}[language=Python]
-names = ["Peter Parker", "Clark Kent", "Wade Wilson", "Bruce Wayne"]
-heroes = ["Spiderman", "Superman", "Deadpool", "Batman"]
-universes = ["Marvel", "DC", "Marvel", "DC"]
-
-for name, hero, universe in zip(names, heroes, universes):
-	print(f"{name} is actually {hero} from {universe}")
-	
-# Peter Parker is actually Spiderman from Marvel
-# Clark Kent is actually Superman from DC
-# Wade Wilson is actually Deadpool from Marvel
-# Bruce Wayne is actually Batman from DC
-\end{lstlisting}
+Sometimes you need to convert a variable from a certain type to another. Cast is a good way to do it but you've to know that you can lose information by doing it. \\ \\
+You can do it by simply follow this pattern : \textbf{new\_type(my\_variable)}
+Notice that you have to be coherent in your type transformation. For exemple, you won't be able to cast a string into an integer if your string = "Salut".
 
 \end{document}

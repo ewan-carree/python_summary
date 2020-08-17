@@ -523,11 +523,15 @@ Héritage / Multiple inheritance
 class Dog:
 	def __init__(self, age):
 		self.age = age
+	def speak(self):
+		print("Waf")
 class Cat(Dog):
 	"""Cat hérite de Dog : elle possède ses fonctions et méthodes"""
 	def __init__(self, age, nom):
 		super().__init__(age)
 		self.nom = nom
+	def speak(self):
+		print("Miaou")
 
 #multiple
 class Animal(object):
@@ -638,7 +642,7 @@ See every methods from a class / See every attributs from class
 ma_class = Point()
 print(dir(ma_class))
 print(ma_class.__dict__)
-print(ma_class.__my_private_attr)
+#print(ma_class.__my_private_attr)
 
 
 
@@ -656,7 +660,7 @@ La méthode appelée quand on souhaite supprimer l'attribut
 La méthode appelée quand on demande de l'aide sur l'attribut
 
 """
-class Test(objet):
+class Test(object):
 	def __init__(self, x=0, y=0):
 		self.x = x
 		self.y = y
