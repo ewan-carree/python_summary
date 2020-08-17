@@ -40,6 +40,14 @@ print(string)
 tableau = string.split(' ')
 print(tableau)
 
+"""
+Compléter des chiffres/nombres pour qu'ils aient tous le même nombre de digit
+
+"""
+string = '5'
+string = string.zfill(2)
+print(string)
+
 
 
 
@@ -71,6 +79,7 @@ print(tableau)
 
 #Connaître la position d'un élément dans une liste
 position = tableau.index('A')
+print(position)
 
 #Convertir tableau en chaine de caractères
 string = ' '.join(tableau)
@@ -91,8 +100,8 @@ keys = dictionnaire.keys()
 print(keys)
 
 #Obtenir toutes les valeurs associées aux clés
-values = dictionnaire.values()
-print(values)
+keys = dictionnaire.keys()
+print(keys)
 
 #Obtenir un tuple des clés associées à leur valeur
 both = dictionnaire.items()
@@ -136,8 +145,10 @@ try:
 	key = int(nom)
 except ValueError:
 	print("Votre nom ne peut pas être convertit en integer")
-finally:
-	key = 0
+else: #done if try is ok
+	print(f"Key as been validated")
+finally: #always done
+	print("end ...")
 
 #Si nous ne voulons pas qu'un élément se produise nous pouvons utiliser le mot clé raise : raise Exception("Le problème")
 
@@ -159,16 +170,17 @@ class MonException(Exception):
 Gérer une boucle : pass/break/continue
 
 """
-#pass peret de ne rien faire
+#pass est une instruction vide
+
 def func():
 	"""
 	Ceci est une docstring, elle permet à l'utilisateur d'en savoir plus sur la fonction en faisait help(func)
 	"""
-	pass
+	return "j'ai retourne une phrase"
 
 nb = 1
-while nb != 10:
-	if nb>10:
+while nb != 20:
+	if nb>6:
 		break #Sort de la boucle while
 	nb+=1
 	if nb==5:
@@ -228,13 +240,7 @@ else:
 
 
 
-"""
-Compléter des chiffres/nombres pour qu'ils aient tous le même nombre de digit
 
-"""
-string = '5'
-string = string.zfill(2)
-print(string)
 
 
 

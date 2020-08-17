@@ -48,7 +48,8 @@
 
 \iffalse
 %Python code highlighting
-\begin{lstlisting}[language=Python, caption=Python example]
+\begin{lstlisting}[language=Python]
+
 \end{lstlisting}
 \fi
 
@@ -75,13 +76,13 @@ In python 3, there are some reserved words that you can't use in your program as
   \hline
   \hyperref[subsec:BCPR]{break} & \hyperref[sec:Class]{class} & \hyperref[subsec:BCPR]{continue} \\
   \hline
-  \hyperref[sec:Function]{def} & del & elif \\
+  \hyperref[sec:Function]{def} & del & \hyperref[IEE]{elif} \\
   \hline
-  else & \hyperref[TEEF]{except} & \hyperref[TEEF]{finally} \\
+  \hyperref[IEE]{else} & \hyperref[TEEF]{except} & \hyperref[TEEF]{finally} \\
   \hline
   for & from & \hyperref[subsec:Global]{global} \\
   \hline
-  if & \hyperref[subsec:Import]{import} & in \\
+  \hyperref[IEE]{if} & \hyperref[subsec:Import]{import} & \hyperref[subsec:ListComprehension]{in} \\
   \hline
   is & \hyperref[subsec:Lambda]{lambda} & nonlocal \\
   \hline 
@@ -106,18 +107,93 @@ Python offers different basics types that are often enough for your program.\new
 Immutable means that you can't directly modify your variable after you've assigned it. You have to reassign or create a new variable to work on a previous one\newline
 
 \subsubsection{String}
-Python string is an ordered collection of characters which is used to represent and store the text-based information. Strings are stored as individual characters in a contiguous memory location. It can be accessed from both directions: forward and backward. \\
-Here are some methods that you can apply on strings : 
+Python string is an ordered collection of characters which is used to represent and store the text-based information. Strings are stored as individual characters in a contiguous memory location. It can be accessed from both directions: forward and backward. A string can be seen in some ways as a list of characters. \\It's better to use ' for as single character and " for a chain. \\ \\
+Here are some methods that you can apply on strings (I choose to reassign the variable whenever it's possible) : 
 \begin{itemize}
-\item
+\begin{lstlisting}[language=Python]
+string = "Hello, world!"
+\end{lstlisting}
+
+\item Upper case \\
+Return a string with every single element from the original one in uppercase.
+\begin{lstlisting}[language=Python]
+string = string.upper()
+# HELLO, WORLD!
+\end{lstlisting}
+
+\item Lowercase \\
+Return a string with every single element from the original one in lowercase.
+\begin{lstlisting}[language=Python]
+string = string.lower()
+# hello, world!
+\end{lstlisting}
+
+\item Captital \\
+Return a string with the first Letter in uppercase and the rest in lowercase.
+\begin{lstlisting}[language=Python]
+string = string.capitalize()
+# Hello, world!
+\end{lstlisting}
+
+\item Strip \\
+Return a string whithout the blank spaces from both sides of the original string.
+\begin{lstlisting}[language=Python]
+string = string.strip()
+\end{lstlisting}
+
+\item Find \\
+Return an integer which is the position of the first argument found in the string from left to right.
+\begin{lstlisting}[language=Python]
+position = string.find('l')
+# 2
+\end{lstlisting}
+
+\item Count \\
+Return an integer that represents the number of occurences of the argument found in the string. 
+\begin{lstlisting}[language=Python]
+nb = string.count('l')
+# 3
+\end{lstlisting}
+
+\item Replace \\
+Return a string where at least a part of it have been replaced by some another words.
+\begin{lstlisting}[language=Python]
+string = string.replace("world", "dlrow")
+# Hello, dlrow!
+\end{lstlisting}
+
+\item Multiply \\
+Return a string with n times the original string.
+\begin{lstlisting}[language=Python]
+string = string*3
+# Hello, dlrow!Hello, dlrow!Hello, dlrow!
+\end{lstlisting}
+
+\item String to List \\
+Return a list that contains every single element separated by the separator argument.
+\begin{lstlisting}[language=Python]
+tableau = string.split(' ')
+# ['Hello,', 'dlrow!Hello,', 'dlrow!Hello,', 'dlrow!']
+\end{lstlisting}
+
+\item Fill
+Return a string filled with zero to correspond to have the same digit in every number.
+\begin{lstlisting}[language=Python]
+string = '5'
+string = string.zfill(3)
+# 005
+\end{lstlisting}
+
 \end{itemize}
 
 \subsubsection{Integer}
 An integer is a number without any comma. \\
-Here are some methods that you can apply on integers : 
-\begin{itemize}
-\item
-\end{itemize}
+You can write very long number in a more readable way with an underscore : 
+\begin{lstlisting}[language=Python]
+nb = 1_000_000
+print(nb)
+# 1000000
+\end{lstlisting}
 
 \subsubsection{Float}
 A float is a number with some digits after the comma, it's preciser than an integer. \\
@@ -137,10 +213,21 @@ Here are some methods that you can apply on tuples :
 \label{subsec:Bool}
 There is only two types of boolean : True and False. \\
 Everything can be considered as True if it diffrent from 0 or False. \\
-Here are some methods that you can apply on booleans : 
-\begin{itemize}
-\item
-\end{itemize}
+\begin{lstlisting}[language=Python]
+a = "Salut"
+b = 0
+if a:
+	print("a fonctionne")
+else:
+	print("a ne fonctionne pas")
+
+if b:
+	print("b fonctionne")
+else:
+	print("b ne fonctionne pas")
+#a fonctionne
+#b ne fonctionne pas
+\end{lstlisting}
 
 \subsection{Mutable}
 Mutable means that if you are working on a variable, you directly modify it and don't need to create a new variable or reassign the previous one. It cans cause conflict if two process are using the same variable that can be changed.\newline
@@ -148,15 +235,94 @@ Mutable means that if you are working on a variable, you directly modify it and 
 \subsubsection{List}
 A list is a container that can contain multiple variables with multiple types that have a link together\\
 Here are some methods that you can apply on lists : 
+
+\begin{lstlisting}[language=Python]
+tableau = ['Hello,', 'dlrow!Hello,', 'dlrow!Hello,', 'dlrow!']
+\end{lstlisting}
+
 \begin{itemize}
-\item
+\item Slicing
+\begin{itemize}
+    \item Last element
+    \begin{lstlisting}[language=Python]
+    dernier_elem = tableau[-1]
+    print(dernier_elem)
+    # dlrow!
+    \end{lstlisting}
+    
+    \item Cut list
+    \begin{lstlisting}[language=Python]
+    first_part = tableau[:3]
+    second_part = tableau[3:]
+    print(f"first_part : {first_part} and second_part : {second_part}")
+    # first_part : ['Hello,', 'dlrow!Hello,', 'dlrow!Hello,'] and second_part : ['dlrow!']
+    \end{lstlisting}
+    
+    \item Insert
+    \begin{lstlisting}[language=Python]
+    tableau[1:1] = 'A'
+    print(tableau)
+    # ['Hello,', 'A', 'dlrow!Hello,', 'dlrow!Hello,', 'dlrow!']
+    \end{lstlisting}
+\end{itemize}
+
+\item Add
+\begin{lstlisting}[language=Python]
+new_tab = first_part + second_part
+print(new_tab)
+# ['Hello,', 'dlrow!Hello,', 'dlrow!Hello,', 'dlrow!']
+\end{lstlisting}
+
+\item Multiply
+\begin{lstlisting}[language=Python]
+new_new_tab = new_tab *3
+print(new_new_tab)
+# ['Hello,', 'dlrow!Hello,', 'dlrow!Hello,', 'dlrow!', 'Hello,', 'dlrow!Hello,', 'dlrow!Hello,', 'dlrow!', 'Hello,', 'dlrow!Hello,', 'dlrow!Hello,', 'dlrow!']
+\end{lstlisting}
+
+\item Index
+\begin{lstlisting}[language=Python]
+position = tableau.index('A')
+print(position)
+# 1
+\end{lstlisting}
+
+\item List to String
+\begin{lstlisting}[language=Python]
+string = ' '.join(tableau)
+print(string)
+# Hello, A dlrow!Hello, dlrow!Hello, dlrow!
+\end{lstlisting}
 \end{itemize}
 
 \subsubsection{Dict}
 A dict is an non-organized container that have variables associated to keys to recognize them. Keys are offently strings but we can also use integers\\
 Here are some methods that you can apply on dicts : 
+\begin{lstlisting}[language=Python]
+dictionnaire = {"nom":"Jerome", "age":20}
+\end{lstlisting}
+
 \begin{itemize}
-\item
+\item Keys \\
+\begin{lstlisting}[language=Python]
+keys = dictionnaire.keys()
+print(keys)
+#dict_keys(['nom', 'age'])
+\end{lstlisting}
+
+\item Values \\
+\begin{lstlisting}[language=Python]
+keys = dictionnaire.keys()
+print(keys)
+#dict_values(['Jerome', 20])
+\end{lstlisting}
+
+\item Items \\
+\begin{lstlisting}[language=Python]
+both = dictionnaire.items()
+print(both)
+# dict_items([('nom', 'Jerome'), ('age', 20)])
+\end{lstlisting}
 \end{itemize}
 
 \subsubsection{Set}
@@ -182,11 +348,71 @@ Classes are a way of bringing together data and functionality. Creating a new cl
 \section{Function}
 \label{sec:Function}
 A function is a block of organized, reusable code that is used to perform a single, related action. Functions provide better modularity for your application and a high degree of code reusing.\newline
+
 \subsection{Lambda function}
 \label{subsec:Lambda}
+\begin{lstlisting}[language=Python]
+def equivalent_lambda(x):
+	return x+5
+
+real_lambda = lambda x : x+5
+
+print(f"equivalent_lambda : {equivalent_lambda(5)} and real_lambda : {real_lambda(5)}")
+
+# equivalent_lambda : 10 and real_lambda : 10
+\end{lstlisting}
+
 \subsection{Default parameters}
+\begin{lstlisting}[language=Python]
+def func(age, nom="Jerome"):
+	print(f"Tu as {age} ans et tu t'appelles {nom}")
+
+func(20, "Antoine")
+func(20)
+# Tu as 20 ans et tu t'appelles Antoine
+# Tu as 20 ans et tu t'appelles Jerome
+
+\end{lstlisting}
+
 \subsection{Map function}
+\begin{lstlisting}[language=Python]
+liste = [1,2,3]
+def map_function(x):
+	return x**x
+mapped_list = list(map(map_function,liste)) #No () for argument function
+print(f"before : {liste} and now : {mapped_list}")
+# before : [1, 2, 3] and now : [1, 4, 27]
+\end{lstlisting}
+
 \subsection{Filter function}
+\begin{lstlisting}[language=Python]
+liste = [1,2,3]
+def filter_function(x):
+	return x%2!=0
+filtered_list = list(filter(filter_function,liste))
+print(f"before : {liste} and now : {filtered_list}")
+# before : [1, 2, 3] and now : [1, 3]
+\end{lstlisting}
+
+\subsection{List Comprehension}
+\label{subsec:ListComprehension}
+\begin{lstlisting}[language=Python]
+liste = [1,2,3]
+new_list = [map_function(x) for x in liste if x%2!=0]
+print(f"before : {liste} and now : {new_list}")
+#before : [1, 2, 3] and now : [1, 27]
+\end{lstlisting}
+
+\subsection{Unknown parameters}
+\begin{lstlisting}[language=Python]
+def parameters(*args, **kwargs):
+	print(f"I received these unnamed args : {args}")
+	print(f"I received these named args : {kwargs}")
+parameters(1,"azerty",[1,2], couleur="rouge", taille_en_cm=172)
+both
+# I received these unnamed args : (1, 'azerty', [1, 2])
+# I received these named args : {'couleur': 'rouge', 'taille_en_cm': 172}
+\end{lstlisting}
 
 \newpage
 \section{Modules}
@@ -214,6 +440,28 @@ Modules are Python programs that contain functions that we often reuse (we also 
 \section{Decorators}
 A decorator is a design pattern in Python that allows a user to add new functionality to an existing object without modifying its structure. Decorators are usually called before the definition of a function you want to decorate.\newline
 \subsection{Function}
+\begin{lstlisting}[language=Python]
+import time
+def timer(func):
+	def wrapper(*args, **kwargs):
+		start = time.time()
+		rv = func(*args, **kwargs)
+		total = time.time() - start
+		print("Time to execute : "+ str(total))
+		return rv
+	return wrapper
+
+@timer #on peut chainer plusieurs decorateurs a la suite 
+def exemple(x):
+	string = "je suis "+str(x)
+	return string
+result = exemple(5)
+print(result)
+
+#Time to execute : 2.384185791015625e-06
+#je suis 5
+\end{lstlisting}
+
 \subsection{Class}
 \subsection{Multiple decorators}
 
@@ -228,23 +476,209 @@ Generators are simple and powerful tools for creating iterators. They are writte
 \section{Others}
 \subsection{Break / Continue / Pass / Return}
 \label{subsec:BCPR}
+\begin{lstlisting}[language=Python]
+#pass est une instruction vide
+
+def func():
+	"""
+	Ceci est une docstring, elle permet a l'utilisateur d'en savoir plus sur la fonction en faisait help(func)
+	"""
+	return "j'ai retourne une phrase"
+
+nb = 1
+while nb != 20:
+	if nb>10:
+		break #Sort de la boucle while
+	nb+=1
+	if nb==5:
+		continue #Retourne en haut de la boucle sans executer ce qui suit	
+	print(nb)
+	
+#2
+#3
+#4
+#6
+#7
+\end{lstlisting}
+
 \subsection{Import}
 \label{subsec:Import}
 \subsubsection{Import module from another repertory}
+Exemple d'arbre :
+Main/
+	main.py
+	Test/
+		tes.py
+
+\begin{lstlisting}[language=Python]
+import sys
+sys.path.append("./Test")
+import test #le fichier .py servant comme module
+\end{lstlisting}
+
 \subsubsection{Import module as}
 \label{As}
 \subsection{Context manager}
 \label{subsec:ContextManager}
+
 \subsection{Global variables}
 \label{subsec:Global}
+\begin{lstlisting}[language=Python]
+a = b = 5
+print(f"a = {a} et b = {b}")
+def modify(b):
+	global a #modify the variable outside the function
+	a*=2
+	b*=2
+
+modify(b)
+print(f"a = {a} et b = {b}")
+#a = 5 et b = 5
+#a = 10 et b = 5
+\end{lstlisting}
+
 \subsection{Exception}
 \subsubsection{Try / Except / Else / Finally}
 \label{TEEF}
+\begin{lstlisting}[language=Python]
+nom = "Jerome"
+try:
+	key = int(nom)
+except ValueError:
+	print("Votre nom ne peut pas etre convertit en integer")
+else: #done if try is ok
+	print(f"Key as been validated")
+finally: #always done
+	print("end ...")
+	
+#Votre nom ne peut pas etre convertit en integer
+#end ...
+\end{lstlisting}
+\newline
+\begin{lstlisting}[language=Python]
+#Créer notre propre exception : La méthode __str__ de la classe est ce qui est appelé pour afficher le message d'erreur
+class MonException(Exception):
+    """Exception levée dans un certain contexte… qui reste à définir"""
+    def __init__(self, message):
+        """On se contente de stocker le message d'erreur"""
+        self.message = message
+    def __str__(self):
+        """On renvoie le message"""
+        return self.message
+\end{lstlisting}
+
 \subsubsection{Raise}
 \label{Raise}
+
+\subsubsection{If / Elif / Else}
+\label{IEE}
+You can write if / else conditions in an easy way in python :
+\begin{lstlisting}[language=Python]
+condition = False
+
+#Bad way :
+
+if condition:
+	x=1
+else:
+	x=0
+print(x)
+
+#Good way :
+x = 1 if condition else 0
+print(x)
+
+#0
+#0
+\end{lstlisting}
+
 \subsection{Files}
+
 \subsection{// and **}
+\begin{lstlisting}[language=Python]
+print(f"10 / 3 = {10 / 3}")
+print(f"10 // 3 = {10 // 3}")
+# 10 / 3 = 3.3333333333333335
+# 10 // 3 = 3
+\end{lstlisting}
+
 \subsection{Assertion}
 \label{subsec:Assertion}
+\begin{lstlisting}[language=Python]
+b = 3
+assert isinstance(b, int)
+\end{lstlisting}
+
+\subsubsection{Cast}
+
+\subsection{For}
+\begin{lstlisting}[language=Python]
+liste = ['a', 'b', 'c']
+for index, elem in enumerate(liste):
+	print(f"{elem} at position {index}")
+	
+# a at position 0
+# b at position 1
+# c at position 2
+\end{lstlisting}
+
+\subsection{Zip}
+\begin{lstlisting}[language=Python]
+names = ["Peter Parker", "Clark Kent", "Wade Wilson", "Bruce Wayne"]
+heroes = ["Spiderman", "Superman", "Deadpool", "Batman"]
+universes = ["Marvel", "DC", "Marvel", "DC"]
+
+for name, hero, universe in zip(names, heroes, universes):
+	print(f"{name} is actually {hero} from {universe}")
+	
+# Peter Parker is actually Spiderman from Marvel
+# Clark Kent is actually Superman from DC
+# Wade Wilson is actually Deadpool from Marvel
+# Bruce Wayne is actually Batman from DC
+\end{lstlisting}
+
+\subsection{Source code}
+\begin{lstlisting}[language=Python]
+import inspect
+from queue import Queue
+#print(f"Code source : \n{inspect.get_source(Queue)}")
+\end{lstlisting}
+
+\subsection{Memory used by variable}
+\begin{lstlisting}[language=Python]
+import sys
+var = [1]*100
+print(f"memoire utilisee par var : {sys.getsizeof(var)} bytes")
+#memoire utilisee par var : 856 bytes
+\end{lstlisting}
+
+\subsection{Ignore unpacked variables}
+\begin{lstlisting}[language=Python]
+my_tuple = (1,2)
+my_tuple2 = (1,2,3,4,5)
+#unpack :
+a, b = my_tuple
+print(f"{a} and {b}")
+
+#We don't need b :
+a, _ = my_tuple
+print(a)
+
+#Another exemple :
+for _ in range(2):
+	print("I d'ont care about i")
+
+#Another exemple :
+a, b, *_ = my_tuple2 #On ignore tout ce qui suit les 2 premieres variables, le reste est stocke dans une liste
+a, b, *c, d = my_tuple2 
+print(f"{a}, {b}, {c}, {d}")
+
+#1 and 2
+#1
+#I d'ont care about i
+#I d'ont care about i
+#1, 2, [3, 4], 5
+\end{lstlisting}
+
 
 \end{document}
