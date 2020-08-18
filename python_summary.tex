@@ -300,6 +300,12 @@ position = tableau.index('A')
 # 1
 \end{lstlisting}
 
+\item Range \\
+You can initialize a list of n ascending numbers easily with : 
+\begin{lstlisting}[language=Python]
+my_list = list(range(n))
+\end{lstlisting}
+
 \item List to String \\
 Transfrom your list into a string.
 \begin{lstlisting}[language=Python]
@@ -379,6 +385,13 @@ Slicing is a method that concerns containers, you can use slicing on every possi
     \begin{lstlisting}[language=Python]
     tableau[1:1] = 'A'
     # ['Hello,', 'A', 'dlrow!Hello,', 'dlrow!Hello,', 'dlrow!']
+    \end{lstlisting}
+    
+    \item Reverse \\
+    If you need to reverse your container you can also use slicing.
+    \begin{lstlisting}[language=Python]
+    tableau[::-1]
+    # ['dlrow!', 'dlrow!Hello,', 'dlrow!Hello,'; 'A', 'Hello,']
     \end{lstlisting}
 \end{itemize}
 
@@ -771,10 +784,24 @@ Sometimes you import modules but it's very long to write methods from a long mod
 
 \subsection{Time}
 \subsubsection{Time}
+For further explanations, see the \href{https://docs.python.org/3/library/time.html}{official documentation}
+
 \subsubsection{Datetime}
+For further explanations, see the \href{https://docs.python.org/3/library/datetime.html}{official documentation}
+
 \subsection{Password}
+
 \subsubsection{Getpass}
+Get pass is a very useful module to enter password secretly. In deed, it doesn't show the characters entered.
+\begin{lstlisting}[language=Python]
+mdp getpass.getpass("Type your password : ")
+\end{lstlisting}
+
+For further explanations, see the \href{https://docs.python.org/3/library/getpass.html}{official documentation}
+
 \subsubsection{Hashlib}
+For further explanations, see the \href{https://docs.python.org/3/library/hashlib.html}{official documentation}
+
 
 \subsection{Os}
 \subsubsection{Working repertory}
@@ -821,7 +848,10 @@ sys.argv
 \end{lstlisting}
 
 \subsection{Math}
+For further explanations, see the \href{https://docs.python.org/3/library/math.html}{official documentation}
+
 \subsection{Random}
+For further explanations, see the \href{https://docs.python.org/3/library/random.html}{official documentation}
 
 \subsection{Argparse}
 You can parse argument(s) passed in the call of program using argparse.
@@ -842,9 +872,12 @@ print(args.x)
 if args.verbose:
     print("I add more explanations")
 \end{lstlisting}
-For further explanations, see \href{http://www.sharelatex.com}{argparse tutorial}.
+For further explanations, see \href{http://www.sharelatex.com}{argparse tutorial} or  \href{https://docs.python.org/3/library/argparse.html}{official documentation}.
+
 
 \subsection{Unittest}
+For further explanations, see the \href{https://docs.python.org/3/library/unittest.html}{official documentation}
+
 
 \subsection{Re}
 Regex also known as regular expression is a very powerfull module for searching in string. \textbf{re.search(expression, string)} with \textbf{expression = r"..."} \\
@@ -874,14 +907,24 @@ expression = r"^0[0-9]([ .-]?[0-9]{2}){4}$"
 expression = r"^[A-Za-z0-9]"
 \end{lstlisting}
 
+See more explanation about re on the \href{https://docs.python.org/3/library/re.html?highlight=re#module-re}{official documentation}
+
 \subsection{Cx\_freeze / setup}
 You can create .exe program that anybody can run on its own computer without having python or the extern libraries installed by using the module cx\_Freeze. \\
-You can do the same by creating a setup.py file.
+You can do the same by creating a setup.py file. \\
+
+See more explanation about cx\_Freeze on the  \href{https://cx-freeze.readthedocs.io/en/latest/}{official documentation}
+
 
 \subsection{Reseau}
 \subsubsection{Socket}
+For further explanations, see the \href{https://docs.python.org/3/library/socket.html}{official documentation} and socketserver  \href{https://docs.python.org/3/library/socketserver.html}{official documentation} 
 \subsubsection{Select}
+For further explanations, see the \href{https://docs.python.org/3/library/select.html}{official documentation}
+
 \subsection{Threads}
+For further explanations, see the \href{https://docs.python.org/3/library/threading.html}{official documentation}
+
 
 \subsection{Inspect}
 If you're interested in knowing how a class is built you can use the inspect module. It prints out the full code from the class. You can't use this function on built-in module like math, os, ... because it's not written in python.
@@ -892,7 +935,7 @@ print(f"Code source : \n{inspect.getsource(Queue)}")
 \end{lstlisting}
 
 \newpage
-\section{Knowledge in bulk}
+\section{Toolbox}
 \subsection{Break / Continue / Pass / Return}
 \label{subsec:BCPR}
 \begin{lstlisting}[language=Python]
@@ -1042,5 +1085,8 @@ if x or y or z:
 if any((x,y,z)):
     pass
 \end{lstlisting}
+
+\subsection{Encoding}
+It's possible to encode a string into bytes using a special string methods. You have to put a b for bytes in front of the first " of you string. Another way is to use encode function as my\_string.encode()
 
 \end{document}
