@@ -1,19 +1,25 @@
-\documentclass[a4paper, 12pt]{article}
-\usepackage[utf8]{inputenc}
+\documentclass[a4paper, 12pt]{article} %document type
+\usepackage[utf8]{inputenc} %encoding
 \usepackage[T1]{fontenc}    
-\usepackage[english]{babel}
+\usepackage[english]{babel} %language
 
 \title{\textbf{python\_summary}}
 \author{Ewan Carrée}
 \date{August 2020}
 
-\usepackage{listings}
+%manage cells in tables
+\usepackage{makecell}
+
+%manage colors
 \usepackage{xcolor}
+%\usepackage{color}
 
 %New colors defined below
 \definecolor{codegray}{rgb}{0.5,0.5,0.5}
 \definecolor{backcolour}{rgb}{0.95,0.95,0.92}
 
+% add code
+\usepackage{listings}
 %Code listing style named "mystyle"
 \lstdefinestyle{mystyle}{
   backgroundcolor=\color{backcolour},   commentstyle=\color{codegray},
@@ -37,7 +43,7 @@
 
 %\usepackage[top=2cm, bottom=2cm, left=2cm, right=2cm]{geometry} 
 
-\usepackage{color}
+%extern and intern links
 \usepackage{hyperref} %links
 \hypersetup{
     colorlinks=true,
@@ -46,12 +52,18 @@
     linktoc=all
 }
 
-\iffalse
+\iffalse % start ignore code
 %Python code highlighting
 \begin{lstlisting}[language=Python]
 
 \end{lstlisting}
-\fi
+\fi % end ignore code
+
+
+
+
+
+
 
 \begin{document}
 
@@ -324,7 +336,15 @@ Return a (dict)tuple containing every keys associated to their values that are i
 both = dictionnaire.items()
 # dict_items([('nom', 'Jerome'), ('age', 20)])
 \end{lstlisting}
+\item Merge two dicts \\
+You are able to merge two dicts in a single one. If some keys are repeated, it's the last one that is gonna overwrite.
+\begin{lstlisting}[language=Python]
+x = {'a':1, 'b':2}
+y = {'c':3, 'a':4}
+z = {**x,**y} # {'c':3, 'b':2, 'a':4}
+\end{lstlisting}
 \end{itemize}
+
 
 \subsubsection{Set}
 A set is a container that are very useful for mathematical operations\\
@@ -373,47 +393,67 @@ if len(my_container)==0:
 \end{lstlisting}
 
 \subsubsection{Iterator / Iterable}
+Iterable is an object, which one can iterate over. It generates an Iterator when passed to iter() method. \\
+Iterator is an object, which is used to iterate over an iterable object using \_\_next\_\_() method. Iterators have \_\_next\_\_() method, which returns the next item of the object.
+\begin{lstlisting}[language=Python]
+class IteratorIterable:
+    def __init__(self, n):
+        self.n = n
+        self.cur = 1
+        
+    def __iter__(self):
+        return self
+        
+    def __next__(self):
+        if self.cur == self.n+1:
+            raise StopIteration
+        else:
+            ret = self.cur
+            self.cur += 1 
+            return ret
+\end{lstlisting}
 
-\newpage
-\section{For}
+\subsubsection{For}
 \label{subsec:For}
 For loop are the most powerful way to work on containers in python.
 
-\subsection{Range}
-Range allows user to loop a certain times. \textbf{range(start,end, step)}
-\begin{lstlisting}[language=Python]
-for x in range(2):
-	print(x)
-#0
-#1
-\end{lstlisting}
-
-\subsection{Enumerate}
-Enumerate is a very good way to work with for loop. You can access simultaneously to the element and it's position in a tuple.
-\begin{lstlisting}[language=Python]
-liste = ['a', 'b', 'c']
-for index, elem in enumerate(liste):
-	print(f"{elem} at position {index}")
-# a at position 0
-# b at position 1
-# c at position 2
-\end{lstlisting}
-
-\subsection{Zip}
-Zip is another loop method. You can combine multiple lists with the same length in the loop. 
-\begin{lstlisting}[language=Python]
-names = ["Peter Parker", "Clark Kent", "Wade Wilson", "Bruce Wayne"]
-heroes = ["Spiderman", "Superman", "Deadpool", "Batman"]
-universes = ["Marvel", "DC", "Marvel", "DC"]
-
-for name, hero, universe in zip(names, heroes, universes):
-	print(f"{name} is actually {hero} from {universe}")
-	
-# Peter Parker is actually Spiderman from Marvel
-# Clark Kent is actually Superman from DC
-# Wade Wilson is actually Deadpool from Marvel
-# Bruce Wayne is actually Batman from DC
-\end{lstlisting}
+\begin{itemize}
+    \item Range
+    Range allows user to loop a certain times. \textbf{range(start,end, step)}
+    \begin{lstlisting}[language=Python]
+    for x in range(2):
+    	print(x)
+    #0
+    #1
+    \end{lstlisting}
+    
+    \item Enumerate
+    Enumerate is a very good way to work with for loop. You can access simultaneously to the element and it's position in a tuple.
+    \begin{lstlisting}[language=Python]
+    liste = ['a', 'b', 'c']
+    for index, elem in enumerate(liste):
+    	print(f"{elem} at position {index}")
+    # a at position 0
+    # b at position 1
+    # c at position 2
+    \end{lstlisting}
+    
+    \item Zip
+    Zip is another loop method. You can combine multiple lists with the same length in the loop. 
+    \begin{lstlisting}[language=Python]
+    names = ["Peter Parker", "Clark Kent", "Wade Wilson", "Bruce Wayne"]
+    heroes = ["Spiderman", "Superman", "Deadpool", "Batman"]
+    universes = ["Marvel", "DC", "Marvel", "DC"]
+    
+    for name, hero, universe in zip(names, heroes, universes):
+    	print(f"{name} is actually {hero} from {universe}")
+    	
+    # Peter Parker is actually Spiderman from Marvel
+    # Clark Kent is actually Superman from DC
+    # Wade Wilson is actually Deadpool from Marvel
+    # Bruce Wayne is actually Batman from DC
+    \end{lstlisting}
+\end{itemize}
 
 \newpage
 \section{Function}
@@ -667,67 +707,6 @@ print(isinstance(my_instance, my_class)) # return True if my_instance is an inst
 \end{lstlisting}
 
 \newpage
-\section{Modules}
-Modules are Python programs that contain functions that we often reuse (we also call them libraries or libraries). These are “toolboxes” that will be very useful to you.\newline
-
-\subsection{Import}
-\label{subsec:Import}
-\subsubsection{Import module from another repertory}
-Sometimes you need to import a module that isn't into you actual repertory, rather than copy this module into you repertory you can import it by another way. \\
-
-Tree exemple :
-Main/
-	main.py
-	Test/
-		tes.py
-
-\begin{lstlisting}[language=Python]
-import sys
-sys.path.append("./Test")
-import test # .py file (module)
-\end{lstlisting}
-
-\subsubsection{Import module as}
-Sometimes you import modules but it's very long to write methods from a long module name. Plus, it's not good to use the \textit{import * from module} because it can creates conflicts between function and class that have the same name in two different modules. Rather than writing module.class you can use the key word \textbf{as}. It very used for libraries like numpy as np, matplotlib.pyplot as plt and scipy.signal as sig
-\label{As}
-
-\subsection{Time}
-\subsubsection{Time}
-\subsubsection{Datetime}
-\subsection{Password}
-\subsubsection{Getpass}
-\subsubsection{Hashlib}
-\subsection{Os}
-
-\subsection{Sys}
-\subsubsection{Memory used by a variable}
-Control you memory while programming. 
-\begin{lstlisting}[language=Python]
-import sys
-var = [1]*100
-print(f"memoire utilisee par var : {sys.getsizeof(var)} bytes") #memoire utilisee par var : 856 bytes
-\end{lstlisting}
-
-\subsection{Math}
-\subsection{Random}
-\subsection{Argparse}
-\subsection{Unittest}
-\subsection{Re}
-\subsection{Cx\_freeze / setup}
-\subsection{Reseau}
-\subsubsection{Socket}
-\subsubsection{Select}
-\subsection{Threads}
-
-\subsection{Inspect}
-If you're interested in knowing how a class is built you can use the inspect module. It prints out the full code from the class. You can't use this function on built-in module like math, os, ... because it's not written in python.
-\begin{lstlisting}[language=Python]
-import inspect
-from queue import Queue
-print(f"Code source : \n{inspect.getsource(Queue)}")
-\end{lstlisting}
-
-\newpage
 \section{Decorators}
 A decorator is a design pattern in Python that allows a user to add new functionality to an existing object without modifying its structure. Decorators are usually called before the definition of a function you want to decorate. \textbf{@my\_decorator}\newline
 \subsection{Function}
@@ -764,6 +743,153 @@ You can chain decorators to apply multiple processes on the same function / clas
 Generators are simple and powerful tools for creating iterators. They are written like regular functions but use the yield statement when they want to return data. Each time it is called by next (), the generator resumes execution where it left off (keeping all of its execution context).\newline
 \subsection{Iterators}
 \subsection{Yield}
+
+\newpage
+\section{Modules}
+Modules are Python programs that contain functions that we often reuse (we also call them libraries or libraries). These are “toolboxes” that will be very useful to you.\newline
+
+\subsection{Import}
+\label{subsec:Import}
+\subsubsection{Import module from another repertory}
+Sometimes you need to import a module that isn't into you actual repertory, rather than copy this module into you repertory you can import it by another way. \\
+
+Tree exemple : \\
+Main/ \\
+....main.py \\
+....Test/ \\
+........test.py \\
+
+\begin{lstlisting}[language=Python]
+import sys
+sys.path.append("./Test")
+import test # .py file (module)
+\end{lstlisting}
+
+\subsubsection{Import module as}
+Sometimes you import modules but it's very long to write methods from a long module name. Plus, it's not good to use the \textit{import * from module} because it can creates conflicts between function and class that have the same name in two different modules. Rather than writing module.class you can use the key word \textbf{as}. It very used for libraries like numpy as np, matplotlib.pyplot as plt and scipy.signal as sig
+\label{As}
+
+\subsection{Time}
+\subsubsection{Time}
+\subsubsection{Datetime}
+\subsection{Password}
+\subsubsection{Getpass}
+\subsubsection{Hashlib}
+
+\subsection{Os}
+\subsubsection{Working repertory}
+You can get you actual working repertory by using :
+\begin{lstlisting}[language=Python]
+my_repertory = os.getcwd()
+\end{lstlisting}
+
+\subsubsection{Terminal commandline}
+You can run terminal commandlines by using : (look out for commands that corresponds with the os terminal you are running you program in)
+\begin{lstlisting}[language=Python]
+os.system("ls")
+
+#get the value returned with
+cmd = os.popen("ls")
+cmd.read()
+\end{lstlisting}
+
+\subsection{Sys}
+\subsubsection{Memory used by a variable}
+Control you memory while programming. 
+\begin{lstlisting}[language=Python]
+var = [1]*100
+print(f"memoire utilisee par var : {sys.getsizeof(var)} bytes") #memoire utilisee par var : 856 bytes
+\end{lstlisting}
+
+\subsubsection{Redirect flow}
+We can redirect the flow to write directly somewhere instead of the terminal.
+\begin{lstlisting}[language=Python]
+file = open("output.txt", 'w')
+sys.stdout = fichier # return to original flow with sys.__stdout__
+\end{lstlisting}
+
+\subsubsection{Exit program}
+You can exit the program any time you want when it's running. The parameter inside the function is important to specify to the user is there has been a problem or not; 0 means no problem and anything else (often 1) means that there has been a problem.
+\begin{lstlisting}[language=Python]
+sys.exit(parameter)
+\end{lstlisting}
+
+\subsubsection{Get parameters passed in the call}
+You can get any parameter specified by the user when he runned the program. (if an parameter is separated by space(s), sourround him by "").
+\begin{lstlisting}[language=Python]
+sys.argv
+\end{lstlisting}
+
+\subsection{Math}
+\subsection{Random}
+
+\subsection{Argparse}
+You can parse argument(s) passed in the call of program using argparse.
+\begin{lstlisting}[language=Python]
+parser = argparse.ArgumentParser()
+
+#add instruction when user type program.py --help/-h
+#imagine we need an compulsory argument of type int :
+parser.add_argument("x", type=int, help="description of x")
+#imagine that the user can specify an other optional argument:
+parser.add_argument("-v", "--verbose", action="store_true", help="add more explanation")
+
+#save arguments
+args = parser.parse_args()
+
+#get args
+print(args.x)
+if args.verbose:
+    print("I add more explanations")
+\end{lstlisting}
+For further explanations, see \href{http://www.sharelatex.com}{argparse tutorial}.
+
+\subsection{Unittest}
+
+\subsection{Re}
+Regex also known as regular expression is a very powerfull module for searching in string. \textbf{re.search(expression, string)} with \textbf{expression = r"..."} \\
+
+\begin{table}[h]
+\begin{center}
+{\renewcommand{\arraystretch}{2} %donne la distance entre les lignes%
+{\setlength{\tabcolsep}{1.5cm} %donne la distance entre les collones%
+\begin{tabular}{|l|c|r|}
+  \hline
+  \makecell{$\land$ \\ start} & \makecell{* \\ 0,1,...} & \makecell{\{\} \\ n times} \\
+  \hline
+  \makecell{\$ \\ end} & \makecell{+ \\ 1,...} & \makecell{[] \\ sth inside} \\
+  \hline
+  \makecell{? \\ 0 or 1} & \makecell{() \\ group} &  \\
+  \hline
+\end{tabular}}}
+\end{center}
+\caption{Regex methods}
+\end{table}
+
+Example :
+\begin{lstlisting}[language=Python]
+# I want to find a phone number with digits separated by a space, a point or an hyphen.
+expression = r"^0[0-9]([ .-]?[0-9]{2}){4}$"
+# I want a password with at least 6 characters and containing number or letter or both.
+expression = r"^[A-Za-z0-9]"
+\end{lstlisting}
+
+\subsection{Cx\_freeze / setup}
+You can create .exe program that anybody can run on its own computer without having python or the extern libraries installed by using the module cx\_Freeze. \\
+You can do the same by creating a setup.py file.
+
+\subsection{Reseau}
+\subsubsection{Socket}
+\subsubsection{Select}
+\subsection{Threads}
+
+\subsection{Inspect}
+If you're interested in knowing how a class is built you can use the inspect module. It prints out the full code from the class. You can't use this function on built-in module like math, os, ... because it's not written in python.
+\begin{lstlisting}[language=Python]
+import inspect
+from queue import Queue
+print(f"Code source : \n{inspect.getsource(Queue)}")
+\end{lstlisting}
 
 \newpage
 \section{Knowledge in bulk}
@@ -892,5 +1018,29 @@ assert isinstance(b, int)
 Sometimes you need to convert a variable from a certain type to another. Cast is a good way to do it but you've to know that you can lose information by doing it. \\ \\
 You can do it by simply follow this pattern : \textbf{new\_type(my\_variable)}
 Notice that you have to be coherent in your type transformation. For example, you won't be able to cast a string into an integer if your string = "Salut".
+
+\subsection{Encoding}
+You can precise in the first line of your .py document the encoding your are curently using.
+\begin{lstlisting}[language=Python]
+# -*-coding:Utf-8 -*
+\end{lstlisting}
+
+\subsection{Path}
+You can precise path to your python compilator in the second line of your .py document.
+\begin{lstlisting}[language=Python]
+# !/usr/bin/python3.8
+\end{lstlisting}
+
+\subsection{Test the validity of several values}
+You can check if one of several values is not False.
+\begin{lstlisting}[language=Python]
+x,y,z = 0,1,0
+if 1 in (x,y,z):
+    pass
+if x or y or z:
+    pass
+if any((x,y,z)):
+    pass
+\end{lstlisting}
 
 \end{document}
