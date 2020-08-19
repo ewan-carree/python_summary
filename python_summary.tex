@@ -1,11 +1,15 @@
-\documentclass[a4paper, 12pt]{article} %document type
+\documentclass[a4paper, 12pt, titlepage]{scrartcl} %document type
 \usepackage[utf8]{inputenc} %encoding
 \usepackage[T1]{fontenc}    
 \usepackage[english]{babel} %language
 
-\title{\textbf{python\_summary}}
-\author{Ewan Carree}
-\date{August 2020}
+\usepackage{graphicx}
+
+\titlehead{\centering\includegraphics[width=6cm]{python}}
+\title{python\_summary}
+\author{}
+\date{August 14, 2020 - \today}
+\publishers{Ewan Carree}
 
 %manage cells in tables
 \usepackage{makecell}
@@ -435,7 +439,7 @@ class IteratorIterable:
 For loop are the most powerful way to work on containers in python.
 
 \begin{itemize}
-    \item Range
+    \item Range \\
     Range allows user to loop a certain times. \textbf{range(start,end, step)}
     \begin{lstlisting}[language=Python]
     for x in range(2):
@@ -444,7 +448,7 @@ For loop are the most powerful way to work on containers in python.
     #1
     \end{lstlisting}
     
-    \item Enumerate
+    \item Enumerate \\
     Enumerate is a very good way to work with for loop. You can access simultaneously to the element and it's position in a tuple.
     \begin{lstlisting}[language=Python]
     liste = ['a', 'b', 'c']
@@ -455,7 +459,7 @@ For loop are the most powerful way to work on containers in python.
     # c at position 2
     \end{lstlisting}
     
-    \item Zip
+    \item Zip \\
     Zip is another loop method. You can combine multiple lists with the same length in the loop. 
     \begin{lstlisting}[language=Python]
     names = ["Peter Parker", "Clark Kent", "Wade Wilson", "Bruce Wayne"]
@@ -1244,7 +1248,7 @@ It's possible to encode a string into bytes using a special string methods. You 
 
 \subsection{F-string}
 \label{subsec:F-string}
-There is a simple way to write argument in you print() function. It's called F-string. A lot of methods come with it. \textbf{print(f"blabla {my\_argument} blabla)}
+There is a simple way to write argument in you print() function. It's called F-string. A lot of methods come with it. \textbf{print(f"blabla \{my\_argument\} blabla")}
 \begin{lstlisting}[language=Python]
 for n in range(2):
 	print(f"n = {n:03}")
