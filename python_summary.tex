@@ -493,8 +493,8 @@ real_lambda = lambda x : x+5
 # equivalent_lambda : 10 and real_lambda : 10
 \end{lstlisting}
 
-\subsection{Default parameters}
-Default parameters are used for parameters that don't necessarily need a value. We assign a default value that can be overloaded if needed. Default parameters are always declared after non-default parameters into function's head. \textbf{def func(non\_default\_parameters, \textit{default\_parameters = value})}
+\subsection{Default argument}
+Default parameters are used for arguments that don't necessarily need a value. We assign a default value that can be overloaded if needed. Default arguments are always declared after non-default arguments into function's head. \textbf{def func(non\_default\_arguments, \textit{default\_arguments = value})}
 
 \begin{lstlisting}[language=Python]
 def func(age, nom="Jerome"):
@@ -504,8 +504,24 @@ func(20, "Antoine")
 func(20)
 # Tu as 20 ans et tu t'appelles Antoine
 # Tu as 20 ans et tu t'appelles Jerome
-
 \end{lstlisting}
+
+\textbf{Warning} : A default argument is evaluated only once time when the function is called for the first time. When you repeat function calls, it may cause problems especially with mutable arguments like lists. If your default argument is an empty list, it will create this empty list one time and reuse it for next calls. The way to counter this problem is to put an immutable argument and then create the list inside the function. \\
+Here is an exemple : 
+\begin{lstlisting}[language=Python]
+def add_employee(emp, emp_list = []):
+    emp_list.append(emp)
+    print(emp_list) # Not good because emp_list is mutable and is reused each time this function is called.
+\end{lstlisting}
+Will become :
+\begin{lstlisting}[language=Python]
+def add_employee(emp, emp_list = None):
+    if emp_list is None:
+        emp_list = []
+    emp_list.append(emp)
+    print(emp_list) # Good because emp_list is immutable and is new each time this function is called.
+\end{lstlisting}
+
 
 \subsection{Map function}
 Map function is a special function used to apply a function for each element of a container. \textbf{map(function\_to\_apply, list)}
@@ -1358,5 +1374,7 @@ print(f"pi = {pi:.2f}")
 \end{lstlisting}
 
 You can see more methods by looking specifically on every module you want, for example datetime f-string.
+
+\subsection{Else}
 
 \end{document}
