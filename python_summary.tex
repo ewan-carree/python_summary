@@ -4,7 +4,7 @@
 \usepackage[english]{babel} %language
 
 \title{\textbf{python\_summary}}
-\author{Ewan Carrée}
+\author{Ewan Carree}
 \date{August 2020}
 
 %manage cells in tables
@@ -195,6 +195,8 @@ string = '5'
 string = string.zfill(3)
 # 005
 \end{lstlisting}
+
+There is another way of doing it while printing argument with \hyperref[subsec:F-string]{F-string}.
 \end{itemize}
 
 \subsubsection{Integer}
@@ -211,6 +213,8 @@ my_float = 3.3333333
 print("%.0f" % my_float + "with no decimal and " + "%.2f" % my_float + "with two decimals") #3 with no decimal and 3.33 with two decimals
 round(my_float, 3) # 3.333
 \end{lstlisting}
+
+There is another way of doing it while printing argument with \hyperref[subsec:F-string]{F-string}.
 
 \subsubsection{Tuple}
 A tuple is a container that can contain multiple variables with multiple types that have a link together. \\
@@ -702,6 +706,8 @@ class Test(object):
 	dimension = property(_get_dimension, _set_dimension) # lorsqu'on appelera objet.dimension, property redirigera vers les accesseurs/mutateurs prives
 \end{lstlisting}
 
+There is another way of doing it in a more readable and better way with \hyperref[subsec:Property]{property decorator}.
+
 \subsection{Metaclass}
 Every class inherit from the \textit{object} class, metaclass is a way to define how to create our own classes without inheriting from \textit{object}.
 
@@ -749,6 +755,66 @@ A decorator can also be used to wrap a class.
 
 \subsection{Multiple decorators}
 You can chain decorators to apply multiple processes on the same function / class.
+
+\subsection{Property decorator}
+\label{subsec:Property}
+Property decorator are one of the most useful decorator in classes to manage getters, setters and deleters. \textbf{@my\_method.getter/setter/deleter}\\
+Indeed, when you use a variable that use some attributes and then you set later one of thes attributes, it won't change in your variable which use attributes. \\
+The way to manage it is by using property decorator into methods as attributes that replace the previous variable. \\
+For example :
+\begin{lstlisting}[language=Python]
+class Myclass(object):
+	def __init__(self, first, last):
+		self.first = first
+		self.last = last
+		self.email = self.first + '.' + self.last + "@gmail.com"
+
+	def fullname(self):
+		return f"{self.first} {self.last}"
+		
+p1 = Myclass("Ewan", "Carree")
+p1.first = "Lou-Anne"
+
+print(p1.email) # Ewan.Carree@gmail.com -- first didn't change
+print(p1.fullname()) # Lou-Anne Carree
+\end{lstlisting}
+Will become :
+\begin{lstlisting}[language=Python]
+class Myclass(object):
+	def __init__(self, first, last):
+		self.first = first
+		self.last = last
+
+	@property
+	def email(self):
+		 return self.first + '.' + self.last + "@gmail.com"
+
+	@property
+	def fullname(self):
+		pass#return f"{self.first} {self.last}"
+
+	@fullname.setter
+	def fullname(self, name):
+		first,last = name.split(' ')
+		self.first = first
+		self.last = last
+
+	@fullname.getter
+	def fullname(self):
+		return f"{self.first} {self.last}"
+
+	@fullname.deleter
+	def fullname(self):
+		print("deleting ...")
+		self.first = None
+		self.last = None
+
+p1 = Myclass("Ewan", "Carree")
+p1.fullname = "Lou-Anne Le_Bras"
+
+print(p1.email) # Lou-Anne.Le_Bras@gmail.com
+print(p1.fullname) # Lou-Anne Le_Bras
+\end{lstlisting}
 
 \newpage
 \section{Generators}
@@ -916,8 +982,93 @@ You can do the same by creating a setup.py file. \\
 See more explanation about cx\_Freeze on the  \href{https://cx-freeze.readthedocs.io/en/latest/}{official documentation}
 
 
-\subsection{Reseau}
+\subsection{Network}
+With network you can exchange data between a client and a server following the TCP protocol. To establish a connexion between client and server, you need an host name and a port number. \\
+Here is an exemple of client and server : \\
+Server side
+\begin{lstlisting}[language=Python]
+import socket
+import select
+
+hote = ''
+port = 12800
+
+connexion_principale = socket.socket(socket.AF_INET, socket.SOCK_STREAM)
+connexion_principale.bind((hote, port))
+connexion_principale.listen(5)
+print("Le serveur ecoute a present sur le port {}".format(port))
+
+serveur_lance = True
+clients_connectes = []
+while serveur_lance:
+    # On va verifier que de nouveaux clients ne demandent pas a se connecter
+    # Pour cela, on ecoute la connexion_principale en lecture
+    # On attend maximum 50ms
+    connexions_demandees, wlist, xlist = select.select([connexion_principale],
+        [], [], 0.05)
+    
+    for connexion in connexions_demandees:
+        connexion_avec_client, infos_connexion = connexion.accept()
+        # On ajoute le socket connecte a la liste des clients
+        clients_connectes.append(connexion_avec_client)
+    
+    # Maintenant, on ecoute la liste des clients connectes
+    # Les clients renvoyes par select sont ceux devant etre lus (recv)
+    # On attend la encore 50ms maximum
+    # On enferme l'appel a select.select dans un bloc try
+    # En effet, si la liste de clients connectes est vide, une exception
+    # Peut etre levee
+    clients_a_lire = []
+    try:
+        clients_a_lire, wlist, xlist = select.select(clients_connectes,
+                [], [], 0.05)
+    except select.error:
+        pass
+    else:
+        # On parcourt la liste des clients a lire
+        for client in clients_a_lire:
+            # Client est de type socket
+            msg_recu = client.recv(1024)
+            # Peut planter si le message contient des caracteres speciaux
+            msg_recu = msg_recu.decode()
+            print("Recu {}".format(msg_recu))
+            client.send(b"5 / 5")
+            if msg_recu == "fin":
+                serveur_lance = False
+
+print("Fermeture des connexions")
+for client in clients_connectes:
+    client.close()
+
+connexion_principale.close()
+\end{lstlisting}
+Client side \\
+\begin{lstlisting}[language=Python]
+import socket
+
+hote = "localhost" #car nous avons les deux serveurs sur la meme machine
+port = 12800 #port du serveur qui ecoute
+
+connexion_avec_serveur = socket.socket(socket.AF_INET, socket.SOCK_STREAM)
+connexion_avec_serveur.connect((hote, port))
+print("Connexion etablie avec le serveur sur le port {}".format(port))
+
+msg_a_envoyer = b""
+while msg_a_envoyer != b"fin":
+    msg_a_envoyer = input("> ")
+    # Peut planter si vous tapez des caracteres speciaux
+    msg_a_envoyer = msg_a_envoyer.encode()
+    # On envoie le message
+    connexion_avec_serveur.send(msg_a_envoyer)
+    msg_recu = connexion_avec_serveur.recv(1024)
+    print(msg_recu.decode()) # La encore, peut planter s'il y a des accents
+
+print("Fermeture de la connexion")
+connexion_avec_serveur.close()
+\end{lstlisting}
+
 \subsubsection{Socket}
+Sockets allow us to open a connexion between two or more computer. Ports available are included between 1024 and 65535. \\
 For further explanations, see the \href{https://docs.python.org/3/library/socket.html}{official documentation} and socketserver  \href{https://docs.python.org/3/library/socketserver.html}{official documentation} 
 \subsubsection{Select}
 For further explanations, see the \href{https://docs.python.org/3/library/select.html}{official documentation}
@@ -933,6 +1084,8 @@ import inspect
 from queue import Queue
 print(f"Code source : \n{inspect.getsource(Queue)}")
 \end{lstlisting}
+
+\subsection{Operator}
 
 \newpage
 \section{Toolbox}
@@ -1088,5 +1241,21 @@ if any((x,y,z)):
 
 \subsection{Encoding}
 It's possible to encode a string into bytes using a special string methods. You have to put a b for bytes in front of the first " of you string. Another way is to use encode function as my\_string.encode()
+
+\subsection{F-string}
+\label{subsec:F-string}
+There is a simple way to write argument in you print() function. It's called F-string. A lot of methods come with it. \textbf{print(f"blabla {my\_argument} blabla)}
+\begin{lstlisting}[language=Python]
+for n in range(2):
+	print(f"n = {n:03}")
+#n = 000
+#n = 001
+
+pi = 3.141592
+print(f"pi = {pi:.2f}") 
+# pi = 3.14
+\end{lstlisting}
+
+You can see more methods by looking specifically on every module you want, for example datetime f-string.
 
 \end{document}
