@@ -870,6 +870,23 @@ mdp getpass.getpass("Type your password : ")
 For further explanations, see the \href{https://docs.python.org/3/library/getpass.html}{official documentation}
 
 \subsubsection{Hashlib}
+You can secure you password get from getpass by hashing them into different hash algorithm.\\
+To see every hash algorithms you can type this command : 
+\begin{lstlisting}[language=Python]
+hashlib.algorithms_guaranteed
+\end{lstlisting}
+First, you are going to encode your password into bytes. Then, use the hash algorithm.
+\begin{lstlisting}[language=Python]
+mot_de_passe = hashlib.sha1(b"mot de passe")
+\end{lstlisting}
+Finally, you'll need to transform your hashed password into bytes or string. String is more readable and reusable.
+\begin{lstlisting}[language=Python]
+mot_de_passe.hexdigest()
+\end{lstlisting}
+Then you can save this password and compare it to the password entered by the user to see if it corresponds.
+
+
+
 For further explanations, see the \href{https://docs.python.org/3/library/hashlib.html}{official documentation}
 
 
@@ -946,6 +963,84 @@ For further explanations, see \href{http://www.sharelatex.com}{argparse tutorial
 
 
 \subsection{Unittest}
+In every program it's very useful to test every functionnality that we propose. Unittest is a powerful module to test our code. You have to create another module starting with "test" into the same repertory from your main program.
+
+Here is an exemple of hos to use this module :
+\begin{lstlisting}[language=Python]
+import random
+import unittest
+
+class RandomTest(unittest.TestCase):
+
+    """Test case utilise pour tester les fonctions du module 'random'."""
+
+    def setUp(self):
+        """Initialisation des tests."""
+        self.liste = list(range(10))
+
+    def test_choice(self):
+        """Test le fonctionnement de la fonction 'random.choice'."""
+        elt = random.choice(self.liste)
+        self.assertIn(elt, self.liste)
+
+    def test_shuffle(self):
+        """Test le fonctionnement de la fonction 'random.shuffle'."""
+        random.shuffle(self.liste)
+        self.liste.sort()
+        self.assertEqual(self.liste, list(range(10)))
+
+    def test_sample(self):
+        """Test le fonctionnement de la fonction 'random.sample'."""
+        extrait = random.sample(self.liste, 5)
+        for element in extrait:
+            self.assertIn(element, self.liste)
+
+        with self.assertRaises(ValueError):
+            random.sample(self.liste, 20)
+\end{lstlisting}
+Set up is similar to def \_\_init\_\_(self), that's where you define generalities.
+Then create a function for each functionnality, it must correspond with the right assertion method.
+
+Here are every assertion methods you can use to test your functionnalities.
+\begin{table}[h]
+\begin{center}
+{\renewcommand{\arraystretch}{1} %donne la distance entre les lignes%
+{\setlength{\tabcolsep}{0.5cm} %donne la distance entre les collones%
+\begin{tabular}{|l|r|}
+  \hline
+  assertEqual(a, b) & a == b \\
+  \hline
+  assertNotEqual(a, b) & a != b \\
+  \hline
+  assertTrue(x) & x is True \\
+  \hline
+  assertFalse(x) & x is False \\
+  \hline
+  assertIs(a, b) & a is b \\
+  \hline
+  assertIsNot(a, b) & a is not b \\
+  \hline
+  assertIsNone(x) & x is None \\
+  \hline
+  assertIsNotNone(x) & x is not None \\
+  \hline
+  assertIn(a, b) & a in b \\
+  \hline
+  assertNotIn(a, b) & a not in b \\
+  \hline
+  assertIsInstance(a, b) & isinstance(a, b) \\
+  \hline
+  assertNotIsInstance(a, b) & not isinstance(a, b) \\
+  \hline
+  assertRaises(exception, fonction, *args, **kwargs) & \makecell{check if function \\ raise the good exception}  \\
+  \hline
+\end{tabular}}}
+\end{center}
+\caption{Assertion methods}
+\end{table}
+
+After creating this module, you can test it by two different ways. The first one is \textbf{unittest.main()} but the other one is much more convenient. Go into the repertory into a terminal where you project and test file are stored and type the command \textbf{pythonX -m unittest}. It will run automatically each test.
+
 For further explanations, see the \href{https://docs.python.org/3/library/unittest.html}{official documentation}
 
 
@@ -1078,6 +1173,8 @@ For further explanations, see the \href{https://docs.python.org/3/library/socket
 For further explanations, see the \href{https://docs.python.org/3/library/select.html}{official documentation}
 
 \subsection{Threads}
+Threading is an advanced module especially used to run multiple processes at the same time. Normally, each functin call follow each other in one way. But with threading you can run them simultaneously. It's especially useful when a call lasts a lot of time, with threading, you don't waste this time.
+
 For further explanations, see the \href{https://docs.python.org/3/library/threading.html}{official documentation}
 
 
