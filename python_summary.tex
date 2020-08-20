@@ -749,7 +749,7 @@ print(isinstance(my_instance, my_class)) # return True if my_instance is an inst
 \section{Decorators}
 A decorator is a design pattern in Python that allows a user to add new functionality to an existing object without modifying its structure. Decorators are usually called before the definition of a function you want to decorate. \textbf{@my\_decorator}\newline
 \subsection{Function}
-A decorator can be applied to wrap a function and apply a process on it each time it's called.
+A decorator can be a function applied to wrap another function and apply a process on it each time it's called.
 \begin{lstlisting}[language=Python]
 import time
 def timer(func):
@@ -765,16 +765,63 @@ def timer(func):
 def exemple(x):
 	return "je suis "+str(x)
 	
-exemple(5)
+rv = exemple(5)
 #Time to execute : 2.384185791015625e-06
-#je suis 5
+print(rv) #je suis 5
 \end{lstlisting}
 
 \subsection{Class}
-A decorator can also be used to wrap a class.
+A decorator can also be a class applied to wrap a function and apply a process on it each time it's called.
+
+Last code become :
+\begin{lstlisting}[language=Python]
+import time
+class timer(object):
+    def __init__(self, func):
+        self.func = func
+    def __call__(self, *args, **kwargs):
+        start = time.time()
+		rv = self.func(*args, **kwargs)
+		total = time.time() - start
+		print("Time to execute : "+ str(total))
+		return rv
+
+@timer #we can chain decorators
+def exemple(x):
+	return "je suis "+str(x)
+	
+exemple(5)
+#Time to execute : 2.384185791015625e-06
+print(rv) #je suis 5
+\end{lstlisting}
 
 \subsection{Multiple decorators}
-You can chain decorators to apply multiple processes on the same function / class.
+You can chain decorators to apply multiple processes on the same function / class. \\
+Sometimes multiple decorators create conflicts between each other by manipulating the original function. You can fix this easily with the module \textbf{functools}. You need to add a \textbf{wraps(my\_func)} decorator on each wrapper function inside your decorators.\\
+
+The function code become :
+\begin{lstlisting}[language=Python]
+import time
+from functools import wraps
+def timer(func):
+    @wraps(func) #changement
+	def wrapper(*args, **kwargs):
+		start = time.time()
+		rv = func(*args, **kwargs)
+		total = time.time() - start
+		print("Time to execute : "+ str(total))
+		return rv
+	return wrapper
+
+#possibly another decorators here
+@timer
+def exemple(x):
+	return "je suis "+str(x)
+	
+rv = exemple(5)
+#Time to execute : 2.384185791015625e-06
+print(rv) #je suis 5
+\end{lstlisting}
 
 \subsection{Property decorator}
 \label{subsec:Property}
@@ -839,7 +886,7 @@ print(p1.fullname) # Lou-Anne Le_Bras
 \newpage
 \section{Generators}
 \label{sec:Generators}
-Generators are simple and powerful tools for creating iterators. They are written like regular functions but use the yield statement when they want to return data. Each time it is called by next (), the generator resumes execution where it left off (keeping all of its execution context).\newline
+Generators are simple and powerful tools for creating iterators. They are written like regular functions but use the yield statement when they want to return data. Each time it is called by next(), the generator resumes execution where it left off (keeping all of its execution context).\newline
 \subsection{Iterators}
 \subsection{Yield}
 
@@ -1375,6 +1422,30 @@ print(f"pi = {pi:.2f}")
 
 You can see more methods by looking specifically on every module you want, for example datetime f-string.
 
-\subsection{Else}
+\subsection{Else clause on loop}
+Else can be used in many case like in the structure if/elif/else ofently. But we can also use it in loops like for or while. It is similar to the finally statement of try/except. \\
+It is always runned except if the loop encounter the \textbf{break} keyword.
+
+\begin{lstlisting}[language=Python]
+for i in range(2):
+    print(i)
+else: @doesn't encounter break
+    print("Loop finished")
+#0
+#1
+#Loop finished
+
+i=0
+while i<5:
+    print(i)
+    i+=1
+    if i == 3:
+        break
+else: #encounter break before end
+    print("Loop finished")
+#0
+#1
+#2
+\end{lstlisting}
 
 \end{document}
