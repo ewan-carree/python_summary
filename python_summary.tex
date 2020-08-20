@@ -98,7 +98,7 @@ In python 3, there are some reserved words that you can't use in your program as
   \hline
   \hyperref[subsec:For]{for} & from & \hyperref[subsec:Global]{global} \\
   \hline
-  \hyperref[IEE]{if} & \hyperref[subsec:Import]{import} & \hyperref[subsec:ListComprehension]{in} \\
+  \hyperref[IEE]{if} & \hyperref[subsec:Import]{import} & \hyperref[Comprehension]{in} \\
   \hline
   is & \hyperref[subsec:Lambda]{lambda} & nonlocal \\
   \hline 
@@ -361,7 +361,13 @@ z = {**x,**y} # {'c':3, 'b':2, 'a':4}
 
 
 \subsubsection{Set}
-A set is a container that are very useful for mathematical operations\\
+A set is a container that are very useful for mathematical operations.\\
+It is similar to a list except the fact that there is only unique value in a set.
+\begin{lstlisting}[language=Python]
+my_list = [1,1,3,5,5]
+my_set = set(my_list) # {1, 3, 5}
+\end{lstlisting}
+
 Here are some methods that you can apply on sets : 
 \begin{itemize}
 \item
@@ -369,6 +375,33 @@ Here are some methods that you can apply on sets :
 
 \subsection{Containers}
 Containers are any object that holds an arbitrary number of other objects. Generally, containers provide a way to access the contained objects and to iterate over them. We can find lists, strings, dicts, tuples and sets. Look out for mutability / immutability, some methods aren't possible between each other. \\
+
+\subsubsection{Comprehension}
+\label{Comprehension}
+Container (list, dict, set) comprehension is probably one of the most powerful method that you can apply. It conbines map and filter function into a single way to do it. \textbf{[func\_to\_apply() for elem in container if filter\_condition]} \\
+
+Example with lists :
+\begin{lstlisting}[language=Python]
+my_list = [1,2,3]
+new_list = [x**x for x in my_list if x%2!=0]
+
+#before : [1, 2, 3] and now : [1, 27]
+\end{lstlisting}
+
+Example with dicts :
+\begin{lstlisting}[language=Python]
+names = ["Peter Parker", "Clark Kent", "Wade Wilson", "Bruce Wayne"]
+heroes = ["Spiderman", "Superman", "Deadpool", "Batman"]
+
+my_dict = {name: hero for name, hero in zip(names, heroes) if name != "Peter Parker"}
+# {'Clark Kent': 'Superman', 'Wade Wilson': 'Deadpool', 'Bruce Wayne': 'Batman'}
+\end{lstlisting}
+
+Example with sets :
+\begin{lstlisting}[language=Python]
+my_list = [1,1,3,5,5]
+my_set = {n for n in my_list} #{1,3,5}
+\end{lstlisting}
 
 \subsubsection{Slicing}
 Slicing is a method that concerns containers, you can use slicing on every possible container. \textbf{[start:end:step]} \textit{end argument isn't take in account : [start:end[}
@@ -534,6 +567,8 @@ mapped_list = list(map(map_function,liste)) #No () for argument function
 # before : [1, 2, 3] and now : [1, 4, 27]
 \end{lstlisting}
 
+There is a way more effective way of doing it with \hyperref[Comprehension]{comprehension}.
+
 \subsection{Filter function}
 Filter function is a special function used to apply a selection for each element of a container. \textbf{map(function\_to\_apply, list)}
 \begin{lstlisting}[language=Python]
@@ -545,15 +580,7 @@ filtered_list = list(filter(filter_function,liste))
 # before : [1, 2, 3] and now : [1, 3]
 \end{lstlisting}
 
-\subsection{List Comprehension}
-List comprehension is probably one of the most powerful method that you can apply. It conbines map and filter function into a single way to do it. \textbf{[func\_to\_apply() for elem in list if filter\_condition]}
-\label{subsec:ListComprehension}
-\begin{lstlisting}[language=Python]
-liste = [1,2,3]
-new_list = [map_function(x) for x in liste if x%2!=0]
-
-#before : [1, 2, 3] and now : [1, 27]
-\end{lstlisting}
+There is a way more effective way of doing it with \hyperref[Comprehension]{comprehension}.
 
 \subsection{Unknown parameters}
 Sometimes you don't know how many arguments a function is going to receive. Also, it's important to handle unknown parameters. \textit{It's the case for exemple with the print() function}. \textbf{* means unnamed parameters and ** means named parameters}
@@ -883,6 +910,31 @@ print(p1.email) # Lou-Anne.Le_Bras@gmail.com
 print(p1.fullname) # Lou-Anne Le_Bras
 \end{lstlisting}
 
+\subsection{Decorator with argument(s)}
+Sometimes you need to pass argument(s) into you decorator to modify the your decorator is working. To solve that problem, you need to nest your previous decorator into un new function. \\
+Here is an exemple : \\
+\begin{lstlisting}[language=Python]
+import time
+def add_prefix(prefix): #every function nested have access to that prefix
+    def timer(func):
+    	def wrapper(*args, **kwargs):
+    		start = time.time()
+    		rv = func(*args, **kwargs)
+    		total = time.time() - start
+    		print(prefix + "Time to execute : "+ str(total))
+    		return rv
+    	return wrapper
+    return timer
+
+@add_prefix("exemple : ")
+def exemple(x):
+	return "je suis "+str(x)
+	
+rv = exemple(5)
+# exemple : Time to execute : 2.384185791015625e-06
+print(rv) #je suis 5
+\end{lstlisting}
+
 \newpage
 \section{Generators}
 \label{sec:Generators}
@@ -896,20 +948,6 @@ Modules are Python programs that contain functions that we often reuse (we also 
 
 \subsection{Import}
 \label{subsec:Import}
-\subsubsection{Import module from another repertory}
-Sometimes you need to import a module that isn't into you actual repertory, rather than copy this module into you repertory you can import it by another way. \\
-
-Tree exemple : \\
-Main/ \\
-....main.py \\
-....Test/ \\
-........test.py \\
-
-\begin{lstlisting}[language=Python]
-import sys
-sys.path.append("./Test")
-import test # .py file (module)
-\end{lstlisting}
 
 \subsubsection{Import module as}
 Sometimes you import modules but it's very long to write methods from a long module name. Plus, it's not good to use the \textit{import * from module} because it can creates conflicts between function and class that have the same name in two different modules. Rather than writing module.class you can use the key word \textbf{as}. It very used for libraries like numpy as np, matplotlib.pyplot as plt and scipy.signal as sig
@@ -971,6 +1009,23 @@ cmd.read()
 \end{lstlisting}
 
 \subsection{Sys}
+\subsubsection{Import module from another repertory}
+Sometimes you need to import a module that isn't into you actual repertory, rather than copy this module into you repertory you can import it by another way. \\
+
+Tree exemple : \\
+Main/ \\
+....main.py \\
+....Test/ \\
+........test.py \\
+
+\begin{lstlisting}[language=Python]
+import sys
+sys.path.append("./Test")
+import test # .py file (module)
+\end{lstlisting}
+
+Another way to do this in a more effective way is to set \hyperref[subsec:PathVariables]{path variables}.
+
 \subsubsection{Memory used by a variable}
 Control you memory while programming. 
 \begin{lstlisting}[language=Python]
@@ -1447,5 +1502,9 @@ else: #encounter break before end
 #1
 #2
 \end{lstlisting}
+
+\subsection{Path Variables}
+\label{PathVariables}
+
 
 \end{document}
