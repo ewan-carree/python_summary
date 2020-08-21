@@ -100,7 +100,7 @@ In python 3, there are some reserved words that you can't use in your program as
   \hline
   \hyperref[IEE]{if} & \hyperref[subsec:Import]{import} & \hyperref[Comprehension]{in} \\
   \hline
-  is & \hyperref[subsec:Lambda]{lambda} & nonlocal \\
+  \hyperref[subsec:Is]{is} & \hyperref[subsec:Lambda]{lambda} & nonlocal \\
   \hline 
   not & or & \hyperref[subsec:BCPR]{pass} \\
   \hline 
@@ -625,15 +625,35 @@ my_instance.my_second_method()
 \end{lstlisting}
 
 \subsection{Inheritance}
-Inheritance is a concept of relation between classes. Some are parents, the other are children. A children inherit from every methods from the parent class but can overload them. A child class can have multiple parents.
+Inheritance is a concept of relation between classes. Some are parents, the other are children. A children inherit from every methods from the parent class but can overload them. A child class can have multiple parents. \\
+Here is a useful example : a parent class that automatically initialize the childs :
+\begin{lstlisting}[language=Python]
+class Initializer:
+    def __init__(self, *args, **kwargs):
+        if kwargs and not args:
+            print(f"kwargs is not empty : {kwargs}")
+            for key, value in kwargs.items():
+                setattr(self, key, value)
+        else:
+            raise ValueError("You didn't enter the correct arguments")
+ 
+ 
+class MyClass(Initializer):
+    def __str__(self):
+        return f"I'm {self.__class__.__name__} and here are my attributes : {self.__dict__}"
+ 
+ 
+my_instance = MyClass(a=1, b=2)
+\end{lstlisting}
+
+Here is another example with multiple inheritance
 \begin{lstlisting}[language=Python]
 class Dog(object):
 	def __init__(self, age):
 		self.age = age
 	def speak(self):
 		print("Waf")
-class Cat(Dog, Animal): #multiple inheritance
-	"""Cat herite de Dog : elle possede ses fonctions et methodes"""
+class Cat(Dog, Animal): #multiple inheritance : Cat have some attributs from Dog but is also an Animal
 	def __init__(self, age, nom):
 		super().__init__(age)
 		self.nom = nom
@@ -775,7 +795,10 @@ print(isinstance(my_instance, my_class)) # return True if my_instance is an inst
 \newpage
 \section{Decorators}
 A decorator is a design pattern in Python that allows a user to add new functionality to an existing object without modifying its structure. Decorators are usually called before the definition of a function you want to decorate. \textbf{@my\_decorator}\newline
-\subsection{Function}
+
+\subsection{Function decorator}
+
+\subsubsection{With a function as decorator}
 A decorator can be a function applied to wrap another function and apply a process on it each time it's called.
 \begin{lstlisting}[language=Python]
 import time
@@ -797,7 +820,7 @@ rv = exemple(5)
 print(rv) #je suis 5
 \end{lstlisting}
 
-\subsection{Class}
+\subsubsection{With a class as decorator}
 A decorator can also be a class applied to wrap a function and apply a process on it each time it's called.
 
 Last code become :
@@ -820,6 +843,37 @@ def exemple(x):
 exemple(5)
 #Time to execute : 2.384185791015625e-06
 print(rv) #je suis 5
+\end{lstlisting}
+
+\subsection{Class decorator}
+Classes can also be decorated the same way that we do with function.\\
+Here is an useful example of a class that automatically initialize another class :
+\begin{lstlisting}[language=Python]
+class ClassInitializer:
+    def __init__(self, cls):
+        print("Entering __init__ ...")
+        self.cls = cls
+ 
+    def __call__(self, *args, **kwargs):
+        print("Entering __call__ ...")
+        obj = self.cls() # create an instance
+ 
+        if kwargs and not args:
+            print(f"kwargs is not empty : {kwargs}")
+            for key, value in kwargs.items():
+                setattr(obj, key, value) # set attributes to the new instance
+        else:
+            raise ValueError("You didn't enter the correct arguments")
+        return obj
+ 
+ 
+@ClassInitializer
+class MyClass:
+    def __str__(self):
+        return f"I'm {self.__class__.__name__} and here are my attributes : {self.__dict__}"
+ 
+ 
+my_instance = MyClass(a=1, b=2)
 \end{lstlisting}
 
 \subsection{Multiple decorators}
@@ -1504,7 +1558,26 @@ else: #encounter break before end
 \end{lstlisting}
 
 \subsection{Path Variables}
-\label{PathVariables}
+\label{subsec:PathVariables}
 
+\subsection{Is vs ==}
+\label{subsec:Is}
+We can think that \textbf{is} and \textbf{==} are exactly the same but it's not the case. \textbf{==} is based on the fact that two objects' elements are exactly the same. Instead, \textbf{is} compare if the two objects belong to the same memory adress.\\
+\textbf{is} cans be seen as \textbf{id(obj1) == id(obj2)} if we want to compare it to \textbf{==}.
+
+Here is an example :
+\begin{lstlisting}[language=Python]
+list1 = [1,2,3,4]
+list2 = [1,2,3,4]
+
+list1 == list2 #True
+list1 is list2 #False
+
+list1 = [1,2,3,4]
+list2 = list1
+
+list1 == list2 #True
+list1 is list2 #True
+\end{lstlisting}
 
 \end{document}
