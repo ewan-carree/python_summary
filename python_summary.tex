@@ -60,7 +60,7 @@
 %Python code highlighting
 \begin{lstlisting}[language=Python]
 
-\end{lstlisting}
+\end{lstlisting} \vspace{5mm}
 \fi % end ignore code
 
 
@@ -96,11 +96,11 @@ In python 3, there are some reserved words that you can't use in your program as
   \hline
   \hyperref[IEE]{else} & \hyperref[TEEF]{except} & \hyperref[TEEF]{finally} \\
   \hline
-  \hyperref[subsec:For]{for} & from & \hyperref[subsec:Global]{global} \\
+  \hyperref[subsec:For]{for} & from & \hyperref[subsec:Global/Nonlocal]{global} \\
   \hline
   \hyperref[IEE]{if} & \hyperref[subsec:Import]{import} & \hyperref[Comprehension]{in} \\
   \hline
-  \hyperref[subsec:Is]{is} & \hyperref[subsec:Lambda]{lambda} & nonlocal \\
+  \hyperref[subsec:Is]{is} & \hyperref[subsec:Lambda]{lambda} & \hyperref[subsec:Global/Nonlocal]{nonlocal} \\
   \hline 
   not & or & \hyperref[subsec:BCPR]{pass} \\
   \hline 
@@ -128,69 +128,69 @@ Here are some methods that you can apply on strings (I choose to reassign the va
 \begin{itemize}
 \begin{lstlisting}[language=Python]
 string = "Hello, world!"
-\end{lstlisting}
+\end{lstlisting} \vspace{5mm}
 
 \item Upper case \\
 Return a string with every single element from the original one in uppercase.
 \begin{lstlisting}[language=Python]
 string = string.upper()
 # HELLO, WORLD!
-\end{lstlisting}
+\end{lstlisting} \vspace{5mm}
 
 \item Lowercase \\
 Return a string with every single element from the original one in lowercase.
 \begin{lstlisting}[language=Python]
 string = string.lower()
 # hello, world!
-\end{lstlisting}
+\end{lstlisting} \vspace{5mm}
 
 \item Captital \\
 Return a string with the first Letter in uppercase and the rest in lowercase.
 \begin{lstlisting}[language=Python]
 string = string.capitalize()
 # Hello, world!
-\end{lstlisting}
+\end{lstlisting} \vspace{5mm}
 
 \item Strip \\
 Return a string whithout the blank spaces from both sides of the original string.
 \begin{lstlisting}[language=Python]
 string = string.strip()
-\end{lstlisting}
+\end{lstlisting} \vspace{5mm}
 
 \item Find \\
 Return an integer which is the position of the first argument found in the string from left to right.
 \begin{lstlisting}[language=Python]
 position = string.find('l')
 # 2
-\end{lstlisting}
+\end{lstlisting} \vspace{5mm}
 
 \item Count \\
 Return an integer that represents the number of occurences of the argument found in the string. 
 \begin{lstlisting}[language=Python]
 nb = string.count('l')
 # 3
-\end{lstlisting}
+\end{lstlisting} \vspace{5mm}
 
 \item Replace \\
 Return a string where at least a part of it have been replaced by some another words.
 \begin{lstlisting}[language=Python]
 string = string.replace("world", "dlrow")
 # Hello, dlrow!
-\end{lstlisting}
+\end{lstlisting} \vspace{5mm}
 
 \item Multiply \\
 Return a string with n times the original string.
 \begin{lstlisting}[language=Python]
 string = string*3
 # Hello, dlrow!Hello, dlrow!Hello, dlrow!
-\end{lstlisting}
+\end{lstlisting} \vspace{5mm}
 
 \item String to List \\
 Transform your string into a list.
 \begin{lstlisting}[language=Python]
 tableau = string.split(' ')
 # ['Hello,', 'dlrow!Hello,', 'dlrow!Hello,', 'dlrow!']
-\end{lstlisting}
+\end{lstlisting} \vspace{5mm}
 
 \item Fill \\
 Return a string filled with zero to correspond to have the same digit in every number.
@@ -198,7 +198,7 @@ Return a string filled with zero to correspond to have the same digit in every n
 string = '5'
 string = string.zfill(3)
 # 005
-\end{lstlisting}
+\end{lstlisting} \vspace{5mm}
 
 There is another way of doing it while printing argument with \hyperref[subsec:F-string]{F-string}.
 \end{itemize}
@@ -208,7 +208,7 @@ You can write very long number in a more readable way with \_ :
 \begin{lstlisting}[language=Python]
 nb = 1_000_000
 # 1000000
-\end{lstlisting}
+\end{lstlisting} \vspace{5mm}
 
 \subsubsection{Float}
 You can handle decimal to choose how many decimal you need. You can modify it by two different ways : 
@@ -216,7 +216,7 @@ You can handle decimal to choose how many decimal you need. You can modify it by
 my_float = 3.3333333
 print("%.0f" % my_float + "with no decimal and " + "%.2f" % my_float + "with two decimals") #3 with no decimal and 3.33 with two decimals
 round(my_float, 3) # 3.333
-\end{lstlisting}
+\end{lstlisting} \vspace{5mm}
 
 There is another way of doing it while printing argument with \hyperref[subsec:F-string]{F-string}.
 
@@ -230,7 +230,7 @@ my_tuple = (1,2)
 
 #unpack :
 a, b = my_tuple #1 and 2
-\end{lstlisting}
+\end{lstlisting} \vspace{5mm}
 
 \item Ignore unpacked variables \\
 When you unpack tuple arguments, sometimes some argument aren't useful, the common way to write it is with \_
@@ -251,7 +251,7 @@ for _ in range(2):
 a, b, *_ = my_tuple2 #We ignore everything after the first two variables, the rest is stored in a list.
 a, b, *c, d = my_tuple2 
 print(f"{a}, {b}, {c}, {d}") #1, 2, [3, 4], 5
-\end{lstlisting}
+\end{lstlisting} \vspace{5mm}
 \end{itemize}
 
 
@@ -273,7 +273,7 @@ if b:
 else:
 	print("b ne fonctionne pas")
 	# b ne fonctionne pas
-\end{lstlisting}
+\end{lstlisting} \vspace{5mm}
 
 \subsection{Mutable}
 Mutable means that if you are working on a variable, you directly modify it and don't need to create a new variable or reassign the previous one. It can cause conflict if two process are using the same variable that can be changed.\newline
@@ -284,7 +284,7 @@ Here are some methods that you can apply on lists :
 
 \begin{lstlisting}[language=Python]
 tableau = ['Hello,', 'dlrow!Hello,', 'dlrow!Hello,', 'dlrow!']
-\end{lstlisting}
+\end{lstlisting} \vspace{5mm}
 
 \begin{itemize}
 \item Add \\
@@ -292,34 +292,34 @@ You can merge two lists into single one containing elements from both original l
 \begin{lstlisting}[language=Python]
 new_tab = first_part + second_part
 # ['Hello,', 'dlrow!Hello,', 'dlrow!Hello,', 'dlrow!']
-\end{lstlisting}
+\end{lstlisting} \vspace{5mm}
 
 \item Multiply \\
 Just like a string, you can multiply your list.
 \begin{lstlisting}[language=Python]
 multilpied_new_tab = new_tab *3
 # ['Hello,', 'dlrow!Hello,', 'dlrow!Hello,', 'dlrow!', 'Hello,', 'dlrow!Hello,', 'dlrow!Hello,', 'dlrow!', 'Hello,', 'dlrow!Hello,', 'dlrow!Hello,', 'dlrow!']
-\end{lstlisting}
+\end{lstlisting} \vspace{5mm}
 
 \item Index \\
 Return an integer which correspond to the position of the element searched.
 \begin{lstlisting}[language=Python]
 position = tableau.index('A')
 # 1
-\end{lstlisting}
+\end{lstlisting} \vspace{5mm}
 
 \item Range \\
 You can initialize a list of n ascending numbers easily with : 
 \begin{lstlisting}[language=Python]
 my_list = list(range(n))
-\end{lstlisting}
+\end{lstlisting} \vspace{5mm}
 
 \item List to String \\
 Transfrom your list into a string.
 \begin{lstlisting}[language=Python]
 string = ' '.join(tableau)
 # Hello, A dlrow!Hello, dlrow!Hello, dlrow!
-\end{lstlisting}
+\end{lstlisting} \vspace{5mm}
 \end{itemize}
 
 \subsubsection{Dict}
@@ -327,7 +327,7 @@ A dict is an non-organized container that have variables associated to keys to r
 Here are some methods that you can apply on dicts : 
 \begin{lstlisting}[language=Python]
 dictionnaire = {"nom":"Jerome", "age":20}
-\end{lstlisting}
+\end{lstlisting} \vspace{5mm}
 
 \begin{itemize}
 \item Keys \\
@@ -335,28 +335,28 @@ Return a (dict)list containing every keys that are into you dictionnary.
 \begin{lstlisting}[language=Python]
 keys = dictionnaire.keys()
 #dict_keys(['nom', 'age'])
-\end{lstlisting}
+\end{lstlisting} \vspace{5mm}
 
 \item Values \\
 Return a (dict)list containing every values that are into you dictionnary.
 \begin{lstlisting}[language=Python]
 keys = dictionnaire.keys()
 #dict_values(['Jerome', 20])
-\end{lstlisting}
+\end{lstlisting} \vspace{5mm}
 
 \item Items \\
 Return a (dict)tuple containing every keys associated to their values that are into you dictionnary.
 \begin{lstlisting}[language=Python]
 both = dictionnaire.items()
 # dict_items([('nom', 'Jerome'), ('age', 20)])
-\end{lstlisting}
+\end{lstlisting} \vspace{5mm}
 \item Merge two dicts \\
 You are able to merge two dicts in a single one. If some keys are repeated, it's the last one that is gonna overwrite.
 \begin{lstlisting}[language=Python]
 x = {'a':1, 'b':2}
 y = {'c':3, 'a':4}
 z = {**x,**y} # {'c':3, 'b':2, 'a':4}
-\end{lstlisting}
+\end{lstlisting} \vspace{5mm}
 \end{itemize}
 
 
@@ -366,11 +366,99 @@ It is similar to a list except the fact that there is only unique value in a set
 \begin{lstlisting}[language=Python]
 my_list = [1,1,3,5,5]
 my_set = set(my_list) # {1, 3, 5}
-\end{lstlisting}
+\end{lstlisting} \vspace{5mm}
 
 Here are some methods that you can apply on sets : 
+\begin{lstlisting}[language=Python]
+my_set = {1,2} # impossible to init with {} because it's a dict but possible with set()
+\end{lstlisting} \vspace{5mm}
+
 \begin{itemize}
-\item
+\item Add \\
+Add allows us to add one single value to our set.
+\begin{lstlisting}[language=Python]
+my_set.add(3) # {1,2,3} 
+\end{lstlisting} \vspace{5mm}
+
+\item Update \\
+Update allows us to add multiple values to our set. We can pass many arguments into the update() function like lists, other sets, ...
+\begin{lstlisting}[language=Python]
+my_set.update([4,5]) # {1,2,3,4,5}
+\end{lstlisting} \vspace{5mm}
+
+\item Remove \\
+Remove allows us to remove one single value from our set. If the value doesn't exist, then it raises an error.
+\begin{lstlisting}[language=Python]
+my_set.remove(5) # {1,2,3,4}
+\end{lstlisting} \vspace{5mm}
+
+\item Discard \\
+Discard allows us to remove one single value from our set. If the value doesn't exist, then it dosen't do anything. 
+\begin{lstlisting}[language=Python]
+my_set.discard(5) # {1,2,3,4}
+\end{lstlisting} \vspace{5mm}
+
+\item Pop \\
+Pop allows us to remove one single element from our set but we don't know which one because sets are unordered data type, it's completely arbitrary.
+\begin{lstlisting}[language=Python]
+my_set.pop() # {1,3,4}
+\end{lstlisting} \vspace{5mm}
+
+\item Clear \\
+Clear allows us to remove every item from our set.
+\begin{lstlisting}[language=Python]
+my_set.clear() # set()
+\end{lstlisting} \vspace{5mm}
+\end{itemize} \vspace{5mm}
+
+As said before, sets are also very useful for math methods, here are some exemples of what we can do with them :
+
+\begin{table}[h]
+\begin{center}
+{\renewcommand{\arraystretch}{2} %donne la distance entre les lignes%
+{\setlength{\tabcolsep}{1.5cm} %donne la distance entre les collones%
+\begin{tabular}{|c|c|}
+  \hline
+  \makecell{\makecell{ | \\ union()} \\ Union} & \makecell{\makecell{ \& \\ intersection()} \\ Intersection} \\
+  \hline
+  \makecell{\makecell{ - \\ difference()} \\ Difference} & \makecell{\makecell{ $\land$ \\ symmetric\_difference()} \\ Symmetric difference} \\
+  \hline
+\end{tabular}}}
+\end{center}
+\caption{Sets operations}
+\end{table} \vspace{5mm}
+
+
+
+\begin{lstlisting}[language=Python]
+A = {1, 2, 3, 4, 5}
+B = {4, 5, 6, 7, 8}
+\end{lstlisting} \vspace{5mm}
+\begin{itemize}
+    \item Union \\
+    Union of A and B is a set of all elements from both sets.
+    \begin{lstlisting}[language=Python]
+    A.union(B) # {1, 2, 3, 4, 5, 6, 7, 8}
+    print(A | B) # {1, 2, 3, 4, 5, 6, 7, 8}\end{lstlisting} \vspace{5mm}
+    
+    \item Intersection \\
+    Intersection of A and B is a set of elements that are common in both the sets.
+    \begin{lstlisting}[language=Python]
+    A.intersection(B) # {4, 5}
+    print(A & B) # {4, 5}\end{lstlisting} \vspace{5mm}
+    
+    \item Difference \\
+    Difference of the set B from set A(A - B) is a set of elements that are only in A but not in B. Similarly, B - A is a set of elements in B but not in A.
+    \begin{lstlisting}[language=Python]
+    A.difference(B) # {1, 2, 3}
+    print(A - B) # {1, 2, 3}\end{lstlisting} \vspace{5mm}
+    
+    \item Symmetric difference \\
+    Symmetric Difference of A and B is a set of elements in A and B but not in both (excluding the intersection).
+    \begin{lstlisting}[language=Python]
+    A.symmetric_difference(B) # {1, 2, 3, 6, 7, 8}
+    print(A ^ B) # {1, 2, 3, 6, 7, 8}\end{lstlisting} \vspace{5mm}
+    
 \end{itemize}
 
 \subsection{Containers}
@@ -386,7 +474,7 @@ my_list = [1,2,3]
 new_list = [x**x for x in my_list if x%2!=0]
 
 #before : [1, 2, 3] and now : [1, 27]
-\end{lstlisting}
+\vspace{5mm}
 
 Example with dicts :
 \begin{lstlisting}[language=Python]
@@ -395,13 +483,13 @@ heroes = ["Spiderman", "Superman", "Deadpool", "Batman"]
 
 my_dict = {name: hero for name, hero in zip(names, heroes) if name != "Peter Parker"}
 # {'Clark Kent': 'Superman', 'Wade Wilson': 'Deadpool', 'Bruce Wayne': 'Batman'}
-\end{lstlisting}
+\end{lstlisting} \vspace{5mm}
 
 Example with sets :
 \begin{lstlisting}[language=Python]
 my_list = [1,1,3,5,5]
 my_set = {n for n in my_list} #{1,3,5}
-\end{lstlisting}
+\end{lstlisting} \vspace{5mm}
 
 \subsubsection{Slicing}
 Slicing is a method that concerns containers, you can use slicing on every possible container. \textbf{[start:end:step]} \textit{end argument isn't take in account : [start:end[}
@@ -411,7 +499,7 @@ Slicing is a method that concerns containers, you can use slicing on every possi
     \begin{lstlisting}[language=Python]
     dernier_elem = tableau[-1]
     # dlrow!
-    \end{lstlisting}
+    \end{lstlisting} \vspace{5mm}
     
     \item Trunc \\
     You can also trunc your list to keep just what you need.
@@ -419,21 +507,21 @@ Slicing is a method that concerns containers, you can use slicing on every possi
     first_part = tableau[:3]
     second_part = tableau[3:]
     # first_part : ['Hello,', 'dlrow!Hello,', 'dlrow!Hello,'] and second_part : ['dlrow!']
-    \end{lstlisting}
+    \end{lstlisting} \vspace{5mm}
     
     \item Insert \\
     If you need to precisely insert an element into list, slicing is a good way of doing it.
     \begin{lstlisting}[language=Python]
     tableau[1:1] = 'A'
     # ['Hello,', 'A', 'dlrow!Hello,', 'dlrow!Hello,', 'dlrow!']
-    \end{lstlisting}
+    \end{lstlisting} \vspace{5mm}
     
     \item Reverse \\
     If you need to reverse your container you can also use slicing.
     \begin{lstlisting}[language=Python]
     tableau[::-1]
     # ['dlrow!', 'dlrow!Hello,', 'dlrow!Hello,'; 'A', 'Hello,']
-    \end{lstlisting}
+    \end{lstlisting} \vspace{5mm}
 \end{itemize}
 
 \subsubsection{Empty}
@@ -444,7 +532,7 @@ if not my_container:
 
 if len(my_container)==0:
     print("empty")
-\end{lstlisting}
+\end{lstlisting} \vspace{5mm}
 
 \subsubsection{Iterator / Iterable}
 Iterable is an object, which one can iterate over. It generates an Iterator when passed to iter() method. \\
@@ -465,7 +553,7 @@ class IteratorIterable:
             ret = self.cur
             self.cur += 1 
             return ret
-\end{lstlisting}
+\end{lstlisting} \vspace{5mm}
 
 \subsubsection{For}
 \label{subsec:For}
@@ -479,7 +567,7 @@ For loop are the most powerful way to work on containers in python.
     	print(x)
     #0
     #1
-    \end{lstlisting}
+    \end{lstlisting} \vspace{5mm}
     
     \item Enumerate \\
     Enumerate is a very good way to work with for loop. You can access simultaneously to the element and it's position in a tuple.
@@ -490,7 +578,7 @@ For loop are the most powerful way to work on containers in python.
     # a at position 0
     # b at position 1
     # c at position 2
-    \end{lstlisting}
+    \end{lstlisting} \vspace{5mm}
     
     \item Zip \\
     Zip is another loop method. You can combine multiple lists with the same length in the loop. 
@@ -506,7 +594,7 @@ For loop are the most powerful way to work on containers in python.
     # Clark Kent is actually Superman from DC
     # Wade Wilson is actually Deadpool from Marvel
     # Bruce Wayne is actually Batman from DC
-    \end{lstlisting}
+    \end{lstlisting} \vspace{5mm}
 \end{itemize}
 
 \newpage
@@ -524,7 +612,7 @@ def equivalent_lambda(x):
 real_lambda = lambda x : x+5
 
 # equivalent_lambda : 10 and real_lambda : 10
-\end{lstlisting}
+\end{lstlisting} \vspace{5mm}
 
 \subsection{Default argument}
 Default parameters are used for arguments that don't necessarily need a value. We assign a default value that can be overloaded if needed. Default arguments are always declared after non-default arguments into function's head. \textbf{def func(non\_default\_arguments, \textit{default\_arguments = value})}
@@ -537,7 +625,7 @@ func(20, "Antoine")
 func(20)
 # Tu as 20 ans et tu t'appelles Antoine
 # Tu as 20 ans et tu t'appelles Jerome
-\end{lstlisting}
+\end{lstlisting} \vspace{5mm}
 
 \textbf{Warning} : A default argument is evaluated only once time when the function is called for the first time. When you repeat function calls, it may cause problems especially with mutable arguments like lists. If your default argument is an empty list, it will create this empty list one time and reuse it for next calls. The way to counter this problem is to put an immutable argument and then create the list inside the function. \\
 Here is an exemple : 
@@ -545,7 +633,7 @@ Here is an exemple :
 def add_employee(emp, emp_list = []):
     emp_list.append(emp)
     print(emp_list) # Not good because emp_list is mutable and is reused each time this function is called.
-\end{lstlisting}
+\end{lstlisting} \vspace{5mm}
 Will become :
 \begin{lstlisting}[language=Python]
 def add_employee(emp, emp_list = None):
@@ -553,7 +641,7 @@ def add_employee(emp, emp_list = None):
         emp_list = []
     emp_list.append(emp)
     print(emp_list) # Good because emp_list is immutable and is new each time this function is called.
-\end{lstlisting}
+\end{lstlisting} \vspace{5mm}
 
 
 \subsection{Map function}
@@ -565,7 +653,7 @@ def map_function(x):
 mapped_list = list(map(map_function,liste)) #No () for argument function
 
 # before : [1, 2, 3] and now : [1, 4, 27]
-\end{lstlisting}
+\end{lstlisting} \vspace{5mm}
 
 There is a way more effective way of doing it with \hyperref[Comprehension]{comprehension}.
 
@@ -578,7 +666,7 @@ def filter_function(x):
 filtered_list = list(filter(filter_function,liste))
 
 # before : [1, 2, 3] and now : [1, 3]
-\end{lstlisting}
+\end{lstlisting} \vspace{5mm}
 
 There is a way more effective way of doing it with \hyperref[Comprehension]{comprehension}.
 
@@ -592,7 +680,7 @@ parameters(1,"azerty",[1,2], couleur="rouge", taille_en_cm=172)
 both
 # I received these unnamed args : (1, 'azerty', [1, 2])
 # I received these named args : {'couleur': 'rouge', 'taille_en_cm': 172}
-\end{lstlisting}
+\end{lstlisting} \vspace{5mm}
 
 \newpage
 \section{Class}
@@ -607,7 +695,7 @@ class MyClass(object):
 		pass
 
 my_instance = MyClass()
-\end{lstlisting}
+\end{lstlisting} \vspace{5mm}
 
 \subsection{Methods}
 Methods are functions that bellow to the class. A method can be used by the instance as follow  : \textbf{my\_instance.my\_method()}
@@ -622,7 +710,7 @@ class MyClass(object):
 
 my_instance = MyClass()
 my_instance.my_second_method()
-\end{lstlisting}
+\end{lstlisting} \vspace{5mm}
 
 \subsection{Inheritance}
 Inheritance is a concept of relation between classes. Some are parents, the other are children. A children inherit from every methods from the parent class but can overload them. A child class can have multiple parents. \\
@@ -644,7 +732,7 @@ class MyClass(Initializer):
  
  
 my_instance = MyClass(a=1, b=2)
-\end{lstlisting}
+\end{lstlisting} \vspace{5mm}
 
 Here is another example with multiple inheritance
 \begin{lstlisting}[language=Python]
@@ -659,7 +747,7 @@ class Cat(Dog, Animal): #multiple inheritance : Cat have some attributs from Dog
 		self.nom = nom
 	def speak(self):
 		print("Miaou")
-\end{lstlisting}
+\end{lstlisting} \vspace{5mm}
 
 \subsection{Dunder methods}
 Dunder methods are specific function from a class, they are surrounded by \_\_. A dunder method can be used by the instance as follow :\\ \textbf{my\_instance.\_\_dunder\_method\_\_}
@@ -720,7 +808,7 @@ class Point(object):
 	__itruediv__(self, p) : /=	
 	...
 	"""
-\end{lstlisting}
+\end{lstlisting} \vspace{5mm}
 
 \subsection{Static and class methods}
 Static methods have a link with the class but don't use any attribute from it. There is no \textbf{self} in the parameters. \\
@@ -741,7 +829,7 @@ class StaticClass:
 	def ma_func2(arg1, arg2):#pas de self
 		"""N'agit pas avec les composants de la classe mais est quand meme en lien avec la classe"""
 		return arg1 + arg2
-\end{lstlisting}
+\end{lstlisting} \vspace{5mm}
 
 \subsection{Property}
 Property concerns the private and public aspect from a class even though everything is public in python. In python, a variable or method which start with \_ is considered as "private". Also, we need to create getters and setters to access and modify these privates elements. Property redirect calls of privates elements to these getters and setters.
@@ -771,7 +859,7 @@ class Test(object):
 		self._dimension = value
 		
 	dimension = property(_get_dimension, _set_dimension) # lorsqu'on appelera objet.dimension, property redirigera vers les accesseurs/mutateurs prives
-\end{lstlisting}
+\end{lstlisting} \vspace{5mm}
 
 There is another way of doing it in a more readable and better way with \hyperref[subsec:Property]{property decorator}.
 
@@ -790,7 +878,7 @@ print(dir(ma_instance)) #return a list of every dunder methods, methods and attr
 print(ma_instance.__dict__) # return a dict with attributes as keys and their value. associated.
 print(issubclass(child_class, parent_class)) # return True if child_class is the child of parent_class.
 print(isinstance(my_instance, my_class)) # return True if my_instance is an instance from my_class.
-\end{lstlisting}
+\end{lstlisting} \vspace{5mm}
 
 \newpage
 \section{Decorators}
@@ -818,7 +906,7 @@ def exemple(x):
 rv = exemple(5)
 #Time to execute : 2.384185791015625e-06
 print(rv) #je suis 5
-\end{lstlisting}
+\end{lstlisting} \vspace{5mm}
 
 \subsubsection{With a class as decorator}
 A decorator can also be a class applied to wrap a function and apply a process on it each time it's called.
@@ -843,7 +931,7 @@ def exemple(x):
 exemple(5)
 #Time to execute : 2.384185791015625e-06
 print(rv) #je suis 5
-\end{lstlisting}
+\end{lstlisting} \vspace{5mm}
 
 \subsection{Class decorator}
 Classes can also be decorated the same way that we do with function.\\
@@ -874,7 +962,7 @@ class MyClass:
  
  
 my_instance = MyClass(a=1, b=2)
-\end{lstlisting}
+\end{lstlisting} \vspace{5mm}
 
 \subsection{Multiple decorators}
 You can chain decorators to apply multiple processes on the same function / class. \\
@@ -902,7 +990,7 @@ def exemple(x):
 rv = exemple(5)
 #Time to execute : 2.384185791015625e-06
 print(rv) #je suis 5
-\end{lstlisting}
+\end{lstlisting} \vspace{5mm}
 
 \subsection{Property decorator}
 \label{subsec:Property}
@@ -925,7 +1013,7 @@ p1.first = "Lou-Anne"
 
 print(p1.email) # Ewan.Carree@gmail.com -- first didn't change
 print(p1.fullname()) # Lou-Anne Carree
-\end{lstlisting}
+\end{lstlisting} \vspace{5mm}
 Will become :
 \begin{lstlisting}[language=Python]
 class Myclass(object):
@@ -962,14 +1050,14 @@ p1.fullname = "Lou-Anne Le_Bras"
 
 print(p1.email) # Lou-Anne.Le_Bras@gmail.com
 print(p1.fullname) # Lou-Anne Le_Bras
-\end{lstlisting}
+\end{lstlisting} \vspace{5mm}
 
 \subsection{Decorator with argument(s)}
 Sometimes you need to pass argument(s) into you decorator to modify the your decorator is working. To solve that problem, you need to nest your previous decorator into un new function. \\
 Here is an exemple : \\
 \begin{lstlisting}[language=Python]
 import time
-def add_prefix(prefix): #every function nested have access to that prefix
+def add_prefix(prefix): #every function nested have access to that prefix : enclosing
     def timer(func):
     	def wrapper(*args, **kwargs):
     		start = time.time()
@@ -987,7 +1075,7 @@ def exemple(x):
 rv = exemple(5)
 # exemple : Time to execute : 2.384185791015625e-06
 print(rv) #je suis 5
-\end{lstlisting}
+\end{lstlisting} \vspace{5mm}
 
 \newpage
 \section{Generators}
@@ -1020,7 +1108,7 @@ For further explanations, see the \href{https://docs.python.org/3/library/dateti
 Get pass is a very useful module to enter password secretly. In deed, it doesn't show the characters entered.
 \begin{lstlisting}[language=Python]
 mdp getpass.getpass("Type your password : ")
-\end{lstlisting}
+\end{lstlisting} \vspace{5mm}
 
 For further explanations, see the \href{https://docs.python.org/3/library/getpass.html}{official documentation}
 
@@ -1029,15 +1117,15 @@ You can secure you password get from getpass by hashing them into different hash
 To see every hash algorithms you can type this command : 
 \begin{lstlisting}[language=Python]
 hashlib.algorithms_guaranteed
-\end{lstlisting}
+\end{lstlisting} \vspace{5mm}
 First, you are going to encode your password into bytes. Then, use the hash algorithm.
 \begin{lstlisting}[language=Python]
 mot_de_passe = hashlib.sha1(b"mot de passe")
-\end{lstlisting}
+\end{lstlisting} \vspace{5mm}
 Finally, you'll need to transform your hashed password into bytes or string. String is more readable and reusable.
 \begin{lstlisting}[language=Python]
 mot_de_passe.hexdigest()
-\end{lstlisting}
+\end{lstlisting} \vspace{5mm}
 Then you can save this password and compare it to the password entered by the user to see if it corresponds.
 
 
@@ -1050,7 +1138,7 @@ For further explanations, see the \href{https://docs.python.org/3/library/hashli
 You can get you actual working repertory by using :
 \begin{lstlisting}[language=Python]
 my_repertory = os.getcwd()
-\end{lstlisting}
+\end{lstlisting} \vspace{5mm}
 
 \subsubsection{Terminal commandline}
 You can run terminal commandlines by using : (look out for commands that corresponds with the os terminal you are running you program in)
@@ -1060,7 +1148,7 @@ os.system("ls")
 #get the value returned with
 cmd = os.popen("ls")
 cmd.read()
-\end{lstlisting}
+\end{lstlisting} \vspace{5mm}
 
 \subsection{Sys}
 \subsubsection{Import module from another repertory}
@@ -1076,7 +1164,7 @@ Main/ \\
 import sys
 sys.path.append("./Test")
 import test # .py file (module)
-\end{lstlisting}
+\end{lstlisting} \vspace{5mm}
 
 Another way to do this in a more effective way is to set \hyperref[subsec:PathVariables]{path variables}.
 
@@ -1085,26 +1173,26 @@ Control you memory while programming.
 \begin{lstlisting}[language=Python]
 var = [1]*100
 print(f"memoire utilisee par var : {sys.getsizeof(var)} bytes") #memoire utilisee par var : 856 bytes
-\end{lstlisting}
+\end{lstlisting} \vspace{5mm}
 
 \subsubsection{Redirect flow}
 We can redirect the flow to write directly somewhere instead of the terminal.
 \begin{lstlisting}[language=Python]
 file = open("output.txt", 'w')
 sys.stdout = fichier # return to original flow with sys.__stdout__
-\end{lstlisting}
+\end{lstlisting} \vspace{5mm}
 
 \subsubsection{Exit program}
 You can exit the program any time you want when it's running. The parameter inside the function is important to specify to the user is there has been a problem or not; 0 means no problem and anything else (often 1) means that there has been a problem.
 \begin{lstlisting}[language=Python]
 sys.exit(parameter)
-\end{lstlisting}
+\end{lstlisting} \vspace{5mm}
 
 \subsubsection{Get parameters passed in the call}
 You can get any parameter specified by the user when he runned the program. (if an parameter is separated by space(s), sourround him by "").
 \begin{lstlisting}[language=Python]
 sys.argv
-\end{lstlisting}
+\end{lstlisting} \vspace{5mm}
 
 \subsection{Math}
 For further explanations, see the \href{https://docs.python.org/3/library/math.html}{official documentation}
@@ -1130,7 +1218,7 @@ args = parser.parse_args()
 print(args.x)
 if args.verbose:
     print("I add more explanations")
-\end{lstlisting}
+\end{lstlisting} \vspace{5mm}
 For further explanations, see \href{http://www.sharelatex.com}{argparse tutorial} or  \href{https://docs.python.org/3/library/argparse.html}{official documentation}.
 
 
@@ -1169,8 +1257,8 @@ class RandomTest(unittest.TestCase):
 
         with self.assertRaises(ValueError):
             random.sample(self.liste, 20)
-\end{lstlisting}
-Set up is similar to def \_\_init\_\_(self), that's where you define generalities.
+\end{lstlisting} \vspace{5mm}
+def setUp(self) is similar to def \_\_init\_\_(self), that's where you define generalities.
 Then create a function for each functionnality, it must correspond with the right assertion method.
 
 Here are every assertion methods you can use to test your functionnalities.
@@ -1178,7 +1266,7 @@ Here are every assertion methods you can use to test your functionnalities.
 \begin{center}
 {\renewcommand{\arraystretch}{1} %donne la distance entre les lignes%
 {\setlength{\tabcolsep}{0.5cm} %donne la distance entre les collones%
-\begin{tabular}{|l|r|}
+\begin{tabular}{|c|c|}
   \hline
   assertEqual(a, b) & a == b \\
   \hline
@@ -1242,7 +1330,7 @@ Example :
 expression = r"^0[0-9]([ .-]?[0-9]{2}){4}$"
 # I want a password with at least 6 characters and containing number or letter or both.
 expression = r"^[A-Za-z0-9]"
-\end{lstlisting}
+\end{lstlisting} \vspace{5mm}
 
 See more explanation about re on the \href{https://docs.python.org/3/library/re.html?highlight=re#module-re}{official documentation}
 
@@ -1255,7 +1343,7 @@ See more explanation about cx\_Freeze on the  \href{https://cx-freeze.readthedoc
 
 \subsection{Network}
 With network you can exchange data between a client and a server following the TCP protocol. To establish a connexion between client and server, you need an host name and a port number. \\
-Here is an exemple of client and server : \\
+Here is an exemple of client and server : \\ \\
 Server side
 \begin{lstlisting}[language=Python]
 import socket
@@ -1312,8 +1400,8 @@ for client in clients_connectes:
     client.close()
 
 connexion_principale.close()
-\end{lstlisting}
-Client side \\
+\end{lstlisting} \vspace{5mm}
+Client side :
 \begin{lstlisting}[language=Python]
 import socket
 
@@ -1336,7 +1424,7 @@ while msg_a_envoyer != b"fin":
 
 print("Fermeture de la connexion")
 connexion_avec_serveur.close()
-\end{lstlisting}
+\end{lstlisting} \vspace{5mm}
 
 \subsubsection{Socket}
 Sockets allow us to open a connexion between two or more computer. Ports available are included between 1024 and 65535. \\
@@ -1356,7 +1444,7 @@ If you're interested in knowing how a class is built you can use the inspect mod
 import inspect
 from queue import Queue
 print(f"Code source : \n{inspect.getsource(Queue)}")
-\end{lstlisting}
+\end{lstlisting} \vspace{5mm}
 
 \subsection{Operator}
 
@@ -1387,13 +1475,13 @@ while nb != 20:
 #4
 #6
 #7
-\end{lstlisting}
+\end{lstlisting} \vspace{5mm}
 
 \subsection{Context manager}
 \label{subsec:ContextManager}
 
-\subsection{Global variables}
-\label{subsec:Global}
+\subsection{Global/Nonlocal variables}
+\label{subsec:Global/Nonlocal}
 Variables that are created outside of a function (as in all of the examples above) are known as global variables.\\
 Global variables can be used by everyone, both inside of functions and outside.
 \begin{lstlisting}[language=Python]
@@ -1406,7 +1494,7 @@ def modify(b):
 
 modify(b)
 #a = 10 et b = 5
-\end{lstlisting}
+\end{lstlisting} \vspace{5mm}
 
 \subsection{Exception}
 In python you can handle exceptions that may occur when your program is running. \textit{We can always use \textbf{except Exception as e} but it's better to be the most precise possible.}
@@ -1426,7 +1514,7 @@ finally: #always done
 	
 #Votre nom ne peut pas etre convertit en integer
 #end ...
-\end{lstlisting}
+\end{lstlisting} \vspace{5mm}
 
 We can also create our own exception by creating a new class.
 \begin{lstlisting}[language=Python]
@@ -1439,7 +1527,7 @@ class MonException(Exception):
     def __str__(self):
         """On renvoie le message"""
         return self.message
-\end{lstlisting}
+\end{lstlisting} \vspace{5mm}
 
 \subsubsection{Raise}
 \label{Raise}
@@ -1462,7 +1550,7 @@ else:
 #Good way :
 x = 1 if condition else 0
 #0
-\end{lstlisting}
+\end{lstlisting} \vspace{5mm}
 
 \subsection{Files}
 
@@ -1473,7 +1561,7 @@ print(f"10 / 3 = {10 / 3}") # 10 / 3 = 3.3333333333333335
 print(f"10 // 3 = {10 // 3}") # 10 // 3 = 3
 
 print(f"3**3 = {3**3}"}) # 3**3 = 9
-\end{lstlisting}
+\end{lstlisting} \vspace{5mm}
 
 \subsection{Assertion}
 \label{subsec:Assertion}
@@ -1481,7 +1569,7 @@ You can verify a condition before parsing an information by checking the instanc
 \begin{lstlisting}[language=Python]
 b = 3
 assert isinstance(b, int)
-\end{lstlisting}
+\end{lstlisting} \vspace{5mm}
 
 \subsection{Cast}
 Sometimes you need to convert a variable from a certain type to another. Cast is a good way to do it but you've to know that you can lose information by doing it. \\ \\
@@ -1492,13 +1580,13 @@ Notice that you have to be coherent in your type transformation. For example, yo
 You can precise in the first line of your .py document the encoding your are curently using.
 \begin{lstlisting}[language=Python]
 # -*-coding:Utf-8 -*
-\end{lstlisting}
+\end{lstlisting} \vspace{5mm}
 
 \subsection{Path}
 You can precise path to your python compilator in the second line of your .py document.
 \begin{lstlisting}[language=Python]
 # !/usr/bin/python3.8
-\end{lstlisting}
+\end{lstlisting} \vspace{5mm}
 
 \subsection{Test the validity of several values}
 You can check if one of several values is not False.
@@ -1510,7 +1598,7 @@ if x or y or z:
     pass
 if any((x,y,z)):
     pass
-\end{lstlisting}
+\end{lstlisting} \vspace{5mm}
 
 \subsection{Encoding}
 It's possible to encode a string into bytes using a special string methods. You have to put a b for bytes in front of the first " of you string. Another way is to use encode function as my\_string.encode()
@@ -1527,7 +1615,7 @@ for n in range(2):
 pi = 3.141592
 print(f"pi = {pi:.2f}") 
 # pi = 3.14
-\end{lstlisting}
+\end{lstlisting} \vspace{5mm}
 
 You can see more methods by looking specifically on every module you want, for example datetime f-string.
 
@@ -1555,7 +1643,7 @@ else: #encounter break before end
 #0
 #1
 #2
-\end{lstlisting}
+\end{lstlisting} \vspace{5mm}
 
 \subsection{Path Variables}
 \label{subsec:PathVariables}
@@ -1578,6 +1666,6 @@ list2 = list1
 
 list1 == list2 #True
 list1 is list2 #True
-\end{lstlisting}
+\end{lstlisting} \vspace{5mm}
 
 \end{document}
