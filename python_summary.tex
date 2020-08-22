@@ -252,6 +252,19 @@ a, b, *_ = my_tuple2 #We ignore everything after the first two variables, the re
 a, b, *c, d = my_tuple2 
 print(f"{a}, {b}, {c}, {d}") #1, 2, [3, 4], 5
 \end{lstlisting} \vspace{5mm}
+
+\item Named tuple \\
+To name your tuple is a way to create a much more clear code for someone who read your code. For example, an unnamed tuple doesn't give that much information on what it contains.
+\begin{lstlisting}[language=Python]
+from collections import namedtuple
+
+Color = namedtuple("Color", ["red", "green", "blue"])
+
+white = Color(255,255,255)
+
+print(white.red) # we can also call like basic tuple with white[0]
+# 255
+\end{lstlisting} \vspace{5mm}
 \end{itemize}
 
 
@@ -711,6 +724,27 @@ class MyClass(object):
 my_instance = MyClass()
 my_instance.my_second_method()
 \end{lstlisting} \vspace{5mm}
+
+\subsection{Class variable}
+Class variables are useful in some cases. Imagine a variable that would always be used in the class and that the class always access. They are variables that the instance don't necessarily need.
+\begin{lstlisting}[language=Python]
+class ClassVariables(object):
+	nb_instance = 0
+	pourcentage = 1.1
+
+	def __init__(self, price):
+		self.price = price
+		ClassVariables.nb_instance += 1
+
+	def raise_price(self):
+		self.price = round(self.price * self.pourcentage,2)
+
+a = ClassVariables(100)
+a.raise_price()
+print(a.price) # 110.0
+print(ClassVariables.nb_instance) # 1
+\end{lstlisting} \vspace{5mm}
+In this code, nb\_instance and pourcentage are my class variables, I access to them with ClassVariables.nb\_instance and self.pourcentage. I choose to write it like that so that I can possibly the pourcentage for each instance later but I won't be able to affect nb\_instance because it bellows to the class.
 
 \subsection{Inheritance}
 Inheritance is a concept of relation between classes. Some are parents, the other are children. A children inherit from every methods from the parent class but can overload them. A child class can have multiple parents. \\
