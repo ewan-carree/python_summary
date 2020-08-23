@@ -74,6 +74,12 @@
 \maketitle
 \newpage
 
+This PDF is meant to be a summary of all the knowledge that I've acquired during ENIB. It is also meant to be upgrade each time I learn something new or a new concept. I did it to use it in my whole life as I want to become a software developer. \\ \\
+
+Thanks to Corey Schafer, Tech with Tim, Kalle Hallden and Openclassroom because I've learnt everything with them and I've used some of their code into this PDF.
+
+\newpage
+
 \tableofcontents
 
 \newpage
@@ -701,7 +707,8 @@ both
 Classes are a way of bringing together data and functionality. Creating a new class creates a new type of object and so new instances of this type can be built.\newline
 
 \subsection{Instance}
-Each instance can have its own attributes, which defines its state. An instance can also have methods (defined by the instance class) to modify its state.
+An instance is an objet created from the parent class. \\
+Each instance can have its own attributes, which defines its state. An instance can also use methods from the class to modify its state.
 \begin{lstlisting}[language=Python]
 class MyClass(object):
 	def __init__(self):
@@ -711,21 +718,82 @@ my_instance = MyClass()
 \end{lstlisting} \vspace{5mm}
 
 \subsection{Methods}
-Methods are functions that bellow to the class. A method can be used by the instance as follow  : \textbf{my\_instance.my\_method()}
-\begin{lstlisting}[language=Python]
-class MyClass(object):
-	def __init__(self):
-		pass
-	def my_first_method(self):
-	    print("hello")
-	def my_second_method(self):
-	    print("world")
+Methods are functions that bellow to the class. Tey are basically functions that uses attributes from the class. A method can be used by the instance as follow  : \textbf{my\_instance.my\_method()} except for class methods where \textbf{My\_class.my\_method()} is better. \\
 
-my_instance = MyClass()
-my_instance.my_second_method()
+Here is a simple example of some methods from the class Rectangle : 
+\begin{lstlisting}[language=Python]
+class Rectangle(object):
+	def __init__(self,length,width):
+		self.length = length
+		self.width = width
+
+	def perimeter(self):
+		return (self.length + self.width)*2
+
+	def area(self):
+		return self.length * self.width
 \end{lstlisting} \vspace{5mm}
 
-\subsection{Class variable}
+\subsubsection{Static methods}
+Static methods have a link with the class but don't use any attribute from it. There is no \textbf{self} in the parameters. It's often generic function that can apply a process on the attributes from the class. \\
+\begin{lstlisting}[language=Python]
+class Static(object):
+	def __init__(self, position):
+		self.position = position
+
+	@staticmethod
+	def DMS_to_DD(data): #coordinates
+		for x in ['N', 'W','S','E']:
+			try:
+				if data[x] != '':
+					data[x] = (data[x][1]*60+data[x][2])/3600.0 + data[x][0]
+					if x == 'W' or x == 'S':
+						data[x] = round(-data[x],5)
+					else:
+						data[x] = round(data[x],5)
+				else:
+					data[x] = ""
+			except Exception as e:
+				data[x] = ""
+				print("Unable to convert " + data["name"] + " :" + e)
+		return data
+\end{lstlisting} \vspace{5mm}
+
+\subsubsection{Class methods}
+Class methods concerns the class itself and class variables. There is no \textbf{self} in the parameters but \textbf{cls}. \\
+\begin{lstlisting}[language=Python]
+class Class(object):
+	nb_instance = 0
+	def __init__(self):
+		nb_instance+=1
+
+	@classmethod
+	def get_nb_instance(cls):
+		return cls.nb_instance
+
+print(Class.get_nb_instance()) #0
+\end{lstlisting} \vspace{5mm}
+
+Class methods can also be seen as class constructor. You can apply a process before creating the class and create it with the result of the process. \\
+In this example, we apply the process of parsing the person before creating the class :
+
+\begin{lstlisting}[language=Python]
+class ClassConstructor(object):
+	def __init__(self,first, last, age):
+		self.first = first
+		self.last = last
+		self.age = age
+
+	@classmethod
+	def init_person(cls, person):
+		first, last, age = person.split('-')
+		return cls(first, last, age)
+
+person = "Ewan-Carree-20"
+p = ClassConstructor.init_person(person)
+\end{lstlisting} \vspace{5mm}
+
+\subsection{Class variables}
 Class variables are useful in some cases. Imagine a variable that would always be used in the class and that the class always access. They are variables that the instance don't necessarily need.
 \begin{lstlisting}[language=Python]
 class ClassVariables(object):
@@ -842,27 +910,6 @@ class Point(object):
 	__itruediv__(self, p) : /=	
 	...
 	"""
-\end{lstlisting} \vspace{5mm}
-
-\subsection{Static and class methods}
-Static methods have a link with the class but don't use any attribute from it. There is no \textbf{self} in the parameters. \\
-Class methods concerns class variables. There is no \textbf{self} in the parameters but \textbf{cls}.
-\begin{lstlisting}[language=Python]
-class StaticClass:
-	nb_class=0
-	def __init__(self):
-		print("une nouvelle classe vient d'etre creee")
-		nb_class+=1
-	
-	@classmethod
-	def ma_func(cls): #pas de self, obligatoirement cls
-		"""Agit avec les variables de la classe"""
-		return cls.nb_class
-
-	@staticmethod
-	def ma_func2(arg1, arg2):#pas de self
-		"""N'agit pas avec les composants de la classe mais est quand meme en lien avec la classe"""
-		return arg1 + arg2
 \end{lstlisting} \vspace{5mm}
 
 \subsection{Property}
@@ -1007,7 +1054,7 @@ The function code become :
 import time
 from functools import wraps
 def timer(func):
-    @wraps(func) #changement
+    @wraps(func) #modification
 	def wrapper(*args, **kwargs):
 		start = time.time()
 		rv = func(*args, **kwargs)
@@ -1029,7 +1076,7 @@ print(rv) #je suis 5
 \subsection{Property decorator}
 \label{subsec:Property}
 Property decorator are one of the most useful decorator in classes to manage getters, setters and deleters. \textbf{@my\_method.getter/setter/deleter}\\
-Indeed, when you use a variable that use some attributes and then you set later one of thes attributes, it won't change in your variable which use attributes. \\
+Indeed, when you use a variable that use some attributes and then you set later one of these attributes, it won't change in your variable which use attributes. \\
 The way to manage it is by using property decorator into methods as attributes that replace the previous variable. \\
 For example :
 \begin{lstlisting}[language=Python]
@@ -1087,7 +1134,7 @@ print(p1.fullname) # Lou-Anne Le_Bras
 \end{lstlisting} \vspace{5mm}
 
 \subsection{Decorator with argument(s)}
-Sometimes you need to pass argument(s) into you decorator to modify the your decorator is working. To solve that problem, you need to nest your previous decorator into un new function. \\
+Sometimes you need to pass argument(s) into you decorator to modify the way your decorator is working. To solve that problem, you need to nest your previous decorator into a new function. \\
 Here is an exemple : \\
 \begin{lstlisting}[language=Python]
 import time
@@ -1126,8 +1173,9 @@ Modules are Python programs that contain functions that we often reuse (we also 
 \label{subsec:Import}
 
 \subsubsection{Import module as}
-Sometimes you import modules but it's very long to write methods from a long module name. Plus, it's not good to use the \textit{import * from module} because it can creates conflicts between function and class that have the same name in two different modules. Rather than writing module.class you can use the key word \textbf{as}. It very used for libraries like numpy as np, matplotlib.pyplot as plt and scipy.signal as sig
 \label{As}
+Sometimes you import modules but it's very long to write methods from a long module name. Plus, it's not good to use the \textit{import * from module} because it can creates conflicts between function and class that have the same name in two different modules. Rather than writing module.class you can use the key word \textbf{as}. It very used for libraries like numpy as np, matplotlib.pyplot as plt and scipy.signal as sig
+
 
 \subsection{Time}
 \subsubsection{Time}
@@ -1137,7 +1185,6 @@ For further explanations, see the \href{https://docs.python.org/3/library/time.h
 For further explanations, see the \href{https://docs.python.org/3/library/datetime.html}{official documentation}
 
 \subsection{Password}
-
 \subsubsection{Getpass}
 Get pass is a very useful module to enter password secretly. In deed, it doesn't show the characters entered.
 \begin{lstlisting}[language=Python]
@@ -1161,8 +1208,6 @@ Finally, you'll need to transform your hashed password into bytes or string. Str
 mot_de_passe.hexdigest()
 \end{lstlisting} \vspace{5mm}
 Then you can save this password and compare it to the password entered by the user to see if it corresponds.
-
-
 
 For further explanations, see the \href{https://docs.python.org/3/library/hashlib.html}{official documentation}
 
