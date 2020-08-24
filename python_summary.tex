@@ -207,6 +207,9 @@ string = string.zfill(3)
 \end{lstlisting} \vspace{5mm}
 
 There is another way of doing it while printing argument with \hyperref[subsec:F-string]{F-string}.
+
+\item Encode \\
+It's possible to encode a string into bytes using a special string methods. You have to put a b for bytes in front of the first " of you string. Another way is to use encode function as my\_string.encode()
 \end{itemize}
 
 \subsubsection{Integer}
@@ -480,10 +483,10 @@ B = {4, 5, 6, 7, 8}
     
 \end{itemize}
 
-\subsection{Containers}
+\section{Containers}
 Containers are any object that holds an arbitrary number of other objects. Generally, containers provide a way to access the contained objects and to iterate over them. We can find lists, strings, dicts, tuples and sets. Look out for mutability / immutability, some methods aren't possible between each other. \\
 
-\subsubsection{Comprehension}
+\subsection{Comprehension}
 \label{Comprehension}
 Container (list, dict, set) comprehension is probably one of the most powerful method that you can apply. It conbines map and filter function into a single way to do it. \textbf{[func\_to\_apply() for elem in container if filter\_condition]} \\
 
@@ -510,7 +513,7 @@ my_list = [1,1,3,5,5]
 my_set = {n for n in my_list} #{1,3,5}
 \end{lstlisting} \vspace{5mm}
 
-\subsubsection{Slicing}
+\subsection{Slicing}
 Slicing is a method that concerns containers, you can use slicing on every possible container. \textbf{[start:end:step]} \textit{end argument isn't take in account : [start:end[}
 \begin{itemize}
     \item Last element \\
@@ -543,7 +546,7 @@ Slicing is a method that concerns containers, you can use slicing on every possi
     \end{lstlisting} \vspace{5mm}
 \end{itemize}
 
-\subsubsection{Empty}
+\subsection{Empty}
 Sometimes you need to know if a container is empty. There are two common way to do it :
 \begin{lstlisting}[language=Python]
 if not my_container:
@@ -553,68 +556,85 @@ if len(my_container)==0:
     print("empty")
 \end{lstlisting} \vspace{5mm}
 
-\subsubsection{Iterator / Iterable}
-Iterable is an object, which one can iterate over. It generates an Iterator when passed to iter() method. \\
-Iterator is an object, which is used to iterate over an iterable object using \_\_next\_\_() method. Iterators have \_\_next\_\_() method, which returns the next item of the object.
+\subsection{Iterator / Iterable}
+Every object that have the \textit{\_\_iter\_\_} dunder method is an \textbf{iterable} that can be looped over thanks to the iterator returned by this dunder method when \textbf{for loop} calls it. An \textbf{iterator} object is defined by the fact that it has the \textit{\_\_next\_\_} dunder method. \\
+
+Here is an iterable object that is also an iterator :
 \begin{lstlisting}[language=Python]
-class IteratorIterable:
-    def __init__(self, n):
-        self.n = n
-        self.cur = 1
-        
+class MyRange:
+
+    def __init__(self, start, end):
+        self.value = start
+        self.end = end
+
     def __iter__(self):
         return self
-        
+
     def __next__(self):
-        if self.cur == self.n+1:
+        if self.value >= self.end:
             raise StopIteration
-        else:
-            ret = self.cur
-            self.cur += 1 
-            return ret
+        current = self.value
+        self.value += 1
+        return current
 \end{lstlisting} \vspace{5mm}
 
-\subsubsection{For}
-\label{subsec:For}
-For loop are the most powerful way to work on containers in python.
+We can also create the equivalent of MyRange class with a function based on \hyperref[sec:Generators]{generator} which is more readable than a class :
+\begin{lstlisting}[language=Python]
+def my_range(start, end):
+    current = start
+    while current < end:
+        yield current
+        current += 1
 
-\begin{itemize}
-    \item Range \\
-    Range allows user to loop a certain times. \textbf{range(start,end, step)}
-    \begin{lstlisting}[language=Python]
-    for x in range(2):
-    	print(x)
-    #0
-    #1
-    \end{lstlisting} \vspace{5mm}
-    
-    \item Enumerate \\
-    Enumerate is a very good way to work with for loop. You can access simultaneously to the element and it's position in a tuple.
-    \begin{lstlisting}[language=Python]
-    liste = ['a', 'b', 'c']
-    for index, elem in enumerate(liste):
-    	print(f"{elem} at position {index}")
-    # a at position 0
-    # b at position 1
-    # c at position 2
-    \end{lstlisting} \vspace{5mm}
-    
-    \item Zip \\
-    Zip is another loop method. You can combine multiple lists with the same length in the loop. 
-    \begin{lstlisting}[language=Python]
-    names = ["Peter Parker", "Clark Kent", "Wade Wilson", "Bruce Wayne"]
-    heroes = ["Spiderman", "Superman", "Deadpool", "Batman"]
-    universes = ["Marvel", "DC", "Marvel", "DC"]
-    
-    for name, hero, universe in zip(names, heroes, universes):
-    	print(f"{name} is actually {hero} from {universe}")
-    	
-    # Peter Parker is actually Spiderman from Marvel
-    # Clark Kent is actually Superman from DC
-    # Wade Wilson is actually Deadpool from Marvel
-    # Bruce Wayne is actually Batman from DC
-    \end{lstlisting} \vspace{5mm}
-\end{itemize}
+nums = my_range(1,3)
+
+for num in nums:
+    print(num)
+# 1
+# 2
+# 3
+\end{lstlisting} \vspace{5mm}
+
+\subsection{For}
+\label{subsec:For}
+For loop are the most powerful way to work on data contained in list, tuple, dict, string, files, generators, ... \\
+
+\subsubsection{Range}
+Range allows user to loop a certain times. \textbf{range(start,end, step)}
+\begin{lstlisting}[language=Python]
+for x in range(2):
+	print(x)
+#0
+#1
+\end{lstlisting} \vspace{5mm}
+
+\subsubsection{Enumerate}
+Enumerate is a very good way to work with for loop. You can access simultaneously to the element and it's position in a tuple.
+\begin{lstlisting}[language=Python]
+liste = ['a', 'b', 'c']
+for index, elem in enumerate(liste):
+	print(f"{elem} at position {index}")
+# a at position 0
+# b at position 1
+# c at position 2
+\end{lstlisting} \vspace{5mm}
+
+\subsubsection{Zip}
+Zip is another loop method. You can combine multiple lists with the same length in the loop. 
+\begin{lstlisting}[language=Python]
+names = ["Peter Parker", "Clark Kent", "Wade Wilson", "Bruce Wayne"]
+heroes = ["Spiderman", "Superman", "Deadpool", "Batman"]
+universes = ["Marvel", "DC", "Marvel", "DC"]
+
+for name, hero, universe in zip(names, heroes, universes):
+	print(f"{name} is actually {hero} from {universe}")
+	
+# Peter Parker is actually Spiderman from Marvel
+# Clark Kent is actually Superman from DC
+# Wade Wilson is actually Deadpool from Marvel
+# Bruce Wayne is actually Batman from DC
+\end{lstlisting} \vspace{5mm}
+
 
 \newpage
 \section{Function}
@@ -662,6 +682,17 @@ def add_employee(emp, emp_list = None):
     print(emp_list) # Good because emp_list is immutable and is new each time this function is called.
 \end{lstlisting} \vspace{5mm}
 
+\subsection{Unknown arguments}
+Sometimes you don't know how many arguments a function is going to receive. Also, it's important to handle unknown arguments. \textit{It's the case for exemple with the print() function}. \textbf{* means unnamed arguments and ** means named arguments}
+\begin{lstlisting}[language=Python]
+def parameters(*args, **kwargs):
+	print(f"I received these unnamed args : {args}")
+	print(f"I received these named args : {kwargs}")
+parameters(1,"azerty",[1,2], couleur="rouge", taille_en_cm=172)
+both
+# I received these unnamed args : (1, 'azerty', [1, 2])
+# I received these named args : {'couleur': 'rouge', 'taille_en_cm': 172}
+\end{lstlisting} \vspace{5mm}
 
 \subsection{Map function}
 Map function is a special function used to apply a function for each element of a container. \textbf{map(function\_to\_apply, list)}
@@ -673,7 +704,6 @@ mapped_list = list(map(map_function,liste)) #No () for argument function
 
 # before : [1, 2, 3] and now : [1, 4, 27]
 \end{lstlisting} \vspace{5mm}
-
 There is a way more effective way of doing it with \hyperref[Comprehension]{comprehension}.
 
 \subsection{Filter function}
@@ -686,20 +716,8 @@ filtered_list = list(filter(filter_function,liste))
 
 # before : [1, 2, 3] and now : [1, 3]
 \end{lstlisting} \vspace{5mm}
-
 There is a way more effective way of doing it with \hyperref[Comprehension]{comprehension}.
 
-\subsection{Unknown parameters}
-Sometimes you don't know how many arguments a function is going to receive. Also, it's important to handle unknown parameters. \textit{It's the case for exemple with the print() function}. \textbf{* means unnamed parameters and ** means named parameters}
-\begin{lstlisting}[language=Python]
-def parameters(*args, **kwargs):
-	print(f"I received these unnamed args : {args}")
-	print(f"I received these named args : {kwargs}")
-parameters(1,"azerty",[1,2], couleur="rouge", taille_en_cm=172)
-both
-# I received these unnamed args : (1, 'azerty', [1, 2])
-# I received these named args : {'couleur': 'rouge', 'taille_en_cm': 172}
-\end{lstlisting} \vspace{5mm}
 
 \newpage
 \section{Class}
@@ -793,66 +811,8 @@ person = "Ewan-Carree-20"
 p = ClassConstructor.init_person(person)
 \end{lstlisting} \vspace{5mm}
 
-\subsection{Class variables}
-Class variables are useful in some cases. Imagine a variable that would always be used in the class and that the class always access. They are variables that the instance don't necessarily need.
-\begin{lstlisting}[language=Python]
-class ClassVariables(object):
-	nb_instance = 0
-	pourcentage = 1.1
-
-	def __init__(self, price):
-		self.price = price
-		ClassVariables.nb_instance += 1
-
-	def raise_price(self):
-		self.price = round(self.price * self.pourcentage,2)
-
-a = ClassVariables(100)
-a.raise_price()
-print(a.price) # 110.0
-print(ClassVariables.nb_instance) # 1
-\end{lstlisting} \vspace{5mm}
-In this code, nb\_instance and pourcentage are my class variables, I access to them with ClassVariables.nb\_instance and self.pourcentage. I choose to write it like that so that I can possibly the pourcentage for each instance later but I won't be able to affect nb\_instance because it bellows to the class.
-
-\subsection{Inheritance}
-Inheritance is a concept of relation between classes. Some are parents, the other are children. A children inherit from every methods from the parent class but can overload them. A child class can have multiple parents. \\
-Here is a useful example : a parent class that automatically initialize the childs :
-\begin{lstlisting}[language=Python]
-class Initializer:
-    def __init__(self, *args, **kwargs):
-        if kwargs and not args:
-            print(f"kwargs is not empty : {kwargs}")
-            for key, value in kwargs.items():
-                setattr(self, key, value)
-        else:
-            raise ValueError("You didn't enter the correct arguments")
- 
- 
-class MyClass(Initializer):
-    def __str__(self):
-        return f"I'm {self.__class__.__name__} and here are my attributes : {self.__dict__}"
- 
- 
-my_instance = MyClass(a=1, b=2)
-\end{lstlisting} \vspace{5mm}
-
-Here is another example with multiple inheritance
-\begin{lstlisting}[language=Python]
-class Dog(object):
-	def __init__(self, age):
-		self.age = age
-	def speak(self):
-		print("Waf")
-class Cat(Dog, Animal): #multiple inheritance : Cat have some attributs from Dog but is also an Animal
-	def __init__(self, age, nom):
-		super().__init__(age)
-		self.nom = nom
-	def speak(self):
-		print("Miaou")
-\end{lstlisting} \vspace{5mm}
-
 \subsection{Dunder methods}
-Dunder methods are specific function from a class, they are surrounded by \_\_. A dunder method can be used by the instance as follow :\\ \textbf{my\_instance.\_\_dunder\_method\_\_}
+Dunder methods are specific function from a class, they are surrounded by \_\_. A dunder method can be used by the instance as follow :\\ \textbf{my\_instance.\_\_dunder\_method\_\_} but it's better to use them like that : \textbf{dunder\_method(my\_instance)}
 \begin{lstlisting}[language=Python]
 class Point(object):
 	def __init__(self, x=0,y=0):
@@ -910,6 +870,64 @@ class Point(object):
 	__itruediv__(self, p) : /=	
 	...
 	"""
+\end{lstlisting} \vspace{5mm}
+
+\subsection{Class variables}
+Class variables are useful in some cases. Imagine a variable that would always be used in the class and that the class always access. They are variables that the instance don't necessarily need.
+\begin{lstlisting}[language=Python]
+class ClassVariables(object):
+	nb_instance = 0
+	pourcentage = 1.1
+
+	def __init__(self, price):
+		self.price = price
+		ClassVariables.nb_instance += 1
+
+	def raise_price(self):
+		self.price = round(self.price * self.pourcentage,2)
+
+a = ClassVariables(100)
+a.raise_price()
+print(a.price) # 110.0
+print(ClassVariables.nb_instance) # 1
+\end{lstlisting} \vspace{5mm}
+In this code, nb\_instance and pourcentage are my class variables, I access to them with ClassVariables.nb\_instance and self.pourcentage. I choose to write it like that so that I can possibly the pourcentage for each instance later but I won't be able to affect nb\_instance because it bellows to the class.
+
+\subsection{Inheritance}
+Inheritance is a concept of relation between classes. Some are parents, the other are children. A children inherit from every methods from the parent class but can overload them. A child class can have multiple parents. \\
+Here is a useful example : a parent class that automatically initialize the childs :
+\begin{lstlisting}[language=Python]
+class Initializer:
+    def __init__(self, *args, **kwargs):
+        if kwargs and not args:
+            print(f"kwargs is not empty : {kwargs}")
+            for key, value in kwargs.items():
+                setattr(self, key, value)
+        else:
+            raise ValueError("You didn't enter the correct arguments")
+ 
+ 
+class MyClass(Initializer):
+    def __str__(self):
+        return f"I'm {self.__class__.__name__} and here are my attributes : {self.__dict__}"
+ 
+ 
+my_instance = MyClass(a=1, b=2)
+\end{lstlisting} \vspace{5mm}
+
+Here is another example with multiple inheritance
+\begin{lstlisting}[language=Python]
+class Dog(object):
+	def __init__(self, age):
+		self.age = age
+	def speak(self):
+		print("Waf")
+class Cat(Dog, Animal): #multiple inheritance : Cat have some attributs from Dog but is also an Animal
+	def __init__(self, age, nom):
+		super().__init__(age)
+		self.nom = nom
+	def speak(self):
+		print("Miaou")
 \end{lstlisting} \vspace{5mm}
 
 \subsection{Property}
@@ -1162,8 +1180,53 @@ print(rv) #je suis 5
 \section{Generators}
 \label{sec:Generators}
 Generators are simple and powerful tools for creating iterators. They are written like regular functions but use the yield statement when they want to return data. Each time it is called by next(), the generator resumes execution where it left off (keeping all of its execution context).\newline
-\subsection{Iterators}
+
 \subsection{Yield}
+\begin{lstlisting}[language=Python]
+def people_list(num_people):
+    result = []
+    for i in xrange(num_people):
+        person = {
+                    'id': i,
+                    'name': random.choice(names),
+                    'major': random.choice(majors)
+                }
+        result.append(person)
+    return result
+    
+def people_generator(num_people):
+    for i in xrange(num_people):
+        person = {
+                    'id': i,
+                    'name': random.choice(names),
+                    'major': random.choice(majors)
+                }
+        yield person
+\end{lstlisting} \vspace{5mm}
+Here is an example of list against generator. If you run these function with lot of people, you'll see the powerness of generators, instead of returning a list of lot of people, it will yield one peron a the time. Also, it won't take any memory or any time instead of a list. \\
+The only thing that change here is the \textbf{yield} keyword which is equivalent to the return keyword except the fact that it doesn't end the function but freeze it until the next call.
+
+\subsection{Generator comprehension}
+You can also you generator as comprehension like with list to save memory and time simply by replacing the \textbf{[]} from list comprehension with \textbf{()} for generator comprehension. \\
+
+Here : 
+\begin{lstlisting}[language=Python]
+my_nums = [x*x for x in [1,2,3,4,5]]
+print(my_nums) # [1, 4, 9, 16, 25]
+\end{lstlisting} \vspace{5mm}
+
+Become : 
+\begin{lstlisting}[language=Python]
+my_nums = (x*x for x in [1,2,3,4,5])
+for num in my_nums:
+    print(num)
+# 1
+# 4
+# 9
+# 16
+# 25
+\end{lstlisting} \vspace{5mm}
+
 
 \newpage
 \section{Modules}
@@ -1512,6 +1575,7 @@ For further explanations, see the \href{https://docs.python.org/3/library/socket
 For further explanations, see the \href{https://docs.python.org/3/library/select.html}{official documentation}
 
 \subsection{Threads}
+\label{subsec:Threading}
 Threading is an advanced module especially used to run multiple processes at the same time. Normally, each functin call follow each other in one way. But with threading you can run them simultaneously. It's especially useful when a call lasts a lot of time, with threading, you don't waste this time.
 
 For further explanations, see the \href{https://docs.python.org/3/library/threading.html}{official documentation}
@@ -1558,6 +1622,31 @@ while nb != 20:
 
 \subsection{Context manager}
 \label{subsec:ContextManager}
+Context Managers are great for when we need to setup or teardown some resources during use. So these can be used for: open and closing files, opening and closing database connections, acquiring and releasing locks, and much much more.
+
+\begin{lstlisting}[language=Python]
+import os
+from contextlib import contextmanager
+
+
+@contextmanager
+def change_dir(destination):
+    try:
+        cwd = os.getcwd()
+        os.chdir(destination)
+        yield
+    finally:
+        os.chdir(cwd)
+
+
+with change_dir('Sample-Dir-One'):
+    print(os.listdir())
+
+with change_dir('Sample-Dir-Two'):
+    print(os.listdir())
+\end{lstlisting} \vspace{5mm}
+
+You can see some other examples of context manager in these sections : \hyperref[subsec:Files]{files} and \hyperref[subsec:Threading]{threading}
 
 \subsection{Global/Nonlocal variables}
 \label{subsec:Global/Nonlocal}
@@ -1613,7 +1702,7 @@ class MonException(Exception):
 If you want to personalize the way a process handle exceptions you can use the \textbf{raise} keyword.
 
 
-\subsubsection{If / Elif / Else}
+\subsection{If / Elif / Else}
 \label{IEE}
 You can write if / else conditions in an easy way in python :
 \begin{lstlisting}[language=Python]
@@ -1632,6 +1721,7 @@ x = 1 if condition else 0
 \end{lstlisting} \vspace{5mm}
 
 \subsection{Files}
+\label{subsec:Files}
 
 \subsection{// and **}
 There are two basics operations in python very useful instead of using a math method.
@@ -1655,13 +1745,7 @@ Sometimes you need to convert a variable from a certain type to another. Cast is
 You can do it by simply follow this pattern : \textbf{new\_type(my\_variable)}
 Notice that you have to be coherent in your type transformation. For example, you won't be able to cast a string into an integer if your string = "Salut".
 
-\subsection{Encoding}
-You can precise in the first line of your .py document the encoding your are curently using.
-\begin{lstlisting}[language=Python]
-# -*-coding:Utf-8 -*
-\end{lstlisting} \vspace{5mm}
-
-\subsection{Path}
+\subsection{Hash-Bang}
 You can precise path to your python compilator in the second line of your .py document.
 \begin{lstlisting}[language=Python]
 # !/usr/bin/python3.8
@@ -1678,9 +1762,6 @@ if x or y or z:
 if any((x,y,z)):
     pass
 \end{lstlisting} \vspace{5mm}
-
-\subsection{Encoding}
-It's possible to encode a string into bytes using a special string methods. You have to put a b for bytes in front of the first " of you string. Another way is to use encode function as my\_string.encode()
 
 \subsection{F-string}
 \label{subsec:F-string}
