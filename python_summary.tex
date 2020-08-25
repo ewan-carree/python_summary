@@ -112,7 +112,7 @@ In python 3, there are some reserved words that you can't use in your program as
   \hline 
   \hyperref[Raise]{raise} & \hyperref[subsec:BCPR]{return} & \hyperref[TEEF]{try} \\
   \hline
-  while & \hyperref[subsec:ContextManager]{with} & \hyperref[sec:Generators]{yield} \\
+  while & \hyperref[subsec:ContextManager]{with} & \hyperref[subsec:Generators]{yield} \\
   \hline
 \end{tabular}}}
 \end{center}
@@ -488,16 +488,18 @@ Containers are any object that holds an arbitrary number of other objects. Gener
 
 \subsection{Comprehension}
 \label{Comprehension}
-Container (list, dict, set) comprehension is probably one of the most powerful method that you can apply. It conbines map and filter function into a single way to do it. \textbf{[func\_to\_apply() for elem in container if filter\_condition]} \\
+Comprehension is probably one of the most powerful method in python. It conbines map and filter function into a single method. \textbf{[func\_to\_apply() for elem in container if filter\_condition]} \\
 
+\subsubsection{List}
 Example with lists :
 \begin{lstlisting}[language=Python]
 my_list = [1,2,3]
 new_list = [x**x for x in my_list if x%2!=0]
 
 #before : [1, 2, 3] and now : [1, 27]
-\vspace{5mm}
+\end{lstlisting}\vspace{5mm}
 
+\subsubsection{Dict}
 Example with dicts :
 \begin{lstlisting}[language=Python]
 names = ["Peter Parker", "Clark Kent", "Wade Wilson", "Bruce Wayne"]
@@ -507,44 +509,64 @@ my_dict = {name: hero for name, hero in zip(names, heroes) if name != "Peter Par
 # {'Clark Kent': 'Superman', 'Wade Wilson': 'Deadpool', 'Bruce Wayne': 'Batman'}
 \end{lstlisting} \vspace{5mm}
 
+\subsubsection{Set}
 Example with sets :
 \begin{lstlisting}[language=Python]
 my_list = [1,1,3,5,5]
 my_set = {n for n in my_list} #{1,3,5}
 \end{lstlisting} \vspace{5mm}
 
+\subsubsection{Generator}
+You can also use generator as comprehension like with list to save memory and time simply by replacing the \textbf{[]} from list comprehension with \textbf{()} for generator comprehension. \\
+Here : 
+\begin{lstlisting}[language=Python]
+my_nums = [x*x for x in [1,2,3,4,5]]
+print(my_nums) # [1, 4, 9, 16, 25]
+\end{lstlisting} \vspace{5mm}
+
+Become : 
+\begin{lstlisting}[language=Python]
+my_nums = (x*x for x in [1,2,3,4,5])
+for num in my_nums:
+    print(num)
+# 1
+# 4
+# 9
+# 16
+# 25
+\end{lstlisting} \vspace{5mm}
+
 \subsection{Slicing}
 Slicing is a method that concerns containers, you can use slicing on every possible container. \textbf{[start:end:step]} \textit{end argument isn't take in account : [start:end[}
-\begin{itemize}
-    \item Last element \\
-    If you don't know the length of a certain container, you can access to the last element with slicing.
-    \begin{lstlisting}[language=Python]
-    dernier_elem = tableau[-1]
-    # dlrow!
-    \end{lstlisting} \vspace{5mm}
-    
-    \item Trunc \\
-    You can also trunc your list to keep just what you need.
-    \begin{lstlisting}[language=Python]
-    first_part = tableau[:3]
-    second_part = tableau[3:]
-    # first_part : ['Hello,', 'dlrow!Hello,', 'dlrow!Hello,'] and second_part : ['dlrow!']
-    \end{lstlisting} \vspace{5mm}
-    
-    \item Insert \\
-    If you need to precisely insert an element into list, slicing is a good way of doing it.
-    \begin{lstlisting}[language=Python]
-    tableau[1:1] = 'A'
-    # ['Hello,', 'A', 'dlrow!Hello,', 'dlrow!Hello,', 'dlrow!']
-    \end{lstlisting} \vspace{5mm}
-    
-    \item Reverse \\
-    If you need to reverse your container you can also use slicing.
-    \begin{lstlisting}[language=Python]
-    tableau[::-1]
-    # ['dlrow!', 'dlrow!Hello,', 'dlrow!Hello,'; 'A', 'Hello,']
-    \end{lstlisting} \vspace{5mm}
-\end{itemize}
+
+\subsubsection{Last element} 
+If you don't know the length of a certain container, you can access to the last element with slicing.
+\begin{lstlisting}[language=Python]
+dernier_elem = tableau[-1]
+# dlrow!
+\end{lstlisting} \vspace{5mm}
+
+\subsubsection{Trunc} 
+You can also trunc your list to keep just what you need.
+\begin{lstlisting}[language=Python]
+first_part = tableau[:3]
+second_part = tableau[3:]
+# first_part : ['Hello,', 'dlrow!Hello,', 'dlrow!Hello,'] and second_part : ['dlrow!']
+\end{lstlisting} \vspace{5mm}
+
+\subsubsection{Insert}  
+If you need to precisely insert an element into list, slicing is a good way of doing it.
+\begin{lstlisting}[language=Python]
+tableau[1:1] = 'A'
+# ['Hello,', 'A', 'dlrow!Hello,', 'dlrow!Hello,', 'dlrow!']
+\end{lstlisting} \vspace{5mm}
+
+\subsubsection{Reverse} 
+If you need to reverse your container you can also use slicing.
+\begin{lstlisting}[language=Python]
+tableau[::-1]
+# ['dlrow!', 'dlrow!Hello,', 'dlrow!Hello,'; 'A', 'Hello,']
+\end{lstlisting} \vspace{5mm}
 
 \subsection{Empty}
 Sometimes you need to know if a container is empty. There are two common way to do it :
@@ -554,85 +576,6 @@ if not my_container:
 
 if len(my_container)==0:
     print("empty")
-\end{lstlisting} \vspace{5mm}
-
-\subsection{Iterator / Iterable}
-Every object that have the \textit{\_\_iter\_\_} dunder method is an \textbf{iterable} that can be looped over thanks to the iterator returned by this dunder method when \textbf{for loop} calls it. An \textbf{iterator} object is defined by the fact that it has the \textit{\_\_next\_\_} dunder method. \\
-
-Here is an iterable object that is also an iterator :
-\begin{lstlisting}[language=Python]
-class MyRange:
-
-    def __init__(self, start, end):
-        self.value = start
-        self.end = end
-
-    def __iter__(self):
-        return self
-
-    def __next__(self):
-        if self.value >= self.end:
-            raise StopIteration
-        current = self.value
-        self.value += 1
-        return current
-\end{lstlisting} \vspace{5mm}
-
-We can also create the equivalent of MyRange class with a function based on \hyperref[sec:Generators]{generator} which is more readable than a class :
-\begin{lstlisting}[language=Python]
-def my_range(start, end):
-    current = start
-    while current < end:
-        yield current
-        current += 1
-
-nums = my_range(1,3)
-
-for num in nums:
-    print(num)
-# 1
-# 2
-# 3
-\end{lstlisting} \vspace{5mm}
-
-\subsection{For}
-\label{subsec:For}
-For loop are the most powerful way to work on data contained in list, tuple, dict, string, files, generators, ... \\
-
-\subsubsection{Range}
-Range allows user to loop a certain times. \textbf{range(start,end, step)}
-\begin{lstlisting}[language=Python]
-for x in range(2):
-	print(x)
-#0
-#1
-\end{lstlisting} \vspace{5mm}
-
-\subsubsection{Enumerate}
-Enumerate is a very good way to work with for loop. You can access simultaneously to the element and it's position in a tuple.
-\begin{lstlisting}[language=Python]
-liste = ['a', 'b', 'c']
-for index, elem in enumerate(liste):
-	print(f"{elem} at position {index}")
-# a at position 0
-# b at position 1
-# c at position 2
-\end{lstlisting} \vspace{5mm}
-
-\subsubsection{Zip}
-Zip is another loop method. You can combine multiple lists with the same length in the loop. 
-\begin{lstlisting}[language=Python]
-names = ["Peter Parker", "Clark Kent", "Wade Wilson", "Bruce Wayne"]
-heroes = ["Spiderman", "Superman", "Deadpool", "Batman"]
-universes = ["Marvel", "DC", "Marvel", "DC"]
-
-for name, hero, universe in zip(names, heroes, universes):
-	print(f"{name} is actually {hero} from {universe}")
-	
-# Peter Parker is actually Spiderman from Marvel
-# Clark Kent is actually Superman from DC
-# Wade Wilson is actually Deadpool from Marvel
-# Bruce Wayne is actually Batman from DC
 \end{lstlisting} \vspace{5mm}
 
 
@@ -717,6 +660,8 @@ filtered_list = list(filter(filter_function,liste))
 # before : [1, 2, 3] and now : [1, 3]
 \end{lstlisting} \vspace{5mm}
 There is a way more effective way of doing it with \hyperref[Comprehension]{comprehension}.
+
+\subsection{Reduce function}
 
 
 \newpage
@@ -1177,11 +1122,51 @@ print(rv) #je suis 5
 \end{lstlisting} \vspace{5mm}
 
 \newpage
-\section{Generators}
-\label{sec:Generators}
-Generators are simple and powerful tools for creating iterators. They are written like regular functions but use the yield statement when they want to return data. Each time it is called by next(), the generator resumes execution where it left off (keeping all of its execution context).\newline
 
-\subsection{Yield}
+\section{Iterator / Iterable}
+Every object that have the \textit{\_\_iter\_\_} dunder method is an \textbf{iterable} that can be looped over thanks to the iterator returned by this dunder method when \textbf{for loop} calls it. An \textbf{iterator} object is defined by the fact that it has the \textit{\_\_next\_\_} dunder method. \\
+
+Here is an iterable object that is also an iterator because it combines iter() and next() dunder methods :
+\begin{lstlisting}[language=Python]
+class MyRange:
+
+    def __init__(self, start, end):
+        self.value = start
+        self.end = end
+
+    def __iter__(self):
+        return self
+
+    def __next__(self):
+        if self.value >= self.end:
+            raise StopIteration
+        current = self.value
+        self.value += 1
+        return current
+\end{lstlisting} \vspace{5mm}
+
+\subsection{Generators}
+\label{subsec:Generators}
+Generators are simple and powerful tools for creating iterators. They are written like regular functions but use the yield statement when they want to return data. Each time it is called by next(), the generator resumes execution where it left off (keeping all of its execution context). \\
+Also, we can create the equivalent of MyRange class with a function based on generator which is more readable than a class.
+\begin{lstlisting}[language=Python]
+def my_range(start, end):
+    current = start
+    while current < end:
+        yield current
+        current += 1
+
+nums = my_range(1,3)
+
+for num in nums:
+    print(num)
+# 1
+# 2
+# 3
+\end{lstlisting} \vspace{5mm}
+
+Here is an example of list against generator. If you run these function with lot of people, you'll see the strength of generators, instead of returning a list of lot of people, it will yield one person a the time. Also, it won't take any memory or any time instead of a list. \\
+The only thing that change here is the \textbf{yield} keyword which is equivalent to the return keyword except the fact that it doesn't end the function but freeze it until the next call :
 \begin{lstlisting}[language=Python]
 def people_list(num_people):
     result = []
@@ -1203,28 +1188,46 @@ def people_generator(num_people):
                 }
         yield person
 \end{lstlisting} \vspace{5mm}
-Here is an example of list against generator. If you run these function with lot of people, you'll see the powerness of generators, instead of returning a list of lot of people, it will yield one peron a the time. Also, it won't take any memory or any time instead of a list. \\
-The only thing that change here is the \textbf{yield} keyword which is equivalent to the return keyword except the fact that it doesn't end the function but freeze it until the next call.
 
-\subsection{Generator comprehension}
-You can also you generator as comprehension like with list to save memory and time simply by replacing the \textbf{[]} from list comprehension with \textbf{()} for generator comprehension. \\
 
-Here : 
+\subsection{For}
+\label{subsec:For}
+For loop are the most powerful way to work on data contained in list, tuple, dict, string, files, generators, ... \\
+
+\subsubsection{Range}
+Range allows user to loop a certain times. \textbf{range(start,end, step)}
 \begin{lstlisting}[language=Python]
-my_nums = [x*x for x in [1,2,3,4,5]]
-print(my_nums) # [1, 4, 9, 16, 25]
+for x in range(2):
+	print(x)
+#0
+#1
 \end{lstlisting} \vspace{5mm}
 
-Become : 
+\subsubsection{Enumerate}
+Enumerate is a very good way to work with for loop. You can access simultaneously to the element and it's position in a tuple.
 \begin{lstlisting}[language=Python]
-my_nums = (x*x for x in [1,2,3,4,5])
-for num in my_nums:
-    print(num)
-# 1
-# 4
-# 9
-# 16
-# 25
+liste = ['a', 'b', 'c']
+for index, elem in enumerate(liste):
+	print(f"{elem} at position {index}")
+# a at position 0
+# b at position 1
+# c at position 2
+\end{lstlisting} \vspace{5mm}
+
+\subsubsection{Zip}
+Zip is another loop method. You can combine multiple lists with the same length in the loop. 
+\begin{lstlisting}[language=Python]
+names = ["Peter Parker", "Clark Kent", "Wade Wilson", "Bruce Wayne"]
+heroes = ["Spiderman", "Superman", "Deadpool", "Batman"]
+universes = ["Marvel", "DC", "Marvel", "DC"]
+
+for name, hero, universe in zip(names, heroes, universes):
+	print(f"{name} is actually {hero} from {universe}")
+	
+# Peter Parker is actually Spiderman from Marvel
+# Clark Kent is actually Superman from DC
+# Wade Wilson is actually Deadpool from Marvel
+# Bruce Wayne is actually Batman from DC
 \end{lstlisting} \vspace{5mm}
 
 
@@ -1476,9 +1479,32 @@ expression = r"^[A-Za-z0-9]"
 
 See more explanation about re on the \href{https://docs.python.org/3/library/re.html?highlight=re#module-re}{official documentation}
 
-\subsection{Cx\_freeze / setup}
+\subsection{cx\_Freeze / setup}
 You can create .exe program that anybody can run on its own computer without having python or the extern libraries installed by using the module cx\_Freeze. \\
+
+To create a .exe file on windows : open a new terminal and go into the repertory
+\begin{lstlisting}[language=Python]
+C:\Users\carre\AppData\Local\Packages\PythonSoftwareFoundation.Python.3.8_qbz5n2kfra8p0\LocalCache\local-packages\Python38\Scripts
+\end{lstlisting} \vspace{5mm}
+
+Then, run \textit{./cxfreeze pathTo.pyFile} and a \textit{dist} folder will be created with every libraries needed and the .exe file that you can directly run. You can send a zip file of this dist folder to every one so that they can run your program on their own computer. \\
+
+You can do the same on linux by simply do \textit{cxfreeze myfile.py} and you'll get exactly the same except the fact that it is an ubuntu file. \\ \\
+
 You can do the same by creating a setup.py file. \\
+Your setup file will look like this : 
+\begin{lstlisting}[language=Python]
+from cx_Freeze import setup, Executable
+
+setup(
+    name = "myFile",
+    version = "0.1",
+    description = "desciption",
+    executables = [Executable("myFile.py")],
+)
+\end{lstlisting} \vspace{5mm}
+
+Then run \textit{python.exe setup.py build} in your windows terminal and \textit{python3 setup.py build} into your ubuntu terminal. It will create a \textit{build} folder with every necessary files inside. It's more powerfull than cx\_Freeze. \\ \\
 
 See more explanation about cx\_Freeze on the  \href{https://cx-freeze.readthedocs.io/en/latest/}{official documentation}
 
@@ -1748,7 +1774,7 @@ Notice that you have to be coherent in your type transformation. For example, yo
 \subsection{Hash-Bang}
 You can precise path to your python compilator in the second line of your .py document.
 \begin{lstlisting}[language=Python]
-# !/usr/bin/python3.8
+# !/usr/bin/python3
 \end{lstlisting} \vspace{5mm}
 
 \subsection{Test the validity of several values}
