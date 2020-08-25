@@ -92,27 +92,27 @@ In python 3, there are some reserved words that you can't use in your program as
 {\setlength{\tabcolsep}{1.5cm} %donne la distance entre les collones%
 \begin{tabular}{|l|c|r|}
   \hline
-  \hyperref[subsec:Bool]{False} & None & \hyperref[subsec:Bool]{True} \\
+  \hyperref[subsec:Bool]{False} & \hyperref[subsec:Keyword]{None} & \hyperref[subsec:Bool]{True} \\
   \hline
-  and & \hyperref[As]{as} & \hyperref[subsec:Assertion]{assert} \\
+  \hyperref[subsec:Keyword]{and} & \hyperref[As]{as} & \hyperref[subsec:Assertion]{assert} \\
   \hline
   \hyperref[subsec:BCPR]{break} & \hyperref[sec:Class]{class} & \hyperref[subsec:BCPR]{continue} \\
   \hline
-  \hyperref[sec:Function]{def} & del & \hyperref[IEE]{elif} \\
+  \hyperref[sec:Function]{def} & \hyperref[Del]{del} & \hyperref[IEE]{elif} \\
   \hline
-  \hyperref[IEE]{else} & \hyperref[TEEF]{except} & \hyperref[TEEF]{finally} \\
+  \hyperref[subsec:Else]{else} & \hyperref[TEEF]{except} & \hyperref[TEEF]{finally} \\
   \hline
-  \hyperref[subsec:For]{for} & from & \hyperref[subsec:Global/Nonlocal]{global} \\
+  \hyperref[subsec:For]{for} & \hyperref[subsec:Import]{from} & \hyperref[subsec:Global/Nonlocal]{global} \\
   \hline
   \hyperref[IEE]{if} & \hyperref[subsec:Import]{import} & \hyperref[Comprehension]{in} \\
   \hline
   \hyperref[subsec:Is]{is} & \hyperref[subsec:Lambda]{lambda} & \hyperref[subsec:Global/Nonlocal]{nonlocal} \\
   \hline 
-  not & or & \hyperref[subsec:BCPR]{pass} \\
+  \hyperref[subsec:Keyword]{not} & \hyperref[subsec:Keyword]{or} & \hyperref[subsec:BCPR]{pass} \\
   \hline 
   \hyperref[Raise]{raise} & \hyperref[subsec:BCPR]{return} & \hyperref[TEEF]{try} \\
   \hline
-  while & \hyperref[subsec:ContextManager]{with} & \hyperref[subsec:Generators]{yield} \\
+  \hyperref[subsec:While]{while} & \hyperref[subsec:ContextManager]{with} & \hyperref[subsec:Generators]{yield} \\
   \hline
 \end{tabular}}}
 \end{center}
@@ -1059,6 +1059,7 @@ print(p1.email) # Ewan.Carree@gmail.com -- first didn't change
 print(p1.fullname()) # Lou-Anne Carree
 \end{lstlisting} \vspace{5mm}
 Will become :
+\label{Del}
 \begin{lstlisting}[language=Python]
 class Myclass(object):
 	def __init__(self, first, last):
@@ -1086,8 +1087,9 @@ class Myclass(object):
 	@fullname.deleter
 	def fullname(self):
 		print("deleting ...")
-		self.first = None
-		self.last = None
+		# delete attributes, unable to use them later
+		del self.first 
+		del self.last
 
 p1 = Myclass("Ewan", "Carree")
 p1.fullname = "Lou-Anne Le_Bras"
@@ -1450,7 +1452,7 @@ For further explanations, see the \href{https://docs.python.org/3/library/unitte
 
 
 \subsection{Re}
-Regex also known as regular expression is a very powerfull module for searching in string. \textbf{re.search(expression, string)} with \textbf{expression = r"..."} \\
+Regex also known as regular expression is a very powerful module for searching in string. \textbf{re.search(expression, string)} with \textbf{expression = r"..."} \\
 
 \begin{table}[h]
 \begin{center}
@@ -1646,33 +1648,25 @@ while nb != 20:
 #7
 \end{lstlisting} \vspace{5mm}
 
-\subsection{Context manager}
-\label{subsec:ContextManager}
-Context Managers are great for when we need to setup or teardown some resources during use. So these can be used for: open and closing files, opening and closing database connections, acquiring and releasing locks, and much much more.
+\subsection{Is vs ==}
+\label{subsec:Is}
+We can think that \textbf{is} and \textbf{==} are exactly the same but it's not the case. \textbf{==} is based on the fact that two objects' elements are exactly the same. Instead, \textbf{is} compare if the two objects belong to the same memory adress.\\
+\textbf{is} cans be seen as \textbf{id(obj1) == id(obj2)} if we want to compare it to \textbf{==}.
 
+Here is an example :
 \begin{lstlisting}[language=Python]
-import os
-from contextlib import contextmanager
+list1 = [1,2,3,4]
+list2 = [1,2,3,4]
 
+list1 == list2 #True
+list1 is list2 #False
 
-@contextmanager
-def change_dir(destination):
-    try:
-        cwd = os.getcwd()
-        os.chdir(destination)
-        yield
-    finally:
-        os.chdir(cwd)
+list1 = [1,2,3,4]
+list2 = list1
 
-
-with change_dir('Sample-Dir-One'):
-    print(os.listdir())
-
-with change_dir('Sample-Dir-Two'):
-    print(os.listdir())
+list1 == list2 #True
+list1 is list2 #True
 \end{lstlisting} \vspace{5mm}
-
-You can see some other examples of context manager in these sections : \hyperref[subsec:Files]{files} and \hyperref[subsec:Threading]{threading}
 
 \subsection{Global/Nonlocal variables}
 \label{subsec:Global/Nonlocal}
@@ -1688,6 +1682,66 @@ def modify(b):
 
 modify(b)
 #a = 10 et b = 5
+\end{lstlisting} \vspace{5mm}
+
+Variables that are nested into multiple functions are known as nonlocal variables. \\
+Nonlocal variables can be used outside the nested function but inside the parent function.
+\begin{lstlisting}[language=Python]
+def method():
+
+    def method2():
+        # In nested method, reference nonlocal variable.
+        nonlocal value
+        value = 100
+
+    # Set local.
+    value = 10
+    method2()
+
+    # Local variable reflects nonlocal change.
+    print(value)
+
+method() #100
+\end{lstlisting} \vspace{5mm}
+
+\subsection{Keywords}
+\label{subsec:Keyword}
+You can use small keywords to simplify you code in many ways like checking if a set of variable is equal to the value we want.
+\begin{lstlisting}[language=Python]
+x,y,z = 0,1,0
+if 1 in (x,y,z):
+    pass
+if x or y or z:
+    pass
+if any((x,y,z)):
+    pass
+if x and y and z:
+    pass
+    
+value = None
+if value is None:
+    pass
+
+if value is not None:
+    pass
+\end{lstlisting} \vspace{5mm}
+
+\subsection{If / Elif / Else}
+\label{IEE}
+You can write if / else conditions in an easy way in python :
+\begin{lstlisting}[language=Python]
+condition = False
+
+#Bad way :
+if condition:
+	x=1
+else:
+	x=0
+	#0
+
+#Good way :
+x = 1 if condition else 0
+#0
 \end{lstlisting} \vspace{5mm}
 
 \subsection{Exception}
@@ -1725,69 +1779,48 @@ class MonException(Exception):
 
 \subsubsection{Raise}
 \label{Raise}
-If you want to personalize the way a process handle exceptions you can use the \textbf{raise} keyword.
-
-
-\subsection{If / Elif / Else}
-\label{IEE}
-You can write if / else conditions in an easy way in python :
+If you want to personalize the way a process handle exceptions you can use the \textbf{raise} keyword. \\
+Imagine that we don't want a person to be minor :
 \begin{lstlisting}[language=Python]
-condition = False
-
-#Bad way :
-if condition:
-	x=1
-else:
-	x=0
-	#0
-
-#Good way :
-x = 1 if condition else 0
-#0
+class Person(object):
+    def __init__(self,nom,age):
+        self.nom = nom
+        if age >= 18:
+            self.age = age
+        else:
+            raise Exception("Too young!")
 \end{lstlisting} \vspace{5mm}
+
+\subsection{Context manager}
+\label{subsec:ContextManager}
+Context Managers are great for when we need to setup or teardown some resources during use. So these can be used for: open and closing files, opening and closing database connections, acquiring and releasing locks, and much much more.
+
+\begin{lstlisting}[language=Python]
+import os
+from contextlib import contextmanager
+
+
+@contextmanager
+def change_dir(destination):
+    try:
+        cwd = os.getcwd()
+        os.chdir(destination)
+        yield
+    finally:
+        os.chdir(cwd)
+
+
+with change_dir('Sample-Dir-One'):
+    print(os.listdir())
+
+with change_dir('Sample-Dir-Two'):
+    print(os.listdir())
+\end{lstlisting} \vspace{5mm}
+
+You can see some other examples of context manager in these sections : \hyperref[subsec:Files]{files} and \hyperref[subsec:Threading]{threading}
 
 \subsection{Files}
 \label{subsec:Files}
-
-\subsection{// and **}
-There are two basics operations in python very useful instead of using a math method.
-\begin{lstlisting}[language=Python]
-print(f"10 / 3 = {10 / 3}") # 10 / 3 = 3.3333333333333335
-print(f"10 // 3 = {10 // 3}") # 10 // 3 = 3
-
-print(f"3**3 = {3**3}"}) # 3**3 = 9
-\end{lstlisting} \vspace{5mm}
-
-\subsection{Assertion}
-\label{subsec:Assertion}
-You can verify a condition before parsing an information by checking the instance type.
-\begin{lstlisting}[language=Python]
-b = 3
-assert isinstance(b, int)
-\end{lstlisting} \vspace{5mm}
-
-\subsection{Cast}
-Sometimes you need to convert a variable from a certain type to another. Cast is a good way to do it but you've to know that you can lose information by doing it. \\ \\
-You can do it by simply follow this pattern : \textbf{new\_type(my\_variable)}
-Notice that you have to be coherent in your type transformation. For example, you won't be able to cast a string into an integer if your string = "Salut".
-
-\subsection{Hash-Bang}
-You can precise path to your python compilator in the second line of your .py document.
-\begin{lstlisting}[language=Python]
-# !/usr/bin/python3
-\end{lstlisting} \vspace{5mm}
-
-\subsection{Test the validity of several values}
-You can check if one of several values is not False.
-\begin{lstlisting}[language=Python]
-x,y,z = 0,1,0
-if 1 in (x,y,z):
-    pass
-if x or y or z:
-    pass
-if any((x,y,z)):
-    pass
-\end{lstlisting} \vspace{5mm}
 
 \subsection{F-string}
 \label{subsec:F-string}
@@ -1806,13 +1839,14 @@ print(f"pi = {pi:.2f}")
 You can see more methods by looking specifically on every module you want, for example datetime f-string.
 
 \subsection{Else clause on loop}
-Else can be used in many case like in the structure if/elif/else ofently. But we can also use it in loops like for or while. It is similar to the finally statement of try/except. \\
+\label{subsec:Else}
+Else can be used in many case like in the structure if/elif/else oftenly. But we can also use it in loops like for or while. It is similar to the finally statement of try/except. \\
 It is always runned except if the loop encounter the \textbf{break} keyword.
 
 \begin{lstlisting}[language=Python]
 for i in range(2):
     print(i)
-else: @doesn't encounter break
+else: #doesn't encounter break
     print("Loop finished")
 #0
 #1
@@ -1831,27 +1865,44 @@ else: #encounter break before end
 #2
 \end{lstlisting} \vspace{5mm}
 
-\subsection{Path Variables}
+\subsection{Assertion}
+\label{subsec:Assertion}
+You can verify a condition before parsing an information by checking the instance type.
+\begin{lstlisting}[language=Python]
+b = 3
+assert isinstance(b, int)
+\end{lstlisting} \vspace{5mm}
+
+\subsection{// and **}
+There are two basics operations in python very useful instead of using a math method.
+\begin{lstlisting}[language=Python]
+print(f"10 / 3 = {10 / 3}") # 10 / 3 = 3.3333333333333335
+print(f"10 // 3 = {10 // 3}") # 10 // 3 = 3
+
+print(f"3**3 = {3**3}"}) # 3**3 = 9
+\end{lstlisting} \vspace{5mm}
+
+\subsection{Cast}
+Sometimes you need to convert a variable from a certain type to another. Cast is a good way to do it but you've to know that you can lose information by doing it. \\ \\
+You can do it by simply follow this pattern : \textbf{new\_type(my\_variable)}
+Notice that you have to be coherent in your type transformation. For example, you won't be able to cast a string into an integer if your string = "Salut".
+
+\subsection{Hash-Bang}
+You can precise path to your python compilator in the second line of your .py document.
+\begin{lstlisting}[language=Python]
+# !/usr/bin/python3
+\end{lstlisting} \vspace{5mm}
+
+\subsection{Environment path Variables}
 \label{subsec:PathVariables}
 
-\subsection{Is vs ==}
-\label{subsec:Is}
-We can think that \textbf{is} and \textbf{==} are exactly the same but it's not the case. \textbf{==} is based on the fact that two objects' elements are exactly the same. Instead, \textbf{is} compare if the two objects belong to the same memory adress.\\
-\textbf{is} cans be seen as \textbf{id(obj1) == id(obj2)} if we want to compare it to \textbf{==}.
-
-Here is an example :
+\subsection{Infinite loop}
+\label{subsec:While}
+You can create infinite loop in many case to run tasks in continue while your program is running. \\
+You can create it this way :
 \begin{lstlisting}[language=Python]
-list1 = [1,2,3,4]
-list2 = [1,2,3,4]
-
-list1 == list2 #True
-list1 is list2 #False
-
-list1 = [1,2,3,4]
-list2 = list1
-
-list1 == list2 #True
-list1 is list2 #True
+while True:
+    #mytask
 \end{lstlisting} \vspace{5mm}
 
 \end{document}
