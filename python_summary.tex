@@ -121,7 +121,7 @@ In python 3, there are some reserved words that you can't use in your program as
 \end{tabular}}}
 \end{center}
 \caption{Reserved words}
-\end{table}
+\end{table} \vspace{5mm}
 
 
 
@@ -213,7 +213,7 @@ string = string.zfill(3)
 # 005
 \end{lstlisting} \vspace{5mm}
 
-There is another way of doing it while printing argument with \hyperref[subsec:F-string]{F-string}.
+There is another way of doing it while printing argument with \hyperref[subsec:F-string]{\textbf{F-string}}.
 
 \item Encode \\
 It's possible to encode a string into bytes using a special string methods. You have to put a b for bytes in front of the first " of you string. Another way is to use encode function as my\_string.encode()
@@ -234,7 +234,7 @@ print("%.0f" % my_float + "with no decimal and " + "%.2f" % my_float + "with two
 round(my_float, 3) # 3.333
 \end{lstlisting} \vspace{5mm}
 
-There is another way of doing it while printing argument with \hyperref[subsec:F-string]{F-string}.
+There is another way of doing it while printing argument with \hyperref[subsec:F-string]{\textbf{F-string}}.
 
 \subsubsection{Tuple}
 A tuple is a container that can contain multiple variables with multiple types that have a link together. 
@@ -665,7 +665,10 @@ real_lambda = lambda x : x+5
 \end{lstlisting} \vspace{5mm}
 
 \subsection{Default argument}
-Default parameters are used for arguments that don't necessarily need a value. We assign a default value that can be overloaded if needed. Default arguments are always declared after non-default arguments into function's head. \textbf{def func(non\_default\_arguments, \textit{default\_arguments = value})}
+Default arguments are used for arguments that don't necessarily need a value. We assign a default value that can be overloaded if needed. Default arguments are always declared after non-default arguments into function's head. \\
+\textbf{def func(non\_default\_arguments, \textit{default\_arguments = value})}
+
+\vspace{5mm}
 
 \begin{lstlisting}[language=Python]
 def func(age, nom="Jerome"):
@@ -715,7 +718,7 @@ mapped_list = list(map(map_function,liste)) #No () for argument function
 
 # before : [1, 2, 3] and now : [1, 4, 27]
 \end{lstlisting} \vspace{5mm}
-There is a way more effective way of doing it with \textbf{\hyperref[Comprehension]{comprehension}}.
+There is a way more effective way of doing it with \hyperref[Comprehension]{\textbf{comprehension}}.
 
 \subsection{Filter function}
 Filter function is a special function used to apply a selection for each element of a container. \textbf{map(function\_to\_apply, list)}
@@ -727,10 +730,7 @@ filtered_list = list(filter(filter_function,liste))
 
 # before : [1, 2, 3] and now : [1, 3]
 \end{lstlisting} \vspace{5mm}
-There is a way more effective way of doing it with \textbf{\hyperref[Comprehension]{comprehension}}.
-
-\subsection{Reduce function}
-
+There is a way more effective way of doing it with \hyperref[Comprehension]{\textbf{comprehension}}.
 
 \newpage
 \section{Class}
@@ -750,7 +750,9 @@ my_instance = MyClass()
 \end{lstlisting} \vspace{5mm}
 
 \subsection{Methods}
-Methods are functions that bellow to the class. They are basically functions that uses attributes from the class. A method can be used by the instance as follow  : \textbf{my\_instance.my\_method()} except for class methods where \textbf{My\_class.my\_method()} is better.
+Methods are functions that bellow to the class. They are basically functions that uses attributes from the class. \\
+A method can be used by the instance as follow : \textbf{my\_instance.my\_method()}. \\
+Except for class methods where \textbf{My\_class.my\_method()} is better.
 
 \vspace{5mm}
 
@@ -986,7 +988,7 @@ class Test(object):
 	dimension = property(_get_dimension, _set_dimension) # lorsqu'on appelera objet.dimension, property redirigera vers les accesseurs/mutateurs prives
 \end{lstlisting} \vspace{5mm}
 
-There is another way of doing it in a more readable and better way with \hyperref[subsec:Property]{property decorator}.
+There is another way of doing it in a more readable and better way with \hyperref[subsec:Property]{\textbf{property decorator}}.
 
 \subsection{Metaclass}
 Every class inherit from the \textit{object} class, metaclass is a way to define how to create our own classes without inheriting from \textit{object}.
@@ -1338,6 +1340,13 @@ for name, hero, universe in zip(names, heroes, universes):
 # Bruce Wayne is actually Batman from DC
 \end{lstlisting} \vspace{5mm}
 
+\subsubsection{File}
+We can iterate through a file to get every lines into a for loop.
+\begin{lstlisting}[language=Python]
+for line in f:
+	print(line, end = '') # because the end of the line is already \n
+\end{lstlisting} \vspace{5mm}
+
 
 \newpage
 \section{Modules}
@@ -1360,7 +1369,7 @@ For further explanations, see the \href{https://docs.python.org/3/library/dateti
 
 \subsection{Password}
 \subsubsection{Getpass}
-Get pass is a very useful module to enter password secretly. In deed, it doesn't show the characters entered.
+Get pass is a very useful module to enter password secretly. Indeed, it doesn't show the characters entered.
 \begin{lstlisting}[language=Python]
 mdp getpass.getpass("Type your password : ")
 \end{lstlisting} \vspace{5mm}
@@ -1427,7 +1436,7 @@ sys.path.append("./Test")
 import test # .py file (module)
 \end{lstlisting} \vspace{5mm}
 
-Another way to do this in a more effective way is to set \textbf{\hyperref[subsec:PathVariables]{path variables}}.
+Another way to do this in a more effective way is to set \hyperref[subsec:PathVariables]{\textbf{path variables}}.
 
 \subsubsection{Memory used by a variable}
 Control you memory while programming. 
@@ -1562,7 +1571,7 @@ Here are every assertion methods you can use to test your functionnalities.
 \end{tabular}}}
 \end{center}
 \caption{Assertion methods}
-\end{table}
+\end{table} \vspace{5mm}
 
 After creating this module, you can test it by two different ways. The first one is \textbf{unittest.main()} but the other one is much more convenient. Go into the repertory into a terminal where you project and test file are stored and type the command \textbf{pythonX -m unittest}. It will run automatically each test.
 
@@ -1589,9 +1598,7 @@ Regex also known as regular expression is a very powerful module for searching i
 \end{tabular}}}
 \end{center}
 \caption{Regex methods}
-\end{table}
-
-\vspace{5mm}
+\end{table} \vspace{5mm}
 
 Example :
 \begin{lstlisting}[language=Python]
@@ -1963,10 +1970,79 @@ with change_dir('Sample-Dir-Two'):
     print(os.listdir())
 \end{lstlisting} \vspace{5mm}
 
-You can see some other examples of context manager in these sections : \hyperref[subsec:Files]{files} and \hyperref[subsec:Threading]{threading}
+You can see some other examples of context manager in these sections : \hyperref[subsec:Files]{\textbf{files}} and \hyperref[subsec:Threading]{\textbf{threading}}
 
 \subsection{Files}
+One of the most common tasks that you can do with Python is reading and writing files. Whether it’s writing to a simple text file, reading a complicated server log, or even analyzing raw byte data, all of these situations require reading or writing a file.
+
+\vspace{5mm}
+
+Here is a table of every possible mode we can use files with :
 \label{subsec:Files}
+\begin{table}[h]
+\begin{center}
+{\renewcommand{\arraystretch}{2} %donne la distance entre les lignes%
+{\setlength{\tabcolsep}{0.5cm} %donne la distance entre les collones%
+\begin{tabular}{|l|c|r|}
+  \hline
+  \makecell{r \\ reading only} & \makecell{w \\ writing only - overwrite} \\
+  \hline
+  \makecell{r+ \\ reading and writing} & \makecell{w+ \\ writing and reading - overwrite} \\
+  \hline
+  \makecell{rb \\ read binary only} & \makecell{wb \\ writing binary only - overwrite} \\
+  \hline
+  \makecell{rb+ \\ reading and writing binary} & \makecell{wb+ \\ writing and reading binary - overwrite} \\
+  \hline
+  \makecell{a \\ append} & \makecell{a+ \\ appending and reading} \\
+  \hline
+  \makecell{ab \\ append binary} & \makecell{ab+ \\ appending and reading binary} \\
+  \hline
+  \makecell{x \\ create file} &  \\
+  \hline
+\end{tabular}}}
+\end{center}
+\caption{File modes}
+\end{table} \vspace{5mm}
+
+The best way to use file is with \hyperref[subsec:ContextManager]{\textbf{context manager}}. Indeed, they can assure that, even though there have been an issue while using the file, the file will be closed for good. It's important because a not closed file might cause problems in your program.
+
+\vspace{5mm}
+
+If you want to write into a file that doesn't exist in your repertory, then it will create it for you. But it doesn't work for reading and causes error.
+
+\vspace{5mm}
+
+Here is an example of the most common use with files :
+\begin{lstlisting}[language=Python]
+with open("test.txt", "r") as f:
+	f_contents = f.read()
+	f_contents_lines = f.readlines() #list
+	f_contents_line = f.readline()
+
+with open("test.txt", "w") as f:
+	f.write("Test")
+\end{lstlisting} \vspace{5mm}
+
+You can also open multiple files in different modes to work with them. \\
+For example, if we want to copy a file to another, we can do this :
+\begin{lstlisting}[language=Python]
+with open("test.txt", "r") as rf:
+	with open("test_copy.txt", "w") as wf:
+		for line in rf:
+			wf.write(line)
+\end{lstlisting} \vspace{5mm}
+
+An other aspect of file is that it's not always .txt files. You can also work with other types of file. To do that you need to manipulate the data with bytes. Also, your need to use your files in binary mode.
+
+\vspace{5mm}
+
+Here is an example of file to work with a picture :
+\begin{lstlisting}[language=Python]
+with open("my_picture.jpg", "rb") as rf:
+	with open("my_picture_copy.jpg", "wb") as wf:
+		for line in rf:
+			wf.write(line)
+\end{lstlisting} \vspace{5mm}
 
 \subsection{F-string}
 \label{subsec:F-string}
