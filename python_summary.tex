@@ -74,7 +74,9 @@
 \maketitle
 \newpage
 
-This PDF is meant to be a summary of all the knowledge that I've acquired during ENIB. It is also meant to be upgrade each time I learn something new or a new concept. I did it to use it in my whole life as I want to become a software developer. \\ \\
+This PDF is meant to be a summary of all the knowledge that I've acquired during ENIB. It is also meant to be upgrade each time I learn something new or a new concept. I did it to use it in my whole life as I want to become a software developer.
+
+\vspace{10mm}
 
 Thanks to Corey Schafer, Tech with Tim, Kalle Hallden and Openclassroom because I've learnt everything with them and I've used some of their code into this PDF.
 
@@ -84,7 +86,9 @@ Thanks to Corey Schafer, Tech with Tim, Kalle Hallden and Openclassroom because 
 
 \newpage
 \section{Python reserved words}
-In python 3, there are some reserved words that you can't use in your program as variables, function name, class name, ... \\ \\ \\
+In python 3, there are some reserved words that you can't use in your program as variables, function name, class name, ...
+
+\vspace{35mm}
 
 \begin{table}[h]
 \begin{center}
@@ -123,13 +127,16 @@ In python 3, there are some reserved words that you can't use in your program as
 
 \clearpage
 \section{Types}
-Python offers different basics types that are often enough for your program.\newline
+Python offers different basics types that are often enough for your program.
 
 \subsection{Immutable}
-Immutable means that you can't directly modify your variable after you've assigned it. You have to reassign or create a new variable to work on a previous one\newline
+Immutable means that you can't directly modify your variable after you've assigned it. You have to reassign or create a new variable to work on a previous one
 
 \subsubsection{String}
-Python string is an ordered collection of characters which is used to represent and store the text-based information. Strings are stored as individual characters in a contiguous memory location. It can be accessed from both directions: forward and backward. A string can be seen in some ways as a list of characters. \\It's better to use ' for as single character and " for a chain. \\ \\
+Python string is an ordered collection of characters which is used to represent and store the text-based information. Strings are stored as individual characters in a contiguous memory location. It can be accessed from both directions: forward and backward. A string can be seen in some ways as a list of characters. \\It's better to use ' for as single character and " for a chain.
+
+\vspace{5mm}
+
 Here are some methods that you can apply on strings (I choose to reassign the variable whenever it's possible) : 
 \begin{itemize}
 \begin{lstlisting}[language=Python]
@@ -143,14 +150,14 @@ string = string.upper()
 # HELLO, WORLD!
 \end{lstlisting} \vspace{5mm}
 
-\item Lowercase \\
+\item Lower case \\
 Return a string with every single element from the original one in lowercase.
 \begin{lstlisting}[language=Python]
 string = string.lower()
 # hello, world!
 \end{lstlisting} \vspace{5mm}
 
-\item Captital \\
+\item Capital \\
 Return a string with the first Letter in uppercase and the rest in lowercase.
 \begin{lstlisting}[language=Python]
 string = string.capitalize()
@@ -158,7 +165,7 @@ string = string.capitalize()
 \end{lstlisting} \vspace{5mm}
 
 \item Strip \\
-Return a string whithout the blank spaces from both sides of the original string.
+Return a string without the blank spaces from both sides of the original string.
 \begin{lstlisting}[language=Python]
 string = string.strip()
 \end{lstlisting} \vspace{5mm}
@@ -171,7 +178,7 @@ position = string.find('l')
 \end{lstlisting} \vspace{5mm}
 
 \item Count \\
-Return an integer that represents the number of occurences of the argument found in the string. 
+Return an integer that represents the number of occurrences of the argument found in the string. 
 \begin{lstlisting}[language=Python]
 nb = string.count('l')
 # 3
@@ -230,10 +237,12 @@ round(my_float, 3) # 3.333
 There is another way of doing it while printing argument with \hyperref[subsec:F-string]{F-string}.
 
 \subsubsection{Tuple}
-A tuple is a container that can contain multiple variables with multiple types that have a link together. \\
+A tuple is a container that can contain multiple variables with multiple types that have a link together. 
+
 \begin{itemize}
 \item Unpack \\
-You can unpack each variable from a tuple very easily in python as follow \textbf{first\_variable, ..., n\_variable = my\_tuple\_with\_n\_variable}
+You can unpack each variable from a tuple very easily in python as follow : \textbf{first\_variable, ..., n\_variable = my\_tuple\_with\_n\_variable}
+
 \begin{lstlisting}[language=Python]
 my_tuple = (1,2)
 
@@ -279,8 +288,12 @@ print(white.red) # we can also call like basic tuple with white[0]
 
 \subsubsection{Bool}
 \label{subsec:Bool}
-There is only two types of Boolean : True and False. \\
-Everything can be considered as True if it different from 0 or False. \\
+There is only two types of Boolean : True and False. 
+
+\vspace{5mm}
+
+Everything can be considered as True if it different from 0 or False. 
+
 \begin{lstlisting}[language=Python]
 a = "Salut"
 b = 0
@@ -298,10 +311,13 @@ else:
 \end{lstlisting} \vspace{5mm}
 
 \subsection{Mutable}
-Mutable means that if you are working on a variable, you directly modify it and don't need to create a new variable or reassign the previous one. It can cause conflict if two process are using the same variable that can be changed.\newline
+Mutable means that if you are working on a variable, you directly modify it and don't need to create a new variable or reassign the previous one. It can cause conflict if two process are using the same variable that can be changed.
 
 \subsubsection{List}
-A list is a container that can contain multiple variables with multiple types that have a link together.\\ \\
+A list is a container that can contain multiple variables with multiple types that have a link together.
+
+\vspace{5mm}
+
 Here are some methods that you can apply on lists : 
 
 \begin{lstlisting}[language=Python]
@@ -342,10 +358,27 @@ Transfrom your list into a string.
 string = ' '.join(tableau)
 # Hello, A dlrow!Hello, dlrow!Hello, dlrow!
 \end{lstlisting} \vspace{5mm}
+
+\item Sort \\
+\label{Sort}
+You can easily sort your lists in python with \textbf{my\_list.sort(key, reverse = False)}. You have the possibility to add parameters into these functions with a \textit{key} to specify what you want to sort and \textit{reverse} to sort in the opposite order. The key can be a function, a lambda function or a type if it is possible to cast each element in this type.
+
+\begin{lstlisting}[language=Python]
+cars = ['Ford', 'BMW', 'Volvo']
+
+cars.sort(reverse=True) # ['Volvo', 'Ford', 'BMW']
+
+cars.sort(key = len) # ['BMW', 'Ford', 'Volvo'] #upper case matter
+
+cars.sort(reverse = True, key = lambda x: x[::-1]) # ['Volvo', 'Ford', 'BMW']
+\end{lstlisting} \vspace{5mm}
 \end{itemize}
 
 \subsubsection{Dict}
-A dict is an non-organized container that have variables associated to keys to recognize them. Keys are offently strings but we can also use integers.\\ \\
+A dict is an non-organized container that have variables associated to keys to recognize them. Keys are offently strings but we can also use integers.
+
+\vspace{5mm}
+
 Here are some methods that you can apply on dicts : 
 \begin{lstlisting}[language=Python]
 dictionnaire = {"nom":"Jerome", "age":20}
@@ -484,11 +517,11 @@ B = {4, 5, 6, 7, 8}
 \end{itemize}
 
 \section{Containers}
-Containers are any object that holds an arbitrary number of other objects. Generally, containers provide a way to access the contained objects and to iterate over them. We can find lists, strings, dicts, tuples and sets. Look out for mutability / immutability, some methods aren't possible between each other. \\
+Containers are any object that holds an arbitrary number of other objects. Generally, containers provide a way to access the contained objects and to iterate over them. We can find lists, strings, dicts, tuples and sets. Look out for mutability / immutability, some methods aren't possible between each other. 
 
 \subsection{Comprehension}
 \label{Comprehension}
-Comprehension is probably one of the most powerful method in python. It conbines map and filter function into a single method. \textbf{[func\_to\_apply() for elem in container if filter\_condition]} \\
+Comprehension is probably one of the most powerful method in python. It conbines map and filter function into a single method. \textbf{[func\_to\_apply() for elem in container if filter\_condition]} 
 
 \subsubsection{List}
 Example with lists :
@@ -547,7 +580,7 @@ dernier_elem = tableau[-1]
 \end{lstlisting} \vspace{5mm}
 
 \subsubsection{Trunc} 
-You can also trunc your list to keep just what you need.
+You can also trunc your mutable container to keep just what you need.
 \begin{lstlisting}[language=Python]
 first_part = tableau[:3]
 second_part = tableau[3:]
@@ -555,21 +588,56 @@ second_part = tableau[3:]
 \end{lstlisting} \vspace{5mm}
 
 \subsubsection{Insert}  
-If you need to precisely insert an element into list, slicing is a good way of doing it.
+If you need to precisely insert an element into mutable container, slicing is a good way of doing it.
 \begin{lstlisting}[language=Python]
 tableau[1:1] = 'A'
 # ['Hello,', 'A', 'dlrow!Hello,', 'dlrow!Hello,', 'dlrow!']
 \end{lstlisting} \vspace{5mm}
 
 \subsubsection{Reverse} 
-If you need to reverse your container you can also use slicing.
+If you need to reverse your mutable container you can also use slicing.
 \begin{lstlisting}[language=Python]
 tableau[::-1]
 # ['dlrow!', 'dlrow!Hello,', 'dlrow!Hello,'; 'A', 'Hello,']
 \end{lstlisting} \vspace{5mm}
 
+\subsection{Sort}
+You can sort your container if they contains comparable elements with a powerful method in python. \textbf{sorted(my\_container, key, reverse = False)}. Sorted return a new list so you might have to cast it later. You have the possibility to add parameters into these functions with a \textit{key} to specify what you want to sort and \textit{reverse} to sort in the opposite order. The key can be a function, a lambda function or a type if it is possible to cast each element in this type.
+
+\vspace{5mm}
+
+There is a more powerful way to do all these methods with \hyperref[subsec:Operator]{\textbf{operator}} module.
+
+\subsubsection{List}
+You can use sorted on list the same way we've seen with \hyperref[Sort]{\textbf{sort}}.
+
+\subsubsection{String}
+String sorting is based on ASCII table, upper or lower case matter.
+
+\begin{lstlisting}[language=Python]
+string_value = 'I like to sort'
+sorted_string = sorted(string_value.split()) #['I', 'like', 'sort', 'to'] #split() allows to not consider white spaces
+\end{lstlisting} \vspace{5mm}
+
+\subsubsection{Dict}
+\begin{lstlisting}[language=Python]
+my_dict = {1: 2, 2: -10, "Hello": 1234}
+
+my_sorted_dict = sorted(my_dict.items(), key = lambda item: item[1]) # [(2,-10),(1,2),("hello",1234)]
+\end{lstlisting} \vspace{5mm}
+
+\subsubsection{Set}
+Here is an example with a type as key argument, it useful in this case because we don't really want to sort those elements as strings, but as numbers.
+
+\begin{lstlisting}[language=Python]
+my_set = {'0','4','1','10'}
+my_sorted_set = sorted(my_set) # ['0', '1', '10', '4']
+
+my_good_sorted_set = sorted(my_set, key = int) # ['0', '1', '4', '10']
+\end{lstlisting} \vspace{5mm}
+
 \subsection{Empty}
-Sometimes you need to know if a container is empty. There are two common way to do it :
+Sometimes you need to know if a container is empty. There are two common ways to do it :
 \begin{lstlisting}[language=Python]
 if not my_container:
     print("empty")
@@ -582,7 +650,7 @@ if len(my_container)==0:
 \newpage
 \section{Function}
 \label{sec:Function}
-A function is a block of organized, reusable code that is used to perform a single, related action. Functions provide better modularity for your application and a high degree of code reusing.\newline
+A function is a block of organized, reusable code that is used to perform a single, related action. Functions provide better modularity for your application and a high degree of code reusing.
 
 \subsection{Lambda function}
 \label{subsec:Lambda}
@@ -610,7 +678,7 @@ func(20)
 \end{lstlisting} \vspace{5mm}
 
 \textbf{Warning} : A default argument is evaluated only once time when the function is called for the first time. When you repeat function calls, it may cause problems especially with mutable arguments like lists. If your default argument is an empty list, it will create this empty list one time and reuse it for next calls. The way to counter this problem is to put an immutable argument and then create the list inside the function. \\
-Here is an exemple : 
+Here is an example : 
 \begin{lstlisting}[language=Python]
 def add_employee(emp, emp_list = []):
     emp_list.append(emp)
@@ -647,7 +715,7 @@ mapped_list = list(map(map_function,liste)) #No () for argument function
 
 # before : [1, 2, 3] and now : [1, 4, 27]
 \end{lstlisting} \vspace{5mm}
-There is a way more effective way of doing it with \hyperref[Comprehension]{comprehension}.
+There is a way more effective way of doing it with \textbf{\hyperref[Comprehension]{comprehension}}.
 
 \subsection{Filter function}
 Filter function is a special function used to apply a selection for each element of a container. \textbf{map(function\_to\_apply, list)}
@@ -659,7 +727,7 @@ filtered_list = list(filter(filter_function,liste))
 
 # before : [1, 2, 3] and now : [1, 3]
 \end{lstlisting} \vspace{5mm}
-There is a way more effective way of doing it with \hyperref[Comprehension]{comprehension}.
+There is a way more effective way of doing it with \textbf{\hyperref[Comprehension]{comprehension}}.
 
 \subsection{Reduce function}
 
@@ -667,11 +735,12 @@ There is a way more effective way of doing it with \hyperref[Comprehension]{comp
 \newpage
 \section{Class}
 \label{sec:Class}
-Classes are a way of bringing together data and functionality. Creating a new class creates a new type of object and so new instances of this type can be built.\newline
+Classes are a way of bringing together data and functionality. Creating a new class creates a new type of object and so new instances of this type can be built.
 
 \subsection{Instance}
 An instance is an objet created from the parent class. \\
-Each instance can have its own attributes, which defines its state. An instance can also use methods from the class to modify its state.
+Each instance can have its own attributes, which defines its state. \\
+An instance can also use methods from the class to modify its state.
 \begin{lstlisting}[language=Python]
 class MyClass(object):
 	def __init__(self):
@@ -681,7 +750,9 @@ my_instance = MyClass()
 \end{lstlisting} \vspace{5mm}
 
 \subsection{Methods}
-Methods are functions that bellow to the class. Tey are basically functions that uses attributes from the class. A method can be used by the instance as follow  : \textbf{my\_instance.my\_method()} except for class methods where \textbf{My\_class.my\_method()} is better. \\
+Methods are functions that bellow to the class. They are basically functions that uses attributes from the class. A method can be used by the instance as follow  : \textbf{my\_instance.my\_method()} except for class methods where \textbf{My\_class.my\_method()} is better.
+
+\vspace{5mm}
 
 Here is a simple example of some methods from the class Rectangle : 
 \begin{lstlisting}[language=Python]
@@ -698,7 +769,8 @@ class Rectangle(object):
 \end{lstlisting} \vspace{5mm}
 
 \subsubsection{Static methods}
-Static methods have a link with the class but don't use any attribute from it. There is no \textbf{self} in the parameters. It's often generic function that can apply a process on the attributes from the class. \\
+Static methods have a link with the class but don't use any attribute from it. There is no \textbf{self} in the parameters. It's often generic function that can apply a process on the attributes from the class.
+
 \begin{lstlisting}[language=Python]
 class Static(object):
 	def __init__(self, position):
@@ -723,7 +795,8 @@ class Static(object):
 \end{lstlisting} \vspace{5mm}
 
 \subsubsection{Class methods}
-Class methods concerns the class itself and class variables. There is no \textbf{self} in the parameters but \textbf{cls}. \\
+Class methods concerns the class itself and class variables. There is no \textbf{self} in the parameters but \textbf{cls}.
+
 \begin{lstlisting}[language=Python]
 class Class(object):
 	nb_instance = 0
@@ -737,7 +810,10 @@ class Class(object):
 print(Class.get_nb_instance()) #0
 \end{lstlisting} \vspace{5mm}
 
-Class methods can also be seen as class constructor. You can apply a process before creating the class and create it with the result of the process. \\
+Class methods can also be seen as class constructor. You can apply a process before creating the class and create it with the result of the process.
+
+\vspace{5mm}
+
 In this example, we apply the process of parsing the person before creating the class :
 
 \begin{lstlisting}[language=Python]
@@ -757,7 +833,9 @@ p = ClassConstructor.init_person(person)
 \end{lstlisting} \vspace{5mm}
 
 \subsection{Dunder methods}
-Dunder methods are specific function from a class, they are surrounded by \_\_. A dunder method can be used by the instance as follow :\\ \textbf{my\_instance.\_\_dunder\_method\_\_} but it's better to use them like that : \textbf{dunder\_method(my\_instance)}
+Dunder methods are specific function from a class, they are surrounded by \_\_. \\
+It can be used by the instance as follow : \textbf{my\_instance.\_\_dunder\_method\_\_} \\
+But it's better to use them like that : \textbf{dunder\_method(my\_instance)}
 \begin{lstlisting}[language=Python]
 class Point(object):
 	def __init__(self, x=0,y=0):
@@ -839,7 +917,10 @@ print(ClassVariables.nb_instance) # 1
 In this code, nb\_instance and pourcentage are my class variables, I access to them with ClassVariables.nb\_instance and self.pourcentage. I choose to write it like that so that I can possibly the pourcentage for each instance later but I won't be able to affect nb\_instance because it bellows to the class.
 
 \subsection{Inheritance}
-Inheritance is a concept of relation between classes. Some are parents, the other are children. A children inherit from every methods from the parent class but can overload them. A child class can have multiple parents. \\
+Inheritance is a concept of relation between classes. Some are parents, the other are children. A children inherit from every methods from the parent class but can overload them. A child class can have multiple parents.
+
+\vspace{5mm}
+
 Here is a useful example : a parent class that automatically initialize the childs :
 \begin{lstlisting}[language=Python]
 class Initializer:
@@ -913,8 +994,12 @@ Every class inherit from the \textit{object} class, metaclass is a way to define
 \subsection{Other}
 In python, everything is public so there isn't any private method or variable from a class. We can use \_ to tell to the user that we want it private even though it's not really.
 
-In classes you can use self.\_\_my\_private\_attr = "I'm private" 
+\vspace{5mm}
+
+In classes you can use self.\_\_my\_private\_attr = "I'm private".
 It's called name scrambling and it is used to ensure that subclasses don't accidentally override the private methods and attributes of their superclasses. It's not designed to prevent deliberate access from outside. We can see it with : my\_instance.\_\_dict\_\_
+
+\vspace{5mm}
 
 There are some tips useful to know concerning class :
 \begin{lstlisting}[language=Python]
@@ -926,7 +1011,7 @@ print(isinstance(my_instance, my_class)) # return True if my_instance is an inst
 
 \newpage
 \section{Decorators}
-A decorator is a design pattern in Python that allows a user to add new functionality to an existing object without modifying its structure. Decorators are usually called before the definition of a function you want to decorate. \textbf{@my\_decorator}\newline
+A decorator is a design pattern in Python that allows a user to add new functionality to an existing object without modifying its structure. Decorators are usually called before the definition of a function you want to decorate. \textbf{@my\_decorator}
 
 \subsection{Function decorator}
 
@@ -955,6 +1040,8 @@ print(rv) #je suis 5
 \subsubsection{With a class as decorator}
 A decorator can also be a class applied to wrap a function and apply a process on it each time it's called.
 
+\vspace{5mm}
+
 Last code become :
 \begin{lstlisting}[language=Python]
 import time
@@ -978,7 +1065,10 @@ print(rv) #je suis 5
 \end{lstlisting} \vspace{5mm}
 
 \subsection{Class decorator}
-Classes can also be decorated the same way that we do with function.\\
+Classes can also be decorated the same way that we do with function.
+
+\vspace{5mm}
+
 Here is an useful example of a class that automatically initialize another class :
 \begin{lstlisting}[language=Python]
 class ClassInitializer:
@@ -1009,8 +1099,13 @@ my_instance = MyClass(a=1, b=2)
 \end{lstlisting} \vspace{5mm}
 
 \subsection{Multiple decorators}
-You can chain decorators to apply multiple processes on the same function / class. \\
-Sometimes multiple decorators create conflicts between each other by manipulating the original function. You can fix this easily with the module \textbf{functools}. You need to add a \textbf{wraps(my\_func)} decorator on each wrapper function inside your decorators.\\
+You can chain decorators to apply multiple processes on the same function / class. 
+
+\vspace{5mm}
+
+Sometimes multiple decorators create conflicts between each other by manipulating the original function. You can fix this easily with the module \textbf{functools}. You need to add a \textbf{wraps(my\_func)} decorator on each wrapper function inside your decorators.
+
+\vspace{5mm}
 
 The function code become :
 \begin{lstlisting}[language=Python]
@@ -1040,7 +1135,10 @@ print(rv) #je suis 5
 \label{subsec:Property}
 Property decorator are one of the most useful decorator in classes to manage getters, setters and deleters. \textbf{@my\_method.getter/setter/deleter}\\
 Indeed, when you use a variable that use some attributes and then you set later one of these attributes, it won't change in your variable which use attributes. \\
-The way to manage it is by using property decorator into methods as attributes that replace the previous variable. \\
+The way to manage it is by using property decorator into methods as attributes that replace the previous variable.
+
+\vspace{5mm}
+
 For example :
 \begin{lstlisting}[language=Python]
 class Myclass(object):
@@ -1099,8 +1197,12 @@ print(p1.fullname) # Lou-Anne Le_Bras
 \end{lstlisting} \vspace{5mm}
 
 \subsection{Decorator with argument(s)}
-Sometimes you need to pass argument(s) into you decorator to modify the way your decorator is working. To solve that problem, you need to nest your previous decorator into a new function. \\
-Here is an exemple : \\
+Sometimes you need to pass argument(s) into you decorator to modify the way your decorator is working. To solve that problem, you need to nest your previous decorator into a new function. 
+
+\vspace{5mm}
+
+Here is an example :
+
 \begin{lstlisting}[language=Python]
 import time
 def add_prefix(prefix): #every function nested have access to that prefix : enclosing
@@ -1124,9 +1226,10 @@ print(rv) #je suis 5
 \end{lstlisting} \vspace{5mm}
 
 \newpage
-
 \section{Iterator / Iterable}
-Every object that have the \textit{\_\_iter\_\_} dunder method is an \textbf{iterable} that can be looped over thanks to the iterator returned by this dunder method when \textbf{for loop} calls it. An \textbf{iterator} object is defined by the fact that it has the \textit{\_\_next\_\_} dunder method. \\
+Every object that have the \textit{\_\_iter\_\_} dunder method is an \textbf{iterable} that can be looped over thanks to the iterator returned by this dunder method when \textbf{for loop} calls it. An \textbf{iterator} object is defined by the fact that it has the \textit{\_\_next\_\_} dunder method. 
+
+\vspace{5mm}
 
 Here is an iterable object that is also an iterator because it combines iter() and next() dunder methods :
 \begin{lstlisting}[language=Python]
@@ -1149,7 +1252,10 @@ class MyRange:
 
 \subsection{Generators}
 \label{subsec:Generators}
-Generators are simple and powerful tools for creating iterators. They are written like regular functions but use the yield statement when they want to return data. Each time it is called by next(), the generator resumes execution where it left off (keeping all of its execution context). \\
+Generators are simple and powerful tools for creating iterators. They are written like regular functions but use the yield statement when they want to return data. Each time it is called by next(), the generator resumes execution where it left off (keeping all of its execution context). 
+
+\vspace{5mm}
+
 Also, we can create the equivalent of MyRange class with a function based on generator which is more readable than a class.
 \begin{lstlisting}[language=Python]
 def my_range(start, end):
@@ -1194,7 +1300,7 @@ def people_generator(num_people):
 
 \subsection{For}
 \label{subsec:For}
-For loop are the most powerful way to work on data contained in list, tuple, dict, string, files, generators, ... \\
+For loop are the most powerful way to work on data contained in list, tuple, dict, string, files, generators, ... 
 
 \subsubsection{Range}
 Range allows user to loop a certain times. \textbf{range(start,end, step)}
@@ -1235,7 +1341,7 @@ for name, hero, universe in zip(names, heroes, universes):
 
 \newpage
 \section{Modules}
-Modules are Python programs that contain functions that we often reuse (we also call them libraries or libraries). These are “toolboxes” that will be very useful to you.\newline
+Modules are Python programs that contain functions that we often reuse (we also call them libraries or libraries). These are “toolboxes” that will be very useful to you.
 
 \subsection{Import}
 \label{subsec:Import}
@@ -1277,6 +1383,8 @@ mot_de_passe.hexdigest()
 \end{lstlisting} \vspace{5mm}
 Then you can save this password and compare it to the password entered by the user to see if it corresponds.
 
+\vspace{5mm}
+
 For further explanations, see the \href{https://docs.python.org/3/library/hashlib.html}{official documentation}
 
 
@@ -1299,13 +1407,19 @@ cmd.read()
 
 \subsection{Sys}
 \subsubsection{Import module from another repertory}
-Sometimes you need to import a module that isn't into you actual repertory, rather than copy this module into you repertory you can import it by another way. \\
+Sometimes you need to import a module that isn't into you actual repertory, rather than copy this module into you repertory you can import it by another way. 
 
-Tree exemple : \\
-Main/ \\
-....main.py \\
-....Test/ \\
-........test.py \\
+\vspace{5mm}
+
+Tree exemple : 
+
+Main/ 
+
+....main.py 
+
+....Test/ 
+
+........test.py 
 
 \begin{lstlisting}[language=Python]
 import sys
@@ -1313,7 +1427,7 @@ sys.path.append("./Test")
 import test # .py file (module)
 \end{lstlisting} \vspace{5mm}
 
-Another way to do this in a more effective way is to set \hyperref[subsec:PathVariables]{path variables}.
+Another way to do this in a more effective way is to set \textbf{\hyperref[subsec:PathVariables]{path variables}}.
 
 \subsubsection{Memory used by a variable}
 Control you memory while programming. 
@@ -1372,6 +1486,8 @@ For further explanations, see \href{http://www.sharelatex.com}{argparse tutorial
 \subsection{Unittest}
 In every program it's very useful to test every functionnality that we propose. Unittest is a powerful module to test our code. You have to create another module starting with "test" into the same repertory from your main program.
 
+\vspace{5mm}
+
 Here is an exemple of hos to use this module :
 \begin{lstlisting}[language=Python]
 import random
@@ -1407,6 +1523,8 @@ class RandomTest(unittest.TestCase):
 \end{lstlisting} \vspace{5mm}
 def setUp(self) is similar to def \_\_init\_\_(self), that's where you define generalities.
 Then create a function for each functionnality, it must correspond with the right assertion method.
+
+\vspace{5mm}
 
 Here are every assertion methods you can use to test your functionnalities.
 \begin{table}[h]
@@ -1448,11 +1566,13 @@ Here are every assertion methods you can use to test your functionnalities.
 
 After creating this module, you can test it by two different ways. The first one is \textbf{unittest.main()} but the other one is much more convenient. Go into the repertory into a terminal where you project and test file are stored and type the command \textbf{pythonX -m unittest}. It will run automatically each test.
 
+\vspace{5mm}
+
 For further explanations, see the \href{https://docs.python.org/3/library/unittest.html}{official documentation}
 
 
 \subsection{Re}
-Regex also known as regular expression is a very powerful module for searching in string. \textbf{re.search(expression, string)} with \textbf{expression = r"..."} \\
+Regex also known as regular expression is a very powerful module for searching in string. \textbf{re.search(expression, string)} with \textbf{expression = r"..."}
 
 \begin{table}[h]
 \begin{center}
@@ -1471,6 +1591,8 @@ Regex also known as regular expression is a very powerful module for searching i
 \caption{Regex methods}
 \end{table}
 
+\vspace{5mm}
+
 Example :
 \begin{lstlisting}[language=Python]
 # I want to find a phone number with digits separated by a space, a point or an hyphen.
@@ -1482,18 +1604,29 @@ expression = r"^[A-Za-z0-9]"
 See more explanation about re on the \href{https://docs.python.org/3/library/re.html?highlight=re#module-re}{official documentation}
 
 \subsection{cx\_Freeze / setup}
-You can create .exe program that anybody can run on its own computer without having python or the extern libraries installed by using the module cx\_Freeze. \\
+You can create .exe program that anybody can run on its own computer without having python or the extern libraries installed by using the module cx\_Freeze.
+
+\vspace{5mm}
 
 To create a .exe file on windows : open a new terminal and go into the repertory
 \begin{lstlisting}[language=Python]
 C:\Users\carre\AppData\Local\Packages\PythonSoftwareFoundation.Python.3.8_qbz5n2kfra8p0\LocalCache\local-packages\Python38\Scripts
 \end{lstlisting} \vspace{5mm}
 
-Then, run \textit{./cxfreeze pathTo.pyFile} and a \textit{dist} folder will be created with every libraries needed and the .exe file that you can directly run. You can send a zip file of this dist folder to every one so that they can run your program on their own computer. \\
+\vspace{5mm}
 
-You can do the same on linux by simply do \textit{cxfreeze myfile.py} and you'll get exactly the same except the fact that it is an ubuntu file. \\ \\
+Then, run \textit{./cxfreeze pathTo.pyFile} and a \textit{dist} folder will be created with every libraries needed and the .exe file that you can directly run. You can send a zip file of this dist folder to every one so that they can run your program on their own computer.
 
-You can do the same by creating a setup.py file. \\
+\vspace{5mm}
+
+You can do the same on linux by simply do \textit{cxfreeze myfile.py} and you'll get exactly the same except the fact that it is an ubuntu file.
+
+\vspace{10mm}
+
+You can do the same by creating a setup.py file.
+
+\vspace{5mm}
+
 Your setup file will look like this : 
 \begin{lstlisting}[language=Python]
 from cx_Freeze import setup, Executable
@@ -1506,14 +1639,19 @@ setup(
 )
 \end{lstlisting} \vspace{5mm}
 
-Then run \textit{python.exe setup.py build} in your windows terminal and \textit{python3 setup.py build} into your ubuntu terminal. It will create a \textit{build} folder with every necessary files inside. It's more powerfull than cx\_Freeze. \\ \\
+Then run \textit{python.exe setup.py build} in your windows terminal and \textit{python3 setup.py build} into your ubuntu terminal. It will create a \textit{build} folder with every necessary files inside. It's more powerfull than cx\_Freeze.
 
 See more explanation about cx\_Freeze on the  \href{https://cx-freeze.readthedocs.io/en/latest/}{official documentation}
 
-
 \subsection{Network}
-With network you can exchange data between a client and a server following the TCP protocol. To establish a connexion between client and server, you need an host name and a port number. \\
-Here is an exemple of client and server : \\ \\
+With network you can exchange data between a client and a server following the TCP protocol. To establish a connection between client and server, you need an host name and a port number. 
+\vspace{5mm}
+
+
+Here is an example of client and server :
+
+\vspace{5mm}
+
 Server side
 \begin{lstlisting}[language=Python]
 import socket
@@ -1597,7 +1735,10 @@ connexion_avec_serveur.close()
 \end{lstlisting} \vspace{5mm}
 
 \subsubsection{Socket}
-Sockets allow us to open a connexion between two or more computer. Ports available are included between 1024 and 65535. \\
+Sockets allow us to open a connexion between two or more computer. Ports available are included between 1024 and 65535. 
+
+\vspace{5mm}
+
 For further explanations, see the \href{https://docs.python.org/3/library/socket.html}{official documentation} and socketserver  \href{https://docs.python.org/3/library/socketserver.html}{official documentation} 
 \subsubsection{Select}
 For further explanations, see the \href{https://docs.python.org/3/library/select.html}{official documentation}
@@ -1605,6 +1746,8 @@ For further explanations, see the \href{https://docs.python.org/3/library/select
 \subsection{Threads}
 \label{subsec:Threading}
 Threading is an advanced module especially used to run multiple processes at the same time. Normally, each functin call follow each other in one way. But with threading you can run them simultaneously. It's especially useful when a call lasts a lot of time, with threading, you don't waste this time.
+
+\vspace{5mm}
 
 For further explanations, see the \href{https://docs.python.org/3/library/threading.html}{official documentation}
 
@@ -1618,6 +1761,7 @@ print(f"Code source : \n{inspect.getsource(Queue)}")
 \end{lstlisting} \vspace{5mm}
 
 \subsection{Operator}
+\label{subsec:Operator}
 
 \newpage
 \section{Toolbox}
@@ -1652,6 +1796,8 @@ while nb != 20:
 \label{subsec:Is}
 We can think that \textbf{is} and \textbf{==} are exactly the same but it's not the case. \textbf{==} is based on the fact that two objects' elements are exactly the same. Instead, \textbf{is} compare if the two objects belong to the same memory adress.\\
 \textbf{is} cans be seen as \textbf{id(obj1) == id(obj2)} if we want to compare it to \textbf{==}.
+
+\vspace{5mm}
 
 Here is an example :
 \begin{lstlisting}[language=Python]
@@ -1883,7 +2029,8 @@ print(f"3**3 = {3**3}"}) # 3**3 = 9
 \end{lstlisting} \vspace{5mm}
 
 \subsection{Cast}
-Sometimes you need to convert a variable from a certain type to another. Cast is a good way to do it but you've to know that you can lose information by doing it. \\ \\
+Sometimes you need to convert a variable from a certain type to another. Cast is a good way to do it but you've to know that you can lose information by doing it. 
+
 You can do it by simply follow this pattern : \textbf{new\_type(my\_variable)}
 Notice that you have to be coherent in your type transformation. For example, you won't be able to cast a string into an integer if your string = "Salut".
 
