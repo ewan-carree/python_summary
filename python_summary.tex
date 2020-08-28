@@ -65,10 +65,6 @@
 
 
 
-
-
-
-
 \begin{document}
 
 \maketitle
@@ -92,8 +88,8 @@ In python 3, there are some reserved words that you can't use in your program as
 
 \begin{table}[h]
 \begin{center}
-{\renewcommand{\arraystretch}{2} %donne la distance entre les lignes%
-{\setlength{\tabcolsep}{1.5cm} %donne la distance entre les collones%
+{\renewcommand{\arraystretch}{2} %space between lines%
+{\setlength{\tabcolsep}{1.5cm} %space between columns%
 \begin{tabular}{|l|c|r|}
   \hline
   \hyperref[subsec:Bool]{False} & \hyperref[subsec:Keyword]{None} & \hyperref[subsec:Bool]{True} \\
@@ -353,7 +349,7 @@ my_list = list(range(n))
 \end{lstlisting} \vspace{5mm}
 
 \item List to String \\
-Transfrom your list into a string.
+Transform your list into a string.
 \begin{lstlisting}[language=Python]
 string = ' '.join(tableau)
 # Hello, A dlrow!Hello, dlrow!Hello, dlrow!
@@ -375,36 +371,37 @@ cars.sort(reverse = True, key = lambda x: x[::-1]) # ['Volvo', 'Ford', 'BMW']
 \end{itemize}
 
 \subsubsection{Dict}
-A dict is an non-organized container that have variables associated to keys to recognize them. Keys are offently strings but we can also use integers.
+A dict is an non-organized container that have variables associated to keys to recognize them. Keys are often strings but we can also use integers.
 
 \vspace{5mm}
 
 Here are some methods that you can apply on dicts : 
 \begin{lstlisting}[language=Python]
-dictionnaire = {"nom":"Jerome", "age":20}
+my_dict = {"name":"Jerome", "age":20}
 \end{lstlisting} \vspace{5mm}
 
 \begin{itemize}
 \item Keys \\
-Return a (dict)list containing every keys that are into you dictionnary.
+Return a (dict)list containing every keys that are into your dictionary.
 \begin{lstlisting}[language=Python]
-keys = dictionnaire.keys()
-#dict_keys(['nom', 'age'])
+keys = my_dict.keys()
+#dict_keys(['name', 'age'])
 \end{lstlisting} \vspace{5mm}
 
 \item Values \\
-Return a (dict)list containing every values that are into you dictionnary.
+Return a (dict)list containing every values that are into you dictionary.
 \begin{lstlisting}[language=Python]
-keys = dictionnaire.keys()
+keys = my_dict.keys()
 #dict_values(['Jerome', 20])
 \end{lstlisting} \vspace{5mm}
 
 \item Items \\
-Return a (dict)tuple containing every keys associated to their values that are into you dictionnary.
+Return a (dict)tuple containing every keys associated to their values that are into you dictionary.
 \begin{lstlisting}[language=Python]
-both = dictionnaire.items()
-# dict_items([('nom', 'Jerome'), ('age', 20)])
+both = my_dict.items()
+# dict_items([('name', 'Jerome'), ('age', 20)])
 \end{lstlisting} \vspace{5mm}
+
 \item Merge two dicts \\
 You are able to merge two dicts in a single one. If some keys are repeated, it's the last one that is gonna overwrite.
 \begin{lstlisting}[language=Python]
@@ -425,7 +422,7 @@ my_set = set(my_list) # {1, 3, 5}
 
 Here are some methods that you can apply on sets : 
 \begin{lstlisting}[language=Python]
-my_set = {1,2} # impossible to init with {} because it's a dict but possible with set()
+my_set = {1,2} # impossible to initialize with {} because it's a dict but possible with set()
 \end{lstlisting} \vspace{5mm}
 
 \begin{itemize}
@@ -448,7 +445,7 @@ my_set.remove(5) # {1,2,3,4}
 \end{lstlisting} \vspace{5mm}
 
 \item Discard \\
-Discard allows us to remove one single value from our set. If the value doesn't exist, then it dosen't do anything. 
+Discard allows us to remove one single value from our set. If the value doesn't exist, then it doesn't do anything. 
 \begin{lstlisting}[language=Python]
 my_set.discard(5) # {1,2,3,4}
 \end{lstlisting} \vspace{5mm}
@@ -466,12 +463,12 @@ my_set.clear() # set()
 \end{lstlisting} \vspace{5mm}
 \end{itemize} \vspace{5mm}
 
-As said before, sets are also very useful for math methods, here are some exemples of what we can do with them :
+As said before, sets are also very useful for math methods, here are some examples of what we can do with them :
 
 \begin{table}[h]
 \begin{center}
-{\renewcommand{\arraystretch}{2} %donne la distance entre les lignes%
-{\setlength{\tabcolsep}{1.5cm} %donne la distance entre les collones%
+{\renewcommand{\arraystretch}{2}
+{\setlength{\tabcolsep}{1.5cm} 
 \begin{tabular}{|c|c|}
   \hline
   \makecell{\makecell{ | \\ union()} \\ Union} & \makecell{\makecell{ \& \\ intersection()} \\ Intersection} \\
@@ -521,18 +518,6 @@ B = {4, 5, 6, 7, 8}
 \label{sec:Function}
 A function is a block of organized, reusable code that is used to perform a single, related action. Functions provide better modularity for your application and a high degree of code reusing.
 
-\subsection{Lambda}
-\label{subsec:Lambda}
-Lambda function are very small function, it's very simple to create them and very often better than a function. \textbf{function\_name = lambda parameter : return\_value}
-\begin{lstlisting}[language=Python]
-def equivalent_lambda(x):
-	return x+5
-	
-real_lambda = lambda x : x+5
-
-# equivalent_lambda : 10 and real_lambda : 10
-\end{lstlisting} \vspace{5mm}
-
 \subsection{Default arguments}
 Default arguments are used for arguments that don't necessarily need a value. We assign a default value that can be overloaded if needed. Default arguments are always declared after non-default arguments into function's head. \\
 \textbf{def func(non\_default\_arguments, \textit{default\_arguments = value})}
@@ -540,13 +525,13 @@ Default arguments are used for arguments that don't necessarily need a value. We
 \vspace{5mm}
 
 \begin{lstlisting}[language=Python]
-def func(age, nom="Jerome"):
-	print(f"Tu as {age} ans et tu t'appelles {nom}")
+def func(age, name="Jerome"):
+	print(f"You are {age} years old and your name is {nom}")
 
 func(20, "Antoine")
 func(20)
-# Tu as 20 ans et tu t'appelles Antoine
-# Tu as 20 ans et tu t'appelles Jerome
+# You are 20 years old and your name is Antoine
+# You are 20 years old and your name is Jerome
 \end{lstlisting} \vspace{5mm}
 
 \textbf{Warning} : A default argument is evaluated only once time when the function is called for the first time. When you repeat function calls, it may cause problems especially with mutable arguments like lists. If your default argument is an empty list, it will create this empty list one time and reuse it for next calls. The way to counter this problem is to put an immutable argument and then create the list inside the function. \\
@@ -566,20 +551,34 @@ def add_employee(emp, emp_list = None):
 \end{lstlisting} \vspace{5mm}
 
 \subsection{Unknown arguments}
-Sometimes you don't know how many arguments a function is going to receive. Also, it's important to handle unknown arguments. \textit{It's the case for exemple with the print() function}. \textbf{* means unnamed arguments and ** means named arguments}
+Sometimes you don't know how many arguments a function is going to receive. Also, it's important to handle unknown arguments. \textit{It's the case for example with the print() function}. 
+
+\textbf{* means unnamed arguments \\ ** means named arguments}
 \begin{lstlisting}[language=Python]
 def parameters(*args, **kwargs):
 	print(f"I received these unnamed args : {args}")
 	print(f"I received these named args : {kwargs}")
-parameters(1,"azerty",[1,2], couleur="rouge", taille_en_cm=172)
-both
+parameters(1,"azerty",[1,2], color="red", length_in_cm=172)
+
 # I received these unnamed args : (1, 'azerty', [1, 2])
-# I received these named args : {'couleur': 'rouge', 'taille_en_cm': 172}
+# I received these named args : {'color': 'red', 'length_in_cm': 172}
+\end{lstlisting} \vspace{5mm}
+
+\subsection{Lambda}
+\label{subsec:Lambda}
+Lambda function are very small function, it's very simple to create them and very often better than a function. \textbf{function\_name = lambda parameter : return\_value}
+\begin{lstlisting}[language=Python]
+def equivalent_lambda(x):
+	return x+5
+	
+real_lambda = lambda x : x+5
+
+# equivalent_lambda : 10 and real_lambda : 10
 \end{lstlisting} \vspace{5mm}
 
 \subsection{Generator}
 \label{subsec:Generators}
-Generators functions are simple and powerful tools for creating iterators. They are written like regular functions but use the \textit{yield} statement instead of \textit{return} statement when they want to return data. Each time it is called by next(), the generator resumes execution where it left off (keeping all of its execution context). That's why they don't use any memory and execute extremly fast.
+Generators functions are simple and powerful tools for creating iterators. They are written like regular functions but use the \textit{yield} statement instead of \textit{return} statement when they want to return data. Each time it is called by next(), the generator resumes execution where it left off (keeping all of its execution context). That's why they don't use any memory and execute extremely fast.
 
 \vspace{5mm}
 
@@ -610,10 +609,10 @@ def people_generator(num_people):
 \subsection{Map}
 Map function is a special function used to apply a function for each element of a container. \textbf{map(function\_to\_apply, list)}
 \begin{lstlisting}[language=Python]
-liste = [1,2,3]
+my_list = [1,2,3]
 def map_function(x):
 	return x**x
-mapped_list = list(map(map_function,liste)) #No () for argument function
+mapped_list = list(map(map_function, my_list)) #No () for argument function
 
 # before : [1, 2, 3] and now : [1, 4, 27]
 \end{lstlisting} \vspace{5mm}
@@ -622,10 +621,10 @@ There is a way more effective way of doing it with \hyperref[Comprehension]{\tex
 \subsection{Filter}
 Filter function is a special function used to apply a selection for each element of a container. \textbf{map(function\_to\_apply, list)}
 \begin{lstlisting}[language=Python]
-liste = [1,2,3]
+my_list = [1,2,3]
 def filter_function(x):
 	return x%2!=0
-filtered_list = list(filter(filter_function,liste))
+filtered_list = list(filter(filter_function, my_list))
 
 # before : [1, 2, 3] and now : [1, 3]
 \end{lstlisting} \vspace{5mm}
@@ -736,44 +735,44 @@ p = ClassConstructor.init_person(person)
 \subsubsection{Dunder methods}
 Dunder methods are specific function from a class, they are surrounded by \_\_. \\
 It can be used by the instance as follow : \textbf{my\_instance.\_\_dunder\_method\_\_} \\
-But it's better to use them like that : \textbf{dunder\_method(my\_instance)}
+It's better whenever it's possible with : \textbf{dunder\_method(my\_instance)}
 \begin{lstlisting}[language=Python]
 class Point(object):
 	def __init__(self, x=0,y=0):
 		self.x = x
 		self.y = y
-		self.conteneur = [1,2,3,4,5,6,7]
+		self.container = [1,2,3,4,5,6,7]
 
 	def __str__(self):
 		print("I'm the class Point")
 
 	def __add__(self, p):
-		"""la fonction add surcharge l'operateur +"""
+		"""add overload the operator +"""
 		return Point(self.x + p.x, self.y + p.y)
 
 #	def __getattr__(self, name):
 #		print(f"{name} didn't found")
 
 	def __setattr__(self, name, value):
-		"""On modifie la classe mere directement plutot que seulement appeler setaatr de cette classe et tourner en boucle sur la meme methode"""
-		object.__setattr__(self, name, value) #Chaque classe cree herite de base de la classe object
+	    """We modify the parent class directly instead of just calling setattr of this class and loop on the same method"""
+		object.__setattr__(self, name, value) #Each created class basicly inherits from the class "object"
 
 	def __delattr__(self, name):
 		print(f"Deleting {name} ...")
 
 	def __getitem__(self, index):
-		return self.conteneur[index]
+		return self.container[index]
 
 	def __setitem__(self, index, value):
-		self.conteneur[index] = value
+		self.container[index] = value
 
-	def __contains__(self, value): # 8 in ma_liste  <==>  ma_liste.__contains__(8)
-		return True if value in self.conteneur else False
+	def __contains__(self, value): # 8 in my_list  <==>  my_list.__contains__(8)
+		return True if value in self.container else False
 
 	def __len__(self):
-		return len(self.conteneur)
+		return len(self.container)
 
-	"""Autres surcharges : 
+	"""Other overload : 
 
 	__sub__(self,p) : -
 	__mul__(self,p) : *
@@ -801,21 +800,21 @@ Class variables are useful in some cases. Imagine a variable that would always b
 \begin{lstlisting}[language=Python]
 class ClassVariables(object):
 	nb_instance = 0
-	pourcentage = 1.1
+	percentage = 1.1
 
 	def __init__(self, price):
 		self.price = price
 		ClassVariables.nb_instance += 1
 
 	def raise_price(self):
-		self.price = round(self.price * self.pourcentage,2)
+		self.price = round(self.price * self.percentage,2)
 
 a = ClassVariables(100)
 a.raise_price()
 print(a.price) # 110.0
 print(ClassVariables.nb_instance) # 1
 \end{lstlisting} \vspace{5mm}
-In this code, nb\_instance and pourcentage are my class variables, I access to them with ClassVariables.nb\_instance and self.pourcentage. I choose to write it like that so that I can possibly the pourcentage for each instance later but I won't be able to affect nb\_instance because it bellows to the class.
+In this code, nb\_instance and percentage are my class variables, I access to them with ClassVariables.nb\_instance and self.percentage. I choose to write it like that so that I can possibly the percentage for each instance later but I won't be able to affect nb\_instance because it bellows to the class.
 
 \subsection{Inheritance}
 Inheritance is a concept of relation between classes. Some are parents, the other are children. A children inherit from every methods from the parent class but can overload them. A child class can have multiple parents.
@@ -852,9 +851,9 @@ class Dog(object):
 	def speak(self):
 		print("Waf")
 class Cat(Dog, Animal): #multiple inheritance : Cat have some attributes from Dog but is also an Animal
-	def __init__(self, age, nom):
+	def __init__(self, age, name):
 		super().__init__(age)
-		self.nom = nom
+		self.nom = name
 	def speak(self):
 		print("Miaou")
 \end{lstlisting} \vspace{5mm}
@@ -864,22 +863,16 @@ Property concerns the private and public aspect from a class even though everyth
 
 \begin{lstlisting}[language=Python]
 """
-Property : permet d'offrir des accesseurs et mutateurs pour definir un attribut prive
-
-La methode donnant acces a l'attribut
-
-La methode modifiant l'attribut
-
-La methode appelee quand on souhaite supprimer l'attribut (optionnel)
-
-La methode appelee quand on demande de l'aide sur l'attribut (optionnel)
+Property : offers getters and setters to define private attribute
+It needs : a getter, a setter, a deleter (optional), an helper (optional)
 
 """
+
 class Test(object):
 	def __init__(self, x=0, y=0):
 		self.x = x
 		self.y = y
-		self._dimension = 2 #Attribut prive
+		self._dimension = 2 #Private attribute
 
 	def _get_dimension(self):
 		return self._dimension
@@ -887,7 +880,7 @@ class Test(object):
 	def _set_dimension(self,value):
 		self._dimension = value
 		
-	dimension = property(_get_dimension, _set_dimension) # lorsqu'on appelera objet.dimension, property redirigera vers les accesseurs/mutateurs prives
+	dimension = property(_get_dimension, _set_dimension) #Whenever we call object.dimension, property will redirect to private getters/setters.
 \end{lstlisting} \vspace{5mm}
 
 There is another way of doing it in a more readable and better way with \hyperref[subsec:Property]{\textbf{property decorator}}.
@@ -904,7 +897,7 @@ Here is an example of a class using type() :
 def my_method(self):
     print("Hi")
     
-MyClass = type("MyClass", (object,), {'x': 5, 'y': 10, "my_method": my_method}) #don't froget the coma after object
+MyClass = type("MyClass", (object,), {'x': 5, 'y': 10, "my_method": my_method}) #don't forget the coma after object
 
 my_instance = MyClass()
 \end{lstlisting} \vspace{5mm}
@@ -927,7 +920,7 @@ class MyClass(metaclass = Meta):
 my_instance = MyClass(1, 2) # {'__module__': '__main__', '__qualname__': 'MyClass', '__init__': <function MyClass.__init__ at 0x7f3998be1f70>, 'position': <function MyClass.position at 0x7f3998c00160>}
 \end{lstlisting} \vspace{5mm}
 
-We can see that our metaclass inherits from \textbf{type} and not \textbf{object} as usual. It overwrites de \_\_new\_\_() method with our own method. We can also see that our class use our metaclass by defining in argument : \textbf{metaclass = Meta}.
+We can see that our metaclass inherits from \textbf{type} and not \textbf{object} as usual. It overwrites the \_\_new\_\_() method with our own method. We can also see that our class use our metaclass by defining in argument : \textbf{metaclass = Meta}.
 
 \vspace{5mm}
 
@@ -971,12 +964,12 @@ def timer(func):
 	return wrapper
 
 @timer #we can chain decorators
-def exemple(x):
-	return "je suis "+str(x)
+def example(x):
+	return "I'm "+str(x)
 	
-rv = exemple(5)
+rv = example(5)
 #Time to execute : 2.384185791015625e-06
-print(rv) #je suis 5
+print(rv) #I'm 5
 \end{lstlisting} \vspace{5mm}
 
 \subsubsection{With a class as decorator}
@@ -998,12 +991,12 @@ class timer(object):
 		return rv
 
 @timer #we can chain decorators
-def exemple(x):
-	return "je suis "+str(x)
+def example(x):
+	return "I'm "+str(x)
 	
-exemple(5)
+example(5)
 #Time to execute : 2.384185791015625e-06
-print(rv) #je suis 5
+print(rv) #I'm 5
 \end{lstlisting} \vspace{5mm}
 
 \subsection{Class decorator}
@@ -1065,12 +1058,12 @@ def timer(func):
 
 #possibly another decorators here
 @timer
-def exemple(x):
-	return "je suis "+str(x)
+def example(x):
+	return "I'm "+str(x)
 	
-rv = exemple(5)
+rv = example(5)
 #Time to execute : 2.384185791015625e-06
-print(rv) #je suis 5
+print(rv) #I'm 5
 \end{lstlisting} \vspace{5mm}
 
 \subsection{Property decorator}
@@ -1158,13 +1151,13 @@ def add_prefix(prefix): #every function nested have access to that prefix : encl
     	return wrapper
     return timer
 
-@add_prefix("exemple : ")
-def exemple(x):
-	return "je suis "+str(x)
+@add_prefix("example : ")
+def example(x):
+	return "I'm "+str(x)
 	
-rv = exemple(5)
-# exemple : Time to execute : 2.384185791015625e-06
-print(rv) #je suis 5
+rv = example(5)
+# example : Time to execute : 2.384185791015625e-06
+print(rv) #I'm 5
 \end{lstlisting} \vspace{5mm}
 
 \newpage
@@ -1269,7 +1262,7 @@ for num in nums:
 
 \subsection{Comprehension}
 \label{Comprehension}
-Comprehension is probably one of the most powerful method in python. It conbines map and filter function into a single method. \textbf{[func\_to\_apply() for elem in container if filter\_condition]} 
+Comprehension is probably one of the most powerful method in python. It combines map and filter function into a single method. \textbf{[func\_to\_apply() for elem in container if filter\_condition]} 
 
 \subsubsection{List}
 Example with lists :
@@ -1323,12 +1316,12 @@ Slicing is a method that concerns containers, you can use slicing on every possi
 \subsubsection{Last element} 
 If you don't know the length of a certain container, you can access to the last element with slicing.
 \begin{lstlisting}[language=Python]
-dernier_elem = tableau[-1]
+last_elem = tableau[-1]
 # dlrow!
 \end{lstlisting} \vspace{5mm}
 
-\subsubsection{Trunc} 
-You can also trunc your mutable container to keep just what you need.
+\subsubsection{Truncate} 
+You can also truncate your mutable container to keep just what you need.
 \begin{lstlisting}[language=Python]
 first_part = tableau[:3]
 second_part = tableau[3:]
@@ -1406,7 +1399,7 @@ if True:
 #return is used in function to give a response to a call.
 def func():
 	"""this is a docstring, use help(func) to know more about this function."""
-	return "j'ai retourne une phrase"
+	return "This is my sentence"
 
 #break and continue are used in loop to modify the way the loop is looping.
 nb = 3
@@ -1425,7 +1418,7 @@ while nb != 20:
 
 \subsection{Is vs ==}
 \label{subsec:Is}
-We can think that \textbf{is} and \textbf{==} are exactly the same but it's not the case. \textbf{==} is based on the fact that two objects' elements are exactly the same. Instead, \textbf{is} compare if the two objects belong to the same memory adress.\\
+We can think that \textbf{is} and \textbf{==} are exactly the same but it's not the case. \textbf{==} is based on the fact that two objects' elements are exactly the same. Instead, \textbf{is} compare if the two objects belong to the same memory address.\\
 \textbf{is} cans be seen as \textbf{id(obj1) == id(obj2)} if we want to compare it to \textbf{==}.
 
 \vspace{5mm}
@@ -1451,7 +1444,7 @@ Variables that are created outside of a function (as in all of the examples abov
 Global variables can be used by everyone, both inside of functions and outside.
 \begin{lstlisting}[language=Python]
 a = b = 5
-#a = 5 et b = 5
+#a = 5 and b = 5
 def modify(b):
 	global a #modify the variable outside the function
 	a*=2
@@ -1527,30 +1520,30 @@ In python you can handle exceptions that may occur when your program is running.
 This is the basic structure to handle exception :
 \label{TEEF}
 \begin{lstlisting}[language=Python]
-nom = "Jerome"
+name = "Jerome"
 try:
-	key = int(nom)
+	key = int(name)
 except ValueError:
-	print("Votre nom ne peut pas etre convertit en integer")
-else: #done if try is ok
+	print("Your name cannot be converted into integer!")
+else: #done if try is validated
 	print("Key as been validated")
 finally: #always done
 	print("end ...")
 	
-#Votre nom ne peut pas etre convertit en integer
+#Your name cannot be converted into integer!
 #end ...
 \end{lstlisting} \vspace{5mm}
 
 We can also create our own exception by creating a new class.
 \begin{lstlisting}[language=Python]
-#Creer notre propre exception : La methode __str__ de la classe est ce qui est appele pour afficher le message d'erreur
-class MonException(Exception):
-    """Exception levee dans un certain contexte qui reste a definir"""
+# The __str__() method is the one called to print the error message
+class MyException(Exception):
+    """Raised exception in a context to define"""
     def __init__(self, message):
-        """On se contente de stocker le message d'erreur"""
+        """We store the error message"""
         self.message = message
     def __str__(self):
-        """On renvoie le message"""
+        """We send the message"""
         return self.message
 \end{lstlisting} \vspace{5mm}
 
@@ -1560,8 +1553,8 @@ If you want to personalize the way a process handle exceptions you can use the \
 Imagine that we don't want a person to be minor :
 \begin{lstlisting}[language=Python]
 class Person(object):
-    def __init__(self,nom,age):
-        self.nom = nom
+    def __init__(self, name, age):
+        self.name = name
         if age >= 18:
             self.age = age
         else:
@@ -1605,8 +1598,8 @@ Here is a table of every possible mode we can use files with :
 \label{subsec:Files}
 \begin{table}[h]
 \begin{center}
-{\renewcommand{\arraystretch}{2} %donne la distance entre les lignes%
-{\setlength{\tabcolsep}{0.5cm} %donne la distance entre les collones%
+{\renewcommand{\arraystretch}{2}
+{\setlength{\tabcolsep}{0.5cm} 
 \begin{tabular}{|l|c|r|}
   \hline
   \makecell{r \\ reading only} & \makecell{w \\ writing only - overwrite} \\
@@ -1686,8 +1679,8 @@ You can see more methods by looking specifically on every module you want, for e
 
 \subsection{Else clause on loop}
 \label{subsec:Else}
-Else can be used in many case like in the structure if/elif/else oftenly. But we can also use it in loops like for or while. It is similar to the finally statement of try/except. \\
-It is always runned except if the loop encounter the \textbf{break} keyword.
+Else can be used in many case like in the structure if/elif/else often. But we can also use it in loops like for or while. It is similar to the finally statement of try/except. \\
+It is always ran except if the loop encounter the \textbf{break} keyword.
 
 \begin{lstlisting}[language=Python]
 for i in range(2):
@@ -1732,10 +1725,10 @@ print(f"3**3 = {3**3}"}) # 3**3 = 9
 Sometimes you need to convert a variable from a certain type to another. Cast is a good way to do it but you've to know that you can lose information by doing it. 
 
 You can do it by simply follow this pattern : \textbf{new\_type(my\_variable)}
-Notice that you have to be coherent in your type transformation. For example, you won't be able to cast a string into an integer if your string = "Salut".
+Notice that you have to be coherent in your type transformation. For example, you won't be able to cast a string into an integer if your string = "Hey!".
 
 \subsection{Hash-Bang}
-You can precise path to your python compilator in the second line of your .py document.
+You can precise path to your python compiler in the second line of your .py document.
 \begin{lstlisting}[language=Python]
 # !/usr/bin/python3
 \end{lstlisting} \vspace{5mm}
@@ -1749,7 +1742,7 @@ You can create infinite loop in many case to run tasks in continue while your pr
 You can create it this way :
 \begin{lstlisting}[language=Python]
 while True:
-    #mytask
+    #my_task
 \end{lstlisting} \vspace{5mm}
 
 
@@ -1776,7 +1769,7 @@ For further explanations, see the \href{https://docs.python.org/3/library/dateti
 \subsubsection{Getpass}
 Get pass is a very useful module to enter password secretly. Indeed, it doesn't show the characters entered.
 \begin{lstlisting}[language=Python]
-mdp getpass.getpass("Type your password : ")
+password =  getpass.getpass("Type your password : ")
 \end{lstlisting} \vspace{5mm}
 
 For further explanations, see the \href{https://docs.python.org/3/library/getpass.html}{official documentation}
@@ -1789,11 +1782,11 @@ hashlib.algorithms_guaranteed
 \end{lstlisting} \vspace{5mm}
 First, you are going to encode your password into bytes. Then, use the hash algorithm.
 \begin{lstlisting}[language=Python]
-mot_de_passe = hashlib.sha1(b"mot de passe")
+password = hashlib.sha1(b"Password")
 \end{lstlisting} \vspace{5mm}
 Finally, you'll need to transform your hashed password into bytes or string. String is more readable and reusable.
 \begin{lstlisting}[language=Python]
-mot_de_passe.hexdigest()
+password.hexdigest()
 \end{lstlisting} \vspace{5mm}
 Then you can save this password and compare it to the password entered by the user to see if it corresponds.
 
@@ -1825,7 +1818,7 @@ Sometimes you need to import a module that isn't into you actual repertory, rath
 
 \vspace{5mm}
 
-Tree exemple : 
+Tree example : 
 
 Main/ 
 
@@ -1847,14 +1840,14 @@ Another way to do this in a more effective way is to set \hyperref[subsec:PathVa
 Control you memory while programming. 
 \begin{lstlisting}[language=Python]
 var = [1]*100
-print(f"memoire utilisee par var : {sys.getsizeof(var)} bytes") #memoire utilisee par var : 856 bytes
+print(f"memory used by var : {sys.getsizeof(var)} bytes") #memory used by var : 856 bytes
 \end{lstlisting} \vspace{5mm}
 
 \subsubsection{Redirect flow}
 We can redirect the flow to write directly somewhere instead of the terminal.
 \begin{lstlisting}[language=Python]
 file = open("output.txt", 'w')
-sys.stdout = fichier # return to original flow with sys.__stdout__
+sys.stdout = file # return to original flow with sys.__stdout__
 \end{lstlisting} \vspace{5mm}
 
 \subsubsection{Exit program}
@@ -1864,7 +1857,7 @@ sys.exit(parameter)
 \end{lstlisting} \vspace{5mm}
 
 \subsubsection{Get parameters passed in the call}
-You can get any parameter specified by the user when he runned the program. (if an parameter is separated by space(s), sourround him by "").
+You can get any parameter specified by the user when he ran the program. (if a parameter is separated by space(s), you need to surround him by "").
 \begin{lstlisting}[language=Python]
 sys.argv
 \end{lstlisting} \vspace{5mm}
@@ -1898,53 +1891,53 @@ For further explanations, see \href{http://www.sharelatex.com}{argparse tutorial
 
 
 \subsection{Unittest}
-In every program it's very useful to test every functionnality that we propose. Unittest is a powerful module to test our code. You have to create another module starting with "test" into the same repertory from your main program.
+In every program it's very useful to test every functionality that we propose. Unittest is a powerful module to test our code. You have to create another module starting with "test" into the same repertory from your main program.
 
 \vspace{5mm}
 
-Here is an exemple of hos to use this module :
+Here is an example of how to use this module :
 \begin{lstlisting}[language=Python]
 import random
 import unittest
 
 class RandomTest(unittest.TestCase):
-
-    """Test case utilise pour tester les fonctions du module 'random'."""
+    """Test case used for testing functions of module random"""
 
     def setUp(self):
-        """Initialisation des tests."""
-        self.liste = list(range(10))
+        """Initialization of tests."""
+        self.my_list = list(range(10))
 
     def test_choice(self):
-        """Test le fonctionnement de la fonction 'random.choice'."""
-        elt = random.choice(self.liste)
-        self.assertIn(elt, self.liste)
+        """Test 'random.choice'."""
+        elt = random.choice(self.my_list)
+        self.assertIn(elt, self.my_list)
 
     def test_shuffle(self):
-        """Test le fonctionnement de la fonction 'random.shuffle'."""
-        random.shuffle(self.liste)
-        self.liste.sort()
-        self.assertEqual(self.liste, list(range(10)))
+        """Test 'random.shuffle'."""
+        random.shuffle(self.my_list)
+        self.my_list.sort()
+        self.assertEqual(self.my_list, list(range(10)))
 
     def test_sample(self):
-        """Test le fonctionnement de la fonction 'random.sample'."""
-        extrait = random.sample(self.liste, 5)
-        for element in extrait:
-            self.assertIn(element, self.liste)
+        """Test 'random.sample'."""
+        extract = random.sample(self.my_list, 5)
+        for element in extract:
+            self.assertIn(element, self.my_list)
 
         with self.assertRaises(ValueError):
-            random.sample(self.liste, 20)
+            random.sample(self.my_list, 20)
 \end{lstlisting} \vspace{5mm}
-def setUp(self) is similar to def \_\_init\_\_(self), that's where you define generalities.
-Then create a function for each functionnality, it must correspond with the right assertion method.
+
+\textit{def setUp(self)} is similar to def \_\_init\_\_(self), that's where you define generalities.
+Then create a function for each functionality, it must correspond with the right assertion method.
 
 \vspace{5mm}
 
-Here are every assertion methods you can use to test your functionnalities.
+Here are every assertion methods you can use to test your functionalities.
 \begin{table}[h]
 \begin{center}
-{\renewcommand{\arraystretch}{1} %donne la distance entre les lignes%
-{\setlength{\tabcolsep}{0.5cm} %donne la distance entre les collones%
+{\renewcommand{\arraystretch}{1}
+{\setlength{\tabcolsep}{0.5cm} 
 \begin{tabular}{|c|c|}
   \hline
   assertEqual(a, b) & a == b \\
@@ -1992,8 +1985,8 @@ Regex also known as regular expression is a very powerful module for searching i
 
 \begin{table}[ht]
 \begin{center}
-{\renewcommand{\arraystretch}{2} %donne la distance entre les lignes%
-{\setlength{\tabcolsep}{1.5cm} %donne la distance entre les collones%
+{\renewcommand{\arraystretch}{2} 
+{\setlength{\tabcolsep}{1.5cm} 
 \begin{tabular}{|l|c|r|}
   \hline
   \makecell{$\land$ \\ start} & \makecell{* \\ 0,1,...} & \makecell{\{\} \\ n times} \\
@@ -2018,7 +2011,7 @@ expression = r"^[A-Za-z0-9]"
 See more explanation about re on the \href{https://docs.python.org/3/library/re.html?highlight=re#module-re}{official documentation}
 
 \subsection{cx\_Freeze / setup}
-You can create .exe program that anybody can run on its own computer without having python or the extern libraries installed by using the module cx\_Freeze.
+You can create .exe program that anybody can run on its own computer without having python or the external libraries installed by using the module cx\_Freeze.
 
 \vspace{5mm}
 
@@ -2033,7 +2026,7 @@ Then, run \textit{./cxfreeze pathTo.pyFile} and a \textit{dist} folder will be c
 
 \vspace{5mm}
 
-You can do the same on linux by simply do \textit{cxfreeze myfile.py} and you'll get exactly the same except the fact that it is an ubuntu file.
+You can do the same on Linux by simply do \textit{cxfreeze myfile.py} and you'll get exactly the same except the fact that it is an Ubuntu file.
 
 \vspace{10mm}
 
@@ -2053,7 +2046,7 @@ setup(
 )
 \end{lstlisting} \vspace{5mm}
 
-Then run \textit{python.exe setup.py build} in your windows terminal and \textit{python3 setup.py build} into your ubuntu terminal. It will create a \textit{build} folder with every necessary files inside. It's more powerfull than cx\_Freeze.
+Then run \textit{python.exe setup.py build} in your windows terminal and \textit{python3 setup.py build} into your Ubuntu terminal. It will create a \textit{build} folder with every necessary files inside. It's more powerful than cx\_Freeze.
 
 See more explanation about cx\_Freeze on the  \href{https://cx-freeze.readthedocs.io/en/latest/}{official documentation}
 
@@ -2071,85 +2064,84 @@ Server side
 import socket
 import select
 
-hote = ''
+host = ''
 port = 12800
 
-connexion_principale = socket.socket(socket.AF_INET, socket.SOCK_STREAM)
-connexion_principale.bind((hote, port))
-connexion_principale.listen(5)
-print("Le serveur ecoute a present sur le port {}".format(port))
+principal_connection = socket.socket(socket.AF_INET, socket.SOCK_STREAM)
+principal_connection.bind((host, port))
+principal_connection.listen(5)
+print("The server listen on port : {}".format(port))
 
-serveur_lance = True
-clients_connectes = []
-while serveur_lance:
-    # On va verifier que de nouveaux clients ne demandent pas a se connecter
-    # Pour cela, on ecoute la connexion_principale en lecture
-    # On attend maximum 50ms
-    connexions_demandees, wlist, xlist = select.select([connexion_principale],
+server_ran = True
+connected_clients = []
+while server_ran:
+    # We are going to check that new clients are not asking to connect
+    # We listen principal_connection in reading
+    # We wait a maximum of 50ms
+    asked_connection, wlist, xlist = select.select([principal_connection],
         [], [], 0.05)
     
-    for connexion in connexions_demandees:
-        connexion_avec_client, infos_connexion = connexion.accept()
-        # On ajoute le socket connecte a la liste des clients
-        clients_connectes.append(connexion_avec_client)
+    for connection in asked_connection:
+        connection_with_client, infos_connection = connection.accept()
+        # We add the connected socket to the client list
+        connected_clients.append(connection_with_client)
     
-    # Maintenant, on ecoute la liste des clients connectes
-    # Les clients renvoyes par select sont ceux devant etre lus (recv)
-    # On attend la encore 50ms maximum
-    # On enferme l'appel a select.select dans un bloc try
-    # En effet, si la liste de clients connectes est vide, une exception
-    # Peut etre levee
-    clients_a_lire = []
+    # Now we listen the list of connected clients
+    # The clients sent back from select are the one that need to be read (recv)
+    # We wait a maximum of 50ms again
+    # We nest the select.select call in a try bloc
+    # Indeed, if the client list is empty, an exception can be raised
+    clients_to read = []
     try:
-        clients_a_lire, wlist, xlist = select.select(clients_connectes,
+        clients_to_read, wlist, xlist = select.select(connected_clients,
                 [], [], 0.05)
     except select.error:
         pass
     else:
-        # On parcourt la liste des clients a lire
-        for client in clients_a_lire:
-            # Client est de type socket
-            msg_recu = client.recv(1024)
-            # Peut planter si le message contient des caracteres speciaux
-            msg_recu = msg_recu.decode()
-            print("Recu {}".format(msg_recu))
+        # We loop through the client list to read
+        for client in clients_to_read:
+            # Client is a socket type
+            msg_received = client.recv(1024)
+            # Can not work if the message contains special characters
+            msg_received = msg_received.decode()
+            print("Received {}".format(msg_received))
             client.send(b"5 / 5")
-            if msg_recu == "fin":
-                serveur_lance = False
+            if msg_received == "end":
+                server_ran = False
 
-print("Fermeture des connexions")
-for client in clients_connectes:
+print("Close connections")
+for client in connected_clients:
     client.close()
 
-connexion_principale.close()
+principal_connection.close()
 \end{lstlisting} \vspace{5mm}
 Client side :
 \begin{lstlisting}[language=Python]
 import socket
 
-hote = "localhost" #car nous avons les deux serveurs sur la meme machine
-port = 12800 #port du serveur qui ecoute
+host = "localhost" # because we have the two servers on the same computer
+port = 12800 #port of the server that listen
 
-connexion_avec_serveur = socket.socket(socket.AF_INET, socket.SOCK_STREAM)
-connexion_avec_serveur.connect((hote, port))
-print("Connexion etablie avec le serveur sur le port {}".format(port))
+connection_with_server = socket.socket(socket.AF_INET, socket.SOCK_STREAM)
+connection_with_server.connect((host, port))
+print("connection established with the server on port : {}".format(port))
 
-msg_a_envoyer = b""
-while msg_a_envoyer != b"fin":
-    msg_a_envoyer = input("> ")
-    # Peut planter si vous tapez des caracteres speciaux
-    msg_a_envoyer = msg_a_envoyer.encode()
-    # On envoie le message
-    connexion_avec_serveur.send(msg_a_envoyer)
-    msg_recu = connexion_avec_serveur.recv(1024)
-    print(msg_recu.decode()) # La encore, peut planter s'il y a des accents
+msg_to_send = b""
+while msg_to_send != b"end":
+    msg_to_send = input("> ")
+    # Can not work if the message contains special characters
+    msg_to_send = msg_to_send.encode()
+    # We send the message
+    connection_with_server.send(msg_to_send)
+    msg_received = connection_with_server.recv(1024)
+    print(msg_received.decode()) # Can not work if the message contains special characters
 
-print("Fermeture de la connexion")
-connexion_avec_serveur.close()
+print("Close connection")
+connection_with_server.close()
 \end{lstlisting} \vspace{5mm}
 
 \subsubsection{Socket}
-Sockets allow us to open a connexion between two or more computer. Ports available are included between 1024 and 65535. 
+Sockets allow us to open a connection between two or more computer. Ports available are included between 1024 and 65535. 
 
 \vspace{5mm}
 
@@ -2159,7 +2151,7 @@ For further explanations, see the \href{https://docs.python.org/3/library/select
 
 \subsection{Threads}
 \label{subsec:Threading}
-Threading is an advanced module especially used to run multiple processes at the same time. Normally, each functin call follow each other in one way. But with threading you can run them simultaneously. It's especially useful when a call lasts a lot of time, with threading, you don't waste this time.
+Threading is an advanced module especially used to run multiple processes at the same time. Normally, each function call follow each other in one way. But with threading you can run them simultaneously. It's especially useful when a call lasts a lot of time, with threading, you don't waste this time.
 
 \vspace{5mm}
 
@@ -2176,5 +2168,6 @@ print(f"Code source : \n{inspect.getsource(Queue)}")
 
 \subsection{Operator}
 \label{subsec:Operator}
+For further explanations, see the \href{https://docs.python.org/3/library/operator.html}{official documentation}
 
 \end{document}
