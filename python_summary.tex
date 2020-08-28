@@ -516,143 +516,12 @@ B = {4, 5, 6, 7, 8}
     
 \end{itemize}
 
-\section{Containers}
-Containers are any object that holds an arbitrary number of other objects. Generally, containers provide a way to access the contained objects and to iterate over them. We can find lists, strings, dicts, tuples and sets. Look out for mutability / immutability, some methods aren't possible between each other. 
-
-\subsection{Comprehension}
-\label{Comprehension}
-Comprehension is probably one of the most powerful method in python. It conbines map and filter function into a single method. \textbf{[func\_to\_apply() for elem in container if filter\_condition]} 
-
-\subsubsection{List}
-Example with lists :
-\begin{lstlisting}[language=Python]
-my_list = [1,2,3]
-new_list = [x**x for x in my_list if x%2!=0]
-
-#before : [1, 2, 3] and now : [1, 27]
-\end{lstlisting}\vspace{5mm}
-
-\subsubsection{Dict}
-Example with dicts :
-\begin{lstlisting}[language=Python]
-names = ["Peter Parker", "Clark Kent", "Wade Wilson", "Bruce Wayne"]
-heroes = ["Spiderman", "Superman", "Deadpool", "Batman"]
-
-my_dict = {name: hero for name, hero in zip(names, heroes) if name != "Peter Parker"}
-# {'Clark Kent': 'Superman', 'Wade Wilson': 'Deadpool', 'Bruce Wayne': 'Batman'}
-\end{lstlisting} \vspace{5mm}
-
-\subsubsection{Set}
-Example with sets :
-\begin{lstlisting}[language=Python]
-my_list = [1,1,3,5,5]
-my_set = {n for n in my_list} #{1,3,5}
-\end{lstlisting} \vspace{5mm}
-
-\subsubsection{Generator}
-You can also use generator as comprehension like with list to save memory and time simply by replacing the \textbf{[]} from list comprehension with \textbf{()} for generator comprehension. \\
-Here : 
-\begin{lstlisting}[language=Python]
-my_nums = [x*x for x in [1,2,3,4,5]]
-print(my_nums) # [1, 4, 9, 16, 25]
-\end{lstlisting} \vspace{5mm}
-
-Become : 
-\begin{lstlisting}[language=Python]
-my_nums = (x*x for x in [1,2,3,4,5])
-for num in my_nums:
-    print(num)
-# 1
-# 4
-# 9
-# 16
-# 25
-\end{lstlisting} \vspace{5mm}
-
-\subsection{Slicing}
-Slicing is a method that concerns containers, you can use slicing on every possible container. \textbf{[start:end:step]} \textit{end argument isn't take in account : [start:end[}
-
-\subsubsection{Last element} 
-If you don't know the length of a certain container, you can access to the last element with slicing.
-\begin{lstlisting}[language=Python]
-dernier_elem = tableau[-1]
-# dlrow!
-\end{lstlisting} \vspace{5mm}
-
-\subsubsection{Trunc} 
-You can also trunc your mutable container to keep just what you need.
-\begin{lstlisting}[language=Python]
-first_part = tableau[:3]
-second_part = tableau[3:]
-# first_part : ['Hello,', 'dlrow!Hello,', 'dlrow!Hello,'] and second_part : ['dlrow!']
-\end{lstlisting} \vspace{5mm}
-
-\subsubsection{Insert}  
-If you need to precisely insert an element into mutable container, slicing is a good way of doing it.
-\begin{lstlisting}[language=Python]
-tableau[1:1] = 'A'
-# ['Hello,', 'A', 'dlrow!Hello,', 'dlrow!Hello,', 'dlrow!']
-\end{lstlisting} \vspace{5mm}
-
-\subsubsection{Reverse} 
-If you need to reverse your mutable container you can also use slicing.
-\begin{lstlisting}[language=Python]
-tableau[::-1]
-# ['dlrow!', 'dlrow!Hello,', 'dlrow!Hello,'; 'A', 'Hello,']
-\end{lstlisting} \vspace{5mm}
-
-\subsection{Sort}
-You can sort your container if they contains comparable elements with a powerful method in python. \textbf{sorted(my\_container, key, reverse = False)}. Sorted return a new list so you might have to cast it later. You have the possibility to add parameters into these functions with a \textit{key} to specify what you want to sort and \textit{reverse} to sort in the opposite order. The key can be a function, a lambda function or a type if it is possible to cast each element in this type.
-
-\vspace{5mm}
-
-There is a more powerful way to do all these methods with \hyperref[subsec:Operator]{\textbf{operator}} module.
-
-\subsubsection{List}
-You can use sorted on list the same way we've seen with \hyperref[Sort]{\textbf{sort}}.
-
-\subsubsection{String}
-String sorting is based on ASCII table, upper or lower case matter.
-
-\begin{lstlisting}[language=Python]
-string_value = 'I like to sort'
-sorted_string = sorted(string_value.split()) #['I', 'like', 'sort', 'to'] #split() allows to not consider white spaces
-\end{lstlisting} \vspace{5mm}
-
-\subsubsection{Dict}
-\begin{lstlisting}[language=Python]
-my_dict = {1: 2, 2: -10, "Hello": 1234}
-
-my_sorted_dict = sorted(my_dict.items(), key = lambda item: item[1]) # [(2,-10),(1,2),("hello",1234)]
-\end{lstlisting} \vspace{5mm}
-
-\subsubsection{Set}
-Here is an example with a type as key argument, it useful in this case because we don't really want to sort those elements as strings, but as numbers.
-
-\begin{lstlisting}[language=Python]
-my_set = {'0','4','1','10'}
-my_sorted_set = sorted(my_set) # ['0', '1', '10', '4']
-
-my_good_sorted_set = sorted(my_set, key = int) # ['0', '1', '4', '10']
-\end{lstlisting} \vspace{5mm}
-
-\subsection{Empty}
-Sometimes you need to know if a container is empty. There are two common ways to do it :
-\begin{lstlisting}[language=Python]
-if not my_container:
-    print("empty")
-
-if len(my_container)==0:
-    print("empty")
-\end{lstlisting} \vspace{5mm}
-
-
 \newpage
 \section{Function}
 \label{sec:Function}
 A function is a block of organized, reusable code that is used to perform a single, related action. Functions provide better modularity for your application and a high degree of code reusing.
 
-\subsection{Lambda function}
+\subsection{Lambda}
 \label{subsec:Lambda}
 Lambda function are very small function, it's very simple to create them and very often better than a function. \textbf{function\_name = lambda parameter : return\_value}
 \begin{lstlisting}[language=Python]
@@ -664,7 +533,7 @@ real_lambda = lambda x : x+5
 # equivalent_lambda : 10 and real_lambda : 10
 \end{lstlisting} \vspace{5mm}
 
-\subsection{Default argument}
+\subsection{Default arguments}
 Default arguments are used for arguments that don't necessarily need a value. We assign a default value that can be overloaded if needed. Default arguments are always declared after non-default arguments into function's head. \\
 \textbf{def func(non\_default\_arguments, \textit{default\_arguments = value})}
 
@@ -708,7 +577,37 @@ both
 # I received these named args : {'couleur': 'rouge', 'taille_en_cm': 172}
 \end{lstlisting} \vspace{5mm}
 
-\subsection{Map function}
+\subsection{Generator}
+\label{subsec:Generators}
+Generators functions are simple and powerful tools for creating iterators. They are written like regular functions but use the \textit{yield} statement instead of \textit{return} statement when they want to return data. Each time it is called by next(), the generator resumes execution where it left off (keeping all of its execution context). That's why they don't use any memory and execute extremly fast.
+
+\vspace{5mm}
+
+Here is an example of list against generator. If you run these function with lot of people, you'll see the strength of generators, instead of returning a list of lot of people, it will yield one person a the time. Also, it won't take any memory or any time instead of a list. \\
+The only thing that change here is the \textbf{yield} keyword which is equivalent to the return keyword except the fact that it doesn't end the function but freeze it until the next call :
+\begin{lstlisting}[language=Python]
+def people_list(num_people):
+    result = []
+    for i in xrange(num_people):
+        person = {
+                    'id': i,
+                    'name': random.choice(names),
+                    'major': random.choice(majors)
+                }
+        result.append(person)
+    return result
+    
+def people_generator(num_people):
+    for i in xrange(num_people):
+        person = {
+                    'id': i,
+                    'name': random.choice(names),
+                    'major': random.choice(majors)
+                }
+        yield person
+\end{lstlisting} \vspace{5mm}
+
+\subsection{Map}
 Map function is a special function used to apply a function for each element of a container. \textbf{map(function\_to\_apply, list)}
 \begin{lstlisting}[language=Python]
 liste = [1,2,3]
@@ -720,7 +619,7 @@ mapped_list = list(map(map_function,liste)) #No () for argument function
 \end{lstlisting} \vspace{5mm}
 There is a way more effective way of doing it with \hyperref[Comprehension]{\textbf{comprehension}}.
 
-\subsection{Filter function}
+\subsection{Filter}
 Filter function is a special function used to apply a selection for each element of a container. \textbf{map(function\_to\_apply, list)}
 \begin{lstlisting}[language=Python]
 liste = [1,2,3]
@@ -738,7 +637,7 @@ There is a way more effective way of doing it with \hyperref[Comprehension]{\tex
 Classes are a way of bringing together data and functionality. Creating a new class creates a new type of object and so new instances of this type can be built.
 
 \subsection{Instance}
-An instance is an objet created from the parent class. \\
+An instance is an object created from the parent class. \\
 Each instance can have its own attributes, which defines its state. \\
 An instance can also use methods from the class to modify its state.
 \begin{lstlisting}[language=Python]
@@ -834,7 +733,7 @@ person = "Ewan-Carree-20"
 p = ClassConstructor.init_person(person)
 \end{lstlisting} \vspace{5mm}
 
-\subsection{Dunder methods}
+\subsubsection{Dunder methods}
 Dunder methods are specific function from a class, they are surrounded by \_\_. \\
 It can be used by the instance as follow : \textbf{my\_instance.\_\_dunder\_method\_\_} \\
 But it's better to use them like that : \textbf{dunder\_method(my\_instance)}
@@ -923,7 +822,8 @@ Inheritance is a concept of relation between classes. Some are parents, the othe
 
 \vspace{5mm}
 
-Here is a useful example : a parent class that automatically initialize the childs :
+Here is a useful example : a parent class that automatically initialize the children :
+
 \begin{lstlisting}[language=Python]
 class Initializer:
     def __init__(self, *args, **kwargs):
@@ -943,14 +843,15 @@ class MyClass(Initializer):
 my_instance = MyClass(a=1, b=2)
 \end{lstlisting} \vspace{5mm}
 
-Here is another example with multiple inheritance
+Here is another example with multiple inheritance :
+
 \begin{lstlisting}[language=Python]
 class Dog(object):
 	def __init__(self, age):
 		self.age = age
 	def speak(self):
 		print("Waf")
-class Cat(Dog, Animal): #multiple inheritance : Cat have some attributs from Dog but is also an Animal
+class Cat(Dog, Animal): #multiple inheritance : Cat have some attributes from Dog but is also an Animal
 	def __init__(self, age, nom):
 		super().__init__(age)
 		self.nom = nom
@@ -960,6 +861,7 @@ class Cat(Dog, Animal): #multiple inheritance : Cat have some attributs from Dog
 
 \subsection{Property}
 Property concerns the private and public aspect from a class even though everything is public in python. In python, a variable or method which start with \_ is considered as "private". Also, we need to create getters and setters to access and modify these privates elements. Property redirect calls of privates elements to these getters and setters.
+
 \begin{lstlisting}[language=Python]
 """
 Property : permet d'offrir des accesseurs et mutateurs pour definir un attribut prive
@@ -991,7 +893,45 @@ class Test(object):
 There is another way of doing it in a more readable and better way with \hyperref[subsec:Property]{\textbf{property decorator}}.
 
 \subsection{Metaclass}
-Every class inherit from the \textit{object} class, metaclass is a way to define how to create our own classes without inheriting from \textit{object}.
+Every class inherit from the \textit{object} class, metaclass is a way to define how to create our own classes without inheriting from \textit{object}. 
+
+By default, classes are constructed using type(). The class body is executed in a new namespace and the class name is bound locally to the result of \textbf{type("name", (inheritance,), \{namespace/attributes/methods\})}.
+
+\vspace{5mm}
+
+Here is an example of a class using type() :
+\begin{lstlisting}[language=Python]
+def my_method(self):
+    print("Hi")
+    
+MyClass = type("MyClass", (object,), {'x': 5, 'y': 10, "my_method": my_method}) #don't froget the coma after object
+
+my_instance = MyClass()
+\end{lstlisting} \vspace{5mm}
+
+Now, this is the way to create your own metaclasses with methods that overwrite the methods from \textbf{type} :
+\begin{lstlisting}[language=Python]
+class Meta(type):
+	def __new__(self, class_name, bases, attributes):
+		print(attributes)
+		return type(class_name, bases, attributes)
+
+class MyClass(metaclass = Meta):
+	def __init__(self,x,y):
+		self.x = x
+		self.y = y
+
+	def position(self):
+		print(f"My coordinates are : ({self.x},{self.y})")
+
+my_instance = MyClass(1, 2) # {'__module__': '__main__', '__qualname__': 'MyClass', '__init__': <function MyClass.__init__ at 0x7f3998be1f70>, 'position': <function MyClass.position at 0x7f3998c00160>}
+\end{lstlisting} \vspace{5mm}
+
+We can see that our metaclass inherits from \textbf{type} and not \textbf{object} as usual. It overwrites de \_\_new\_\_() method with our own method. We can also see that our class use our metaclass by defining in argument : \textbf{metaclass = Meta}.
+
+\vspace{5mm}
+
+Metaclass should only be used in specific cases because it's an expert concept and often, there is another way to do instead of using metaclass.
 
 \subsection{Other}
 In python, everything is public so there isn't any private method or variable from a class. We can use \_ to tell to the user that we want it private even though it's not really.
@@ -1228,7 +1168,10 @@ print(rv) #je suis 5
 \end{lstlisting} \vspace{5mm}
 
 \newpage
-\section{Iterator / Iterable}
+\section{Containers}
+Containers are any object that holds an arbitrary number of other objects. Generally, containers provide a way to access the contained objects and to iterate over them. We can find lists, strings, dicts, tuples and sets. Look out for mutability / immutability, some methods aren't possible between each other. 
+
+\subsection{Iterator / Iterable}
 Every object that have the \textit{\_\_iter\_\_} dunder method is an \textbf{iterable} that can be looped over thanks to the iterator returned by this dunder method when \textbf{for loop} calls it. An \textbf{iterator} object is defined by the fact that it has the \textit{\_\_next\_\_} dunder method. 
 
 \vspace{5mm}
@@ -1252,60 +1195,13 @@ class MyRange:
         return current
 \end{lstlisting} \vspace{5mm}
 
-\subsection{Generators}
-\label{subsec:Generators}
-Generators are simple and powerful tools for creating iterators. They are written like regular functions but use the yield statement when they want to return data. Each time it is called by next(), the generator resumes execution where it left off (keeping all of its execution context). 
-
-\vspace{5mm}
-
-Also, we can create the equivalent of MyRange class with a function based on generator which is more readable than a class.
-\begin{lstlisting}[language=Python]
-def my_range(start, end):
-    current = start
-    while current < end:
-        yield current
-        current += 1
-
-nums = my_range(1,3)
-
-for num in nums:
-    print(num)
-# 1
-# 2
-# 3
-\end{lstlisting} \vspace{5mm}
-
-Here is an example of list against generator. If you run these function with lot of people, you'll see the strength of generators, instead of returning a list of lot of people, it will yield one person a the time. Also, it won't take any memory or any time instead of a list. \\
-The only thing that change here is the \textbf{yield} keyword which is equivalent to the return keyword except the fact that it doesn't end the function but freeze it until the next call :
-\begin{lstlisting}[language=Python]
-def people_list(num_people):
-    result = []
-    for i in xrange(num_people):
-        person = {
-                    'id': i,
-                    'name': random.choice(names),
-                    'major': random.choice(majors)
-                }
-        result.append(person)
-    return result
-    
-def people_generator(num_people):
-    for i in xrange(num_people):
-        person = {
-                    'id': i,
-                    'name': random.choice(names),
-                    'major': random.choice(majors)
-                }
-        yield person
-\end{lstlisting} \vspace{5mm}
-
-
 \subsection{For}
 \label{subsec:For}
 For loop are the most powerful way to work on data contained in list, tuple, dict, string, files, generators, ... 
 
 \subsubsection{Range}
 Range allows user to loop a certain times. \textbf{range(start,end, step)}
+
 \begin{lstlisting}[language=Python]
 for x in range(2):
 	print(x)
@@ -1315,9 +1211,10 @@ for x in range(2):
 
 \subsubsection{Enumerate}
 Enumerate is a very good way to work with for loop. You can access simultaneously to the element and it's position in a tuple.
+
 \begin{lstlisting}[language=Python]
-liste = ['a', 'b', 'c']
-for index, elem in enumerate(liste):
+my_list = ['a', 'b', 'c']
+for index, elem in enumerate(my_list):
 	print(f"{elem} at position {index}")
 # a at position 0
 # b at position 1
@@ -1325,7 +1222,8 @@ for index, elem in enumerate(liste):
 \end{lstlisting} \vspace{5mm}
 
 \subsubsection{Zip}
-Zip is another loop method. You can combine multiple lists with the same length in the loop. 
+Zip is another loop method. You can combine multiple lists with the same length in the loop.
+
 \begin{lstlisting}[language=Python]
 names = ["Peter Parker", "Clark Kent", "Wade Wilson", "Bruce Wayne"]
 heroes = ["Spiderman", "Superman", "Deadpool", "Batman"]
@@ -1342,433 +1240,159 @@ for name, hero, universe in zip(names, heroes, universes):
 
 \subsubsection{File}
 We can iterate through a file to get every lines into a for loop.
+
 \begin{lstlisting}[language=Python]
 for line in f:
 	print(line, end = '') # because the end of the line is already \n
 \end{lstlisting} \vspace{5mm}
 
-
-\newpage
-\section{Modules}
-Modules are Python programs that contain functions that we often reuse (we also call them libraries or libraries). These are “toolboxes” that will be very useful to you.
-
-\subsection{Import}
-\label{subsec:Import}
-
-\subsubsection{Import module as}
-\label{As}
-Sometimes you import modules but it's very long to write methods from a long module name. Plus, it's not good to use the \textit{import * from module} because it can creates conflicts between function and class that have the same name in two different modules. Rather than writing module.class you can use the key word \textbf{as}. It very used for libraries like numpy as np, matplotlib.pyplot as plt and scipy.signal as sig
-
-
-\subsection{Time}
-\subsubsection{Time}
-For further explanations, see the \href{https://docs.python.org/3/library/time.html}{official documentation}
-
-\subsubsection{Datetime}
-For further explanations, see the \href{https://docs.python.org/3/library/datetime.html}{official documentation}
-
-\subsection{Password}
-\subsubsection{Getpass}
-Get pass is a very useful module to enter password secretly. Indeed, it doesn't show the characters entered.
-\begin{lstlisting}[language=Python]
-mdp getpass.getpass("Type your password : ")
-\end{lstlisting} \vspace{5mm}
-
-For further explanations, see the \href{https://docs.python.org/3/library/getpass.html}{official documentation}
-
-\subsubsection{Hashlib}
-You can secure you password get from getpass by hashing them into different hash algorithm.\\
-To see every hash algorithms you can type this command : 
-\begin{lstlisting}[language=Python]
-hashlib.algorithms_guaranteed
-\end{lstlisting} \vspace{5mm}
-First, you are going to encode your password into bytes. Then, use the hash algorithm.
-\begin{lstlisting}[language=Python]
-mot_de_passe = hashlib.sha1(b"mot de passe")
-\end{lstlisting} \vspace{5mm}
-Finally, you'll need to transform your hashed password into bytes or string. String is more readable and reusable.
-\begin{lstlisting}[language=Python]
-mot_de_passe.hexdigest()
-\end{lstlisting} \vspace{5mm}
-Then you can save this password and compare it to the password entered by the user to see if it corresponds.
-
-\vspace{5mm}
-
-For further explanations, see the \href{https://docs.python.org/3/library/hashlib.html}{official documentation}
-
-
-\subsection{Os}
-\subsubsection{Working repertory}
-You can get you actual working repertory by using :
-\begin{lstlisting}[language=Python]
-my_repertory = os.getcwd()
-\end{lstlisting} \vspace{5mm}
-
-\subsubsection{Terminal commandline}
-You can run terminal commandlines by using : (look out for commands that corresponds with the os terminal you are running you program in)
-\begin{lstlisting}[language=Python]
-os.system("ls")
-
-#get the value returned with
-cmd = os.popen("ls")
-cmd.read()
-\end{lstlisting} \vspace{5mm}
-
-\subsection{Sys}
-\subsubsection{Import module from another repertory}
-Sometimes you need to import a module that isn't into you actual repertory, rather than copy this module into you repertory you can import it by another way. 
-
-\vspace{5mm}
-
-Tree exemple : 
-
-Main/ 
-
-....main.py 
-
-....Test/ 
-
-........test.py 
+\subsubsection{Generator}
+For loop also allows to get each value yielded from the function very easily.
 
 \begin{lstlisting}[language=Python]
-import sys
-sys.path.append("./Test")
-import test # .py file (module)
-\end{lstlisting} \vspace{5mm}
+def my_range(start, end):
+    current = start
+    while current < end:
+        yield current
+        current += 1
 
-Another way to do this in a more effective way is to set \hyperref[subsec:PathVariables]{\textbf{path variables}}.
+nums = my_range(1,3)
 
-\subsubsection{Memory used by a variable}
-Control you memory while programming. 
-\begin{lstlisting}[language=Python]
-var = [1]*100
-print(f"memoire utilisee par var : {sys.getsizeof(var)} bytes") #memoire utilisee par var : 856 bytes
-\end{lstlisting} \vspace{5mm}
-
-\subsubsection{Redirect flow}
-We can redirect the flow to write directly somewhere instead of the terminal.
-\begin{lstlisting}[language=Python]
-file = open("output.txt", 'w')
-sys.stdout = fichier # return to original flow with sys.__stdout__
-\end{lstlisting} \vspace{5mm}
-
-\subsubsection{Exit program}
-You can exit the program any time you want when it's running. The parameter inside the function is important to specify to the user is there has been a problem or not; 0 means no problem and anything else (often 1) means that there has been a problem.
-\begin{lstlisting}[language=Python]
-sys.exit(parameter)
-\end{lstlisting} \vspace{5mm}
-
-\subsubsection{Get parameters passed in the call}
-You can get any parameter specified by the user when he runned the program. (if an parameter is separated by space(s), sourround him by "").
-\begin{lstlisting}[language=Python]
-sys.argv
-\end{lstlisting} \vspace{5mm}
-
-\subsection{Math}
-For further explanations, see the \href{https://docs.python.org/3/library/math.html}{official documentation}
-
-\subsection{Random}
-For further explanations, see the \href{https://docs.python.org/3/library/random.html}{official documentation}
-
-\subsection{Argparse}
-You can parse argument(s) passed in the call of program using argparse.
-\begin{lstlisting}[language=Python]
-parser = argparse.ArgumentParser()
-
-#add instruction when user type program.py --help/-h
-#imagine we need an compulsory argument of type int :
-parser.add_argument("x", type=int, help="description of x")
-#imagine that the user can specify an other optional argument:
-parser.add_argument("-v", "--verbose", action="store_true", help="add more explanation")
-
-#save arguments
-args = parser.parse_args()
-
-#get args
-print(args.x)
-if args.verbose:
-    print("I add more explanations")
-\end{lstlisting} \vspace{5mm}
-For further explanations, see \href{http://www.sharelatex.com}{argparse tutorial} or  \href{https://docs.python.org/3/library/argparse.html}{official documentation}.
-
-
-\subsection{Unittest}
-In every program it's very useful to test every functionnality that we propose. Unittest is a powerful module to test our code. You have to create another module starting with "test" into the same repertory from your main program.
-
-\vspace{5mm}
-
-Here is an exemple of hos to use this module :
-\begin{lstlisting}[language=Python]
-import random
-import unittest
-
-class RandomTest(unittest.TestCase):
-
-    """Test case utilise pour tester les fonctions du module 'random'."""
-
-    def setUp(self):
-        """Initialisation des tests."""
-        self.liste = list(range(10))
-
-    def test_choice(self):
-        """Test le fonctionnement de la fonction 'random.choice'."""
-        elt = random.choice(self.liste)
-        self.assertIn(elt, self.liste)
-
-    def test_shuffle(self):
-        """Test le fonctionnement de la fonction 'random.shuffle'."""
-        random.shuffle(self.liste)
-        self.liste.sort()
-        self.assertEqual(self.liste, list(range(10)))
-
-    def test_sample(self):
-        """Test le fonctionnement de la fonction 'random.sample'."""
-        extrait = random.sample(self.liste, 5)
-        for element in extrait:
-            self.assertIn(element, self.liste)
-
-        with self.assertRaises(ValueError):
-            random.sample(self.liste, 20)
-\end{lstlisting} \vspace{5mm}
-def setUp(self) is similar to def \_\_init\_\_(self), that's where you define generalities.
-Then create a function for each functionnality, it must correspond with the right assertion method.
-
-\vspace{5mm}
-
-Here are every assertion methods you can use to test your functionnalities.
-\begin{table}[h]
-\begin{center}
-{\renewcommand{\arraystretch}{1} %donne la distance entre les lignes%
-{\setlength{\tabcolsep}{0.5cm} %donne la distance entre les collones%
-\begin{tabular}{|c|c|}
-  \hline
-  assertEqual(a, b) & a == b \\
-  \hline
-  assertNotEqual(a, b) & a != b \\
-  \hline
-  assertTrue(x) & x is True \\
-  \hline
-  assertFalse(x) & x is False \\
-  \hline
-  assertIs(a, b) & a is b \\
-  \hline
-  assertIsNot(a, b) & a is not b \\
-  \hline
-  assertIsNone(x) & x is None \\
-  \hline
-  assertIsNotNone(x) & x is not None \\
-  \hline
-  assertIn(a, b) & a in b \\
-  \hline
-  assertNotIn(a, b) & a not in b \\
-  \hline
-  assertIsInstance(a, b) & isinstance(a, b) \\
-  \hline
-  assertNotIsInstance(a, b) & not isinstance(a, b) \\
-  \hline
-  assertRaises(exception, fonction, *args, **kwargs) & \makecell{check if function \\ raise the good exception}  \\
-  \hline
-\end{tabular}}}
-\end{center}
-\caption{Assertion methods}
-\end{table} \vspace{5mm}
-
-After creating this module, you can test it by two different ways. The first one is \textbf{unittest.main()} but the other one is much more convenient. Go into the repertory into a terminal where you project and test file are stored and type the command \textbf{pythonX -m unittest}. It will run automatically each test.
-
-\vspace{5mm}
-
-For further explanations, see the \href{https://docs.python.org/3/library/unittest.html}{official documentation}
-
-
-\subsection{Re}
-Regex also known as regular expression is a very powerful module for searching in string. \textbf{re.search(expression, string)} with \textbf{expression = r"..."}
-
-\begin{table}[h]
-\begin{center}
-{\renewcommand{\arraystretch}{2} %donne la distance entre les lignes%
-{\setlength{\tabcolsep}{1.5cm} %donne la distance entre les collones%
-\begin{tabular}{|l|c|r|}
-  \hline
-  \makecell{$\land$ \\ start} & \makecell{* \\ 0,1,...} & \makecell{\{\} \\ n times} \\
-  \hline
-  \makecell{\$ \\ end} & \makecell{+ \\ 1,...} & \makecell{[] \\ sth inside} \\
-  \hline
-  \makecell{? \\ 0 or 1} & \makecell{() \\ group} &  \\
-  \hline
-\end{tabular}}}
-\end{center}
-\caption{Regex methods}
-\end{table} \vspace{5mm}
-
-Example :
-\begin{lstlisting}[language=Python]
-# I want to find a phone number with digits separated by a space, a point or an hyphen.
-expression = r"^0[0-9]([ .-]?[0-9]{2}){4}$"
-# I want a password with at least 6 characters and containing number or letter or both.
-expression = r"^[A-Za-z0-9]"
-\end{lstlisting} \vspace{5mm}
-
-See more explanation about re on the \href{https://docs.python.org/3/library/re.html?highlight=re#module-re}{official documentation}
-
-\subsection{cx\_Freeze / setup}
-You can create .exe program that anybody can run on its own computer without having python or the extern libraries installed by using the module cx\_Freeze.
-
-\vspace{5mm}
-
-To create a .exe file on windows : open a new terminal and go into the repertory
-\begin{lstlisting}[language=Python]
-C:\Users\carre\AppData\Local\Packages\PythonSoftwareFoundation.Python.3.8_qbz5n2kfra8p0\LocalCache\local-packages\Python38\Scripts
+for num in nums:
+    print(num)
+# 1
+# 2
+# 3
 \end{lstlisting} \vspace{5mm}
 
 \vspace{5mm}
 
-Then, run \textit{./cxfreeze pathTo.pyFile} and a \textit{dist} folder will be created with every libraries needed and the .exe file that you can directly run. You can send a zip file of this dist folder to every one so that they can run your program on their own computer.
+\subsection{Comprehension}
+\label{Comprehension}
+Comprehension is probably one of the most powerful method in python. It conbines map and filter function into a single method. \textbf{[func\_to\_apply() for elem in container if filter\_condition]} 
 
-\vspace{5mm}
-
-You can do the same on linux by simply do \textit{cxfreeze myfile.py} and you'll get exactly the same except the fact that it is an ubuntu file.
-
-\vspace{10mm}
-
-You can do the same by creating a setup.py file.
-
-\vspace{5mm}
-
-Your setup file will look like this : 
+\subsubsection{List}
+Example with lists :
 \begin{lstlisting}[language=Python]
-from cx_Freeze import setup, Executable
+my_list = [1,2,3]
+new_list = [x**x for x in my_list if x%2!=0]
 
-setup(
-    name = "myFile",
-    version = "0.1",
-    description = "desciption",
-    executables = [Executable("myFile.py")],
-)
+#before : [1, 2, 3] and now : [1, 27]
+\end{lstlisting}\vspace{5mm}
+
+\subsubsection{Dict}
+Example with dicts :
+\begin{lstlisting}[language=Python]
+names = ["Peter Parker", "Clark Kent", "Wade Wilson", "Bruce Wayne"]
+heroes = ["Spiderman", "Superman", "Deadpool", "Batman"]
+
+my_dict = {name: hero for name, hero in zip(names, heroes) if name != "Peter Parker"}
+# {'Clark Kent': 'Superman', 'Wade Wilson': 'Deadpool', 'Bruce Wayne': 'Batman'}
 \end{lstlisting} \vspace{5mm}
 
-Then run \textit{python.exe setup.py build} in your windows terminal and \textit{python3 setup.py build} into your ubuntu terminal. It will create a \textit{build} folder with every necessary files inside. It's more powerfull than cx\_Freeze.
-
-See more explanation about cx\_Freeze on the  \href{https://cx-freeze.readthedocs.io/en/latest/}{official documentation}
-
-\subsection{Network}
-With network you can exchange data between a client and a server following the TCP protocol. To establish a connection between client and server, you need an host name and a port number. 
-\vspace{5mm}
-
-
-Here is an example of client and server :
-
-\vspace{5mm}
-
-Server side
+\subsubsection{Set}
+Example with sets :
 \begin{lstlisting}[language=Python]
-import socket
-import select
-
-hote = ''
-port = 12800
-
-connexion_principale = socket.socket(socket.AF_INET, socket.SOCK_STREAM)
-connexion_principale.bind((hote, port))
-connexion_principale.listen(5)
-print("Le serveur ecoute a present sur le port {}".format(port))
-
-serveur_lance = True
-clients_connectes = []
-while serveur_lance:
-    # On va verifier que de nouveaux clients ne demandent pas a se connecter
-    # Pour cela, on ecoute la connexion_principale en lecture
-    # On attend maximum 50ms
-    connexions_demandees, wlist, xlist = select.select([connexion_principale],
-        [], [], 0.05)
-    
-    for connexion in connexions_demandees:
-        connexion_avec_client, infos_connexion = connexion.accept()
-        # On ajoute le socket connecte a la liste des clients
-        clients_connectes.append(connexion_avec_client)
-    
-    # Maintenant, on ecoute la liste des clients connectes
-    # Les clients renvoyes par select sont ceux devant etre lus (recv)
-    # On attend la encore 50ms maximum
-    # On enferme l'appel a select.select dans un bloc try
-    # En effet, si la liste de clients connectes est vide, une exception
-    # Peut etre levee
-    clients_a_lire = []
-    try:
-        clients_a_lire, wlist, xlist = select.select(clients_connectes,
-                [], [], 0.05)
-    except select.error:
-        pass
-    else:
-        # On parcourt la liste des clients a lire
-        for client in clients_a_lire:
-            # Client est de type socket
-            msg_recu = client.recv(1024)
-            # Peut planter si le message contient des caracteres speciaux
-            msg_recu = msg_recu.decode()
-            print("Recu {}".format(msg_recu))
-            client.send(b"5 / 5")
-            if msg_recu == "fin":
-                serveur_lance = False
-
-print("Fermeture des connexions")
-for client in clients_connectes:
-    client.close()
-
-connexion_principale.close()
-\end{lstlisting} \vspace{5mm}
-Client side :
-\begin{lstlisting}[language=Python]
-import socket
-
-hote = "localhost" #car nous avons les deux serveurs sur la meme machine
-port = 12800 #port du serveur qui ecoute
-
-connexion_avec_serveur = socket.socket(socket.AF_INET, socket.SOCK_STREAM)
-connexion_avec_serveur.connect((hote, port))
-print("Connexion etablie avec le serveur sur le port {}".format(port))
-
-msg_a_envoyer = b""
-while msg_a_envoyer != b"fin":
-    msg_a_envoyer = input("> ")
-    # Peut planter si vous tapez des caracteres speciaux
-    msg_a_envoyer = msg_a_envoyer.encode()
-    # On envoie le message
-    connexion_avec_serveur.send(msg_a_envoyer)
-    msg_recu = connexion_avec_serveur.recv(1024)
-    print(msg_recu.decode()) # La encore, peut planter s'il y a des accents
-
-print("Fermeture de la connexion")
-connexion_avec_serveur.close()
+my_list = [1,1,3,5,5]
+my_set = {n for n in my_list} #{1,3,5}
 \end{lstlisting} \vspace{5mm}
 
-\subsubsection{Socket}
-Sockets allow us to open a connexion between two or more computer. Ports available are included between 1024 and 65535. 
-
-\vspace{5mm}
-
-For further explanations, see the \href{https://docs.python.org/3/library/socket.html}{official documentation} and socketserver  \href{https://docs.python.org/3/library/socketserver.html}{official documentation} 
-\subsubsection{Select}
-For further explanations, see the \href{https://docs.python.org/3/library/select.html}{official documentation}
-
-\subsection{Threads}
-\label{subsec:Threading}
-Threading is an advanced module especially used to run multiple processes at the same time. Normally, each functin call follow each other in one way. But with threading you can run them simultaneously. It's especially useful when a call lasts a lot of time, with threading, you don't waste this time.
-
-\vspace{5mm}
-
-For further explanations, see the \href{https://docs.python.org/3/library/threading.html}{official documentation}
-
-
-\subsection{Inspect}
-If you're interested in knowing how a class is built you can use the inspect module. It prints out the full code from the class. You can't use this function on built-in module like math, os, ... because it's not written in python.
+\subsubsection{Generator}
+You can also use generator as comprehension like with list to save memory and time simply by replacing the \textbf{[]} from list comprehension with \textbf{()} for generator comprehension. \\
+Here : 
 \begin{lstlisting}[language=Python]
-import inspect
-from queue import Queue
-print(f"Code source : \n{inspect.getsource(Queue)}")
+my_nums = [x*x for x in [1,2,3,4,5]]
+print(my_nums) # [1, 4, 9, 16, 25]
 \end{lstlisting} \vspace{5mm}
 
-\subsection{Operator}
-\label{subsec:Operator}
+Become : 
+\begin{lstlisting}[language=Python]
+my_nums = (x*x for x in [1,2,3,4,5])
+for num in my_nums:
+    print(num)
+# 1
+# 4
+# 9
+# 16
+# 25
+\end{lstlisting} \vspace{5mm}
+
+\subsection{Slicing}
+Slicing is a method that concerns containers, you can use slicing on every possible container. \textbf{[start:end:step]} \textit{end argument isn't take in account : [start:end[}
+
+\subsubsection{Last element} 
+If you don't know the length of a certain container, you can access to the last element with slicing.
+\begin{lstlisting}[language=Python]
+dernier_elem = tableau[-1]
+# dlrow!
+\end{lstlisting} \vspace{5mm}
+
+\subsubsection{Trunc} 
+You can also trunc your mutable container to keep just what you need.
+\begin{lstlisting}[language=Python]
+first_part = tableau[:3]
+second_part = tableau[3:]
+# first_part : ['Hello,', 'dlrow!Hello,', 'dlrow!Hello,'] and second_part : ['dlrow!']
+\end{lstlisting} \vspace{5mm}
+
+\subsubsection{Insert}  
+If you need to precisely insert an element into mutable container, slicing is a good way of doing it.
+\begin{lstlisting}[language=Python]
+tableau[1:1] = 'A'
+# ['Hello,', 'A', 'dlrow!Hello,', 'dlrow!Hello,', 'dlrow!']
+\end{lstlisting} \vspace{5mm}
+
+\subsubsection{Reverse} 
+If you need to reverse your mutable container you can also use slicing.
+\begin{lstlisting}[language=Python]
+tableau[::-1]
+# ['dlrow!', 'dlrow!Hello,', 'dlrow!Hello,'; 'A', 'Hello,']
+\end{lstlisting} \vspace{5mm}
+
+\subsection{Sort}
+You can sort your container if they contains comparable elements with a powerful method in python. \textbf{sorted(my\_container, key, reverse = False)}. Sorted return a new list so you might have to cast it later. You have the possibility to add parameters into these functions with a \textit{key} to specify what you want to sort and \textit{reverse} to sort in the opposite order. The key can be a function, a lambda function or a type if it is possible to cast each element in this type.
+
+\vspace{5mm}
+
+There is a more powerful way to do all these methods with \hyperref[subsec:Operator]{\textbf{operator}} module.
+
+\subsubsection{List}
+You can use sorted on list the same way we've seen with \hyperref[Sort]{\textbf{sort}}.
+
+\subsubsection{String}
+String sorting is based on ASCII table, upper or lower case matter.
+
+\begin{lstlisting}[language=Python]
+string_value = 'I like to sort'
+sorted_string = sorted(string_value.split()) #['I', 'like', 'sort', 'to'] #split() allows to not consider white spaces
+\end{lstlisting} \vspace{5mm}
+
+\subsubsection{Dict}
+\begin{lstlisting}[language=Python]
+my_dict = {1: 2, 2: -10, "Hello": 1234}
+
+my_sorted_dict = sorted(my_dict.items(), key = lambda item: item[1]) # [(2,-10),(1,2),("hello",1234)]
+\end{lstlisting} \vspace{5mm}
+
+\subsubsection{Set}
+Here is an example with a type as key argument, it useful in this case because we don't really want to sort those elements as strings, but as numbers.
+
+\begin{lstlisting}[language=Python]
+my_set = {'0','4','1','10'}
+my_sorted_set = sorted(my_set) # ['0', '1', '10', '4']
+
+my_good_sorted_set = sorted(my_set, key = int) # ['0', '1', '4', '10']
+\end{lstlisting} \vspace{5mm}
+
+\subsection{Empty}
+Sometimes you need to know if a container is empty. There are two common ways to do it :
+\begin{lstlisting}[language=Python]
+if not my_container:
+    print("empty")
+
+if len(my_container)==0:
+    print("empty")
+\end{lstlisting} \vspace{5mm}
 
 \newpage
 \section{Toolbox}
@@ -2127,5 +1751,430 @@ You can create it this way :
 while True:
     #mytask
 \end{lstlisting} \vspace{5mm}
+
+
+\newpage
+\section{Modules}
+Modules are Python programs that contain functions that we often reuse (we also call them libraries or libraries). These are “toolboxes” that will be very useful to you.
+
+\subsection{Import}
+\label{subsec:Import}
+
+\subsubsection{Import module as}
+\label{As}
+Sometimes you import modules but it's very long to write methods from a long module name. Plus, it's not good to use the \textit{import * from module} because it can creates conflicts between function and class that have the same name in two different modules. Rather than writing module.class you can use the key word \textbf{as}. It very used for libraries like numpy as np, matplotlib.pyplot as plt and scipy.signal as sig
+
+
+\subsection{Time}
+\subsubsection{Time}
+For further explanations, see the \href{https://docs.python.org/3/library/time.html}{official documentation}
+
+\subsubsection{Datetime}
+For further explanations, see the \href{https://docs.python.org/3/library/datetime.html}{official documentation}
+
+\subsection{Password}
+\subsubsection{Getpass}
+Get pass is a very useful module to enter password secretly. Indeed, it doesn't show the characters entered.
+\begin{lstlisting}[language=Python]
+mdp getpass.getpass("Type your password : ")
+\end{lstlisting} \vspace{5mm}
+
+For further explanations, see the \href{https://docs.python.org/3/library/getpass.html}{official documentation}
+
+\subsubsection{Hashlib}
+You can secure you password get from getpass by hashing them into different hash algorithm.\\
+To see every hash algorithms you can type this command : 
+\begin{lstlisting}[language=Python]
+hashlib.algorithms_guaranteed
+\end{lstlisting} \vspace{5mm}
+First, you are going to encode your password into bytes. Then, use the hash algorithm.
+\begin{lstlisting}[language=Python]
+mot_de_passe = hashlib.sha1(b"mot de passe")
+\end{lstlisting} \vspace{5mm}
+Finally, you'll need to transform your hashed password into bytes or string. String is more readable and reusable.
+\begin{lstlisting}[language=Python]
+mot_de_passe.hexdigest()
+\end{lstlisting} \vspace{5mm}
+Then you can save this password and compare it to the password entered by the user to see if it corresponds.
+
+\vspace{5mm}
+
+For further explanations, see the \href{https://docs.python.org/3/library/hashlib.html}{official documentation}
+
+
+\subsection{Os}
+\subsubsection{Working repertory}
+You can get you actual working repertory by using :
+\begin{lstlisting}[language=Python]
+my_repertory = os.getcwd()
+\end{lstlisting} \vspace{5mm}
+
+\subsubsection{Terminal commandline}
+You can run terminal commandlines by using : (look out for commands that corresponds with the os terminal you are running you program in)
+\begin{lstlisting}[language=Python]
+os.system("ls")
+
+#get the value returned with
+cmd = os.popen("ls")
+cmd.read()
+\end{lstlisting} \vspace{5mm}
+
+\subsection{Sys}
+\subsubsection{Import module from another repertory}
+Sometimes you need to import a module that isn't into you actual repertory, rather than copy this module into you repertory you can import it by another way. 
+
+\vspace{5mm}
+
+Tree exemple : 
+
+Main/ 
+
+....main.py 
+
+....Test/ 
+
+........test.py 
+
+\begin{lstlisting}[language=Python]
+import sys
+sys.path.append("./Test")
+import test # .py file (module)
+\end{lstlisting} \vspace{5mm}
+
+Another way to do this in a more effective way is to set \hyperref[subsec:PathVariables]{\textbf{path variables}}.
+
+\subsubsection{Memory used by a variable}
+Control you memory while programming. 
+\begin{lstlisting}[language=Python]
+var = [1]*100
+print(f"memoire utilisee par var : {sys.getsizeof(var)} bytes") #memoire utilisee par var : 856 bytes
+\end{lstlisting} \vspace{5mm}
+
+\subsubsection{Redirect flow}
+We can redirect the flow to write directly somewhere instead of the terminal.
+\begin{lstlisting}[language=Python]
+file = open("output.txt", 'w')
+sys.stdout = fichier # return to original flow with sys.__stdout__
+\end{lstlisting} \vspace{5mm}
+
+\subsubsection{Exit program}
+You can exit the program any time you want when it's running. The parameter inside the function is important to specify to the user is there has been a problem or not; 0 means no problem and anything else (often 1) means that there has been a problem.
+\begin{lstlisting}[language=Python]
+sys.exit(parameter)
+\end{lstlisting} \vspace{5mm}
+
+\subsubsection{Get parameters passed in the call}
+You can get any parameter specified by the user when he runned the program. (if an parameter is separated by space(s), sourround him by "").
+\begin{lstlisting}[language=Python]
+sys.argv
+\end{lstlisting} \vspace{5mm}
+
+\subsection{Math}
+For further explanations, see the \href{https://docs.python.org/3/library/math.html}{official documentation}
+
+\subsection{Random}
+For further explanations, see the \href{https://docs.python.org/3/library/random.html}{official documentation}
+
+\subsection{Argparse}
+You can parse argument(s) passed in the call of program using argparse.
+\begin{lstlisting}[language=Python]
+parser = argparse.ArgumentParser()
+
+#add instruction when user type program.py --help/-h
+#imagine we need an compulsory argument of type int :
+parser.add_argument("x", type=int, help="description of x")
+#imagine that the user can specify an other optional argument:
+parser.add_argument("-v", "--verbose", action="store_true", help="add more explanation")
+
+#save arguments
+args = parser.parse_args()
+
+#get args
+print(args.x)
+if args.verbose:
+    print("I add more explanations")
+\end{lstlisting} \vspace{5mm}
+For further explanations, see \href{http://www.sharelatex.com}{argparse tutorial} or  \href{https://docs.python.org/3/library/argparse.html}{official documentation}.
+
+
+\subsection{Unittest}
+In every program it's very useful to test every functionnality that we propose. Unittest is a powerful module to test our code. You have to create another module starting with "test" into the same repertory from your main program.
+
+\vspace{5mm}
+
+Here is an exemple of hos to use this module :
+\begin{lstlisting}[language=Python]
+import random
+import unittest
+
+class RandomTest(unittest.TestCase):
+
+    """Test case utilise pour tester les fonctions du module 'random'."""
+
+    def setUp(self):
+        """Initialisation des tests."""
+        self.liste = list(range(10))
+
+    def test_choice(self):
+        """Test le fonctionnement de la fonction 'random.choice'."""
+        elt = random.choice(self.liste)
+        self.assertIn(elt, self.liste)
+
+    def test_shuffle(self):
+        """Test le fonctionnement de la fonction 'random.shuffle'."""
+        random.shuffle(self.liste)
+        self.liste.sort()
+        self.assertEqual(self.liste, list(range(10)))
+
+    def test_sample(self):
+        """Test le fonctionnement de la fonction 'random.sample'."""
+        extrait = random.sample(self.liste, 5)
+        for element in extrait:
+            self.assertIn(element, self.liste)
+
+        with self.assertRaises(ValueError):
+            random.sample(self.liste, 20)
+\end{lstlisting} \vspace{5mm}
+def setUp(self) is similar to def \_\_init\_\_(self), that's where you define generalities.
+Then create a function for each functionnality, it must correspond with the right assertion method.
+
+\vspace{5mm}
+
+Here are every assertion methods you can use to test your functionnalities.
+\begin{table}[h]
+\begin{center}
+{\renewcommand{\arraystretch}{1} %donne la distance entre les lignes%
+{\setlength{\tabcolsep}{0.5cm} %donne la distance entre les collones%
+\begin{tabular}{|c|c|}
+  \hline
+  assertEqual(a, b) & a == b \\
+  \hline
+  assertNotEqual(a, b) & a != b \\
+  \hline
+  assertTrue(x) & x is True \\
+  \hline
+  assertFalse(x) & x is False \\
+  \hline
+  assertIs(a, b) & a is b \\
+  \hline
+  assertIsNot(a, b) & a is not b \\
+  \hline
+  assertIsNone(x) & x is None \\
+  \hline
+  assertIsNotNone(x) & x is not None \\
+  \hline
+  assertIn(a, b) & a in b \\
+  \hline
+  assertNotIn(a, b) & a not in b \\
+  \hline
+  assertIsInstance(a, b) & isinstance(a, b) \\
+  \hline
+  assertNotIsInstance(a, b) & not isinstance(a, b) \\
+  \hline
+  assertRaises(exception, fonction, *args, **kwargs) & \makecell{check if function \\ raise the good exception}  \\
+  \hline
+\end{tabular}}}
+\end{center}
+\caption{Assertion methods}
+\end{table} \vspace{5mm}
+
+After creating this module, you can test it by two different ways. The first one is \textbf{unittest.main()} but the other one is much more convenient. Go into the repertory into a terminal where you project and test file are stored and type the command \textbf{pythonX -m unittest}. It will run automatically each test.
+
+\vspace{5mm}
+
+For further explanations, see the \href{https://docs.python.org/3/library/unittest.html}{official documentation}
+
+
+\subsection{Re}
+Regex also known as regular expression is a very powerful module for searching in string. \textbf{re.search(expression, string)} with \textbf{expression = r"..."}
+
+\vspace{5mm}
+
+\begin{table}[ht]
+\begin{center}
+{\renewcommand{\arraystretch}{2} %donne la distance entre les lignes%
+{\setlength{\tabcolsep}{1.5cm} %donne la distance entre les collones%
+\begin{tabular}{|l|c|r|}
+  \hline
+  \makecell{$\land$ \\ start} & \makecell{* \\ 0,1,...} & \makecell{\{\} \\ n times} \\
+  \hline
+  \makecell{\$ \\ end} & \makecell{+ \\ 1,...} & \makecell{[] \\ sth inside} \\
+  \hline
+  \makecell{? \\ 0 or 1} & \makecell{() \\ group} &  \\
+  \hline
+\end{tabular}}}
+\end{center}
+\caption{Regex methods}
+\end{table} \vspace{5mm}
+
+Example :
+\begin{lstlisting}[language=Python]
+# I want to find a phone number with digits separated by a space, a point or an hyphen.
+expression = r"^0[0-9]([ .-]?[0-9]{2}){4}$"
+# I want a password with at least 6 characters and containing number or letter or both.
+expression = r"^[A-Za-z0-9]"
+\end{lstlisting} \vspace{5mm}
+
+See more explanation about re on the \href{https://docs.python.org/3/library/re.html?highlight=re#module-re}{official documentation}
+
+\subsection{cx\_Freeze / setup}
+You can create .exe program that anybody can run on its own computer without having python or the extern libraries installed by using the module cx\_Freeze.
+
+\vspace{5mm}
+
+To create a .exe file on windows : open a new terminal and go into the repertory
+\begin{lstlisting}[language=Python]
+C:\Users\carre\AppData\Local\Packages\PythonSoftwareFoundation.Python.3.8_qbz5n2kfra8p0\LocalCache\local-packages\Python38\Scripts
+\end{lstlisting} \vspace{5mm}
+
+\vspace{5mm}
+
+Then, run \textit{./cxfreeze pathTo.pyFile} and a \textit{dist} folder will be created with every libraries needed and the .exe file that you can directly run. You can send a zip file of this dist folder to every one so that they can run your program on their own computer.
+
+\vspace{5mm}
+
+You can do the same on linux by simply do \textit{cxfreeze myfile.py} and you'll get exactly the same except the fact that it is an ubuntu file.
+
+\vspace{10mm}
+
+You can do the same by creating a setup.py file.
+
+\vspace{5mm}
+
+Your setup file will look like this : 
+\begin{lstlisting}[language=Python]
+from cx_Freeze import setup, Executable
+
+setup(
+    name = "myFile",
+    version = "0.1",
+    description = "desciption",
+    executables = [Executable("myFile.py")],
+)
+\end{lstlisting} \vspace{5mm}
+
+Then run \textit{python.exe setup.py build} in your windows terminal and \textit{python3 setup.py build} into your ubuntu terminal. It will create a \textit{build} folder with every necessary files inside. It's more powerfull than cx\_Freeze.
+
+See more explanation about cx\_Freeze on the  \href{https://cx-freeze.readthedocs.io/en/latest/}{official documentation}
+
+\subsection{Network}
+With network you can exchange data between a client and a server following the TCP protocol. To establish a connection between client and server, you need an host name and a port number. 
+\vspace{5mm}
+
+
+Here is an example of client and server :
+
+\vspace{5mm}
+
+Server side
+\begin{lstlisting}[language=Python]
+import socket
+import select
+
+hote = ''
+port = 12800
+
+connexion_principale = socket.socket(socket.AF_INET, socket.SOCK_STREAM)
+connexion_principale.bind((hote, port))
+connexion_principale.listen(5)
+print("Le serveur ecoute a present sur le port {}".format(port))
+
+serveur_lance = True
+clients_connectes = []
+while serveur_lance:
+    # On va verifier que de nouveaux clients ne demandent pas a se connecter
+    # Pour cela, on ecoute la connexion_principale en lecture
+    # On attend maximum 50ms
+    connexions_demandees, wlist, xlist = select.select([connexion_principale],
+        [], [], 0.05)
+    
+    for connexion in connexions_demandees:
+        connexion_avec_client, infos_connexion = connexion.accept()
+        # On ajoute le socket connecte a la liste des clients
+        clients_connectes.append(connexion_avec_client)
+    
+    # Maintenant, on ecoute la liste des clients connectes
+    # Les clients renvoyes par select sont ceux devant etre lus (recv)
+    # On attend la encore 50ms maximum
+    # On enferme l'appel a select.select dans un bloc try
+    # En effet, si la liste de clients connectes est vide, une exception
+    # Peut etre levee
+    clients_a_lire = []
+    try:
+        clients_a_lire, wlist, xlist = select.select(clients_connectes,
+                [], [], 0.05)
+    except select.error:
+        pass
+    else:
+        # On parcourt la liste des clients a lire
+        for client in clients_a_lire:
+            # Client est de type socket
+            msg_recu = client.recv(1024)
+            # Peut planter si le message contient des caracteres speciaux
+            msg_recu = msg_recu.decode()
+            print("Recu {}".format(msg_recu))
+            client.send(b"5 / 5")
+            if msg_recu == "fin":
+                serveur_lance = False
+
+print("Fermeture des connexions")
+for client in clients_connectes:
+    client.close()
+
+connexion_principale.close()
+\end{lstlisting} \vspace{5mm}
+Client side :
+\begin{lstlisting}[language=Python]
+import socket
+
+hote = "localhost" #car nous avons les deux serveurs sur la meme machine
+port = 12800 #port du serveur qui ecoute
+
+connexion_avec_serveur = socket.socket(socket.AF_INET, socket.SOCK_STREAM)
+connexion_avec_serveur.connect((hote, port))
+print("Connexion etablie avec le serveur sur le port {}".format(port))
+
+msg_a_envoyer = b""
+while msg_a_envoyer != b"fin":
+    msg_a_envoyer = input("> ")
+    # Peut planter si vous tapez des caracteres speciaux
+    msg_a_envoyer = msg_a_envoyer.encode()
+    # On envoie le message
+    connexion_avec_serveur.send(msg_a_envoyer)
+    msg_recu = connexion_avec_serveur.recv(1024)
+    print(msg_recu.decode()) # La encore, peut planter s'il y a des accents
+
+print("Fermeture de la connexion")
+connexion_avec_serveur.close()
+\end{lstlisting} \vspace{5mm}
+
+\subsubsection{Socket}
+Sockets allow us to open a connexion between two or more computer. Ports available are included between 1024 and 65535. 
+
+\vspace{5mm}
+
+For further explanations, see the \href{https://docs.python.org/3/library/socket.html}{official documentation} and socketserver  \href{https://docs.python.org/3/library/socketserver.html}{official documentation} 
+\subsubsection{Select}
+For further explanations, see the \href{https://docs.python.org/3/library/select.html}{official documentation}
+
+\subsection{Threads}
+\label{subsec:Threading}
+Threading is an advanced module especially used to run multiple processes at the same time. Normally, each functin call follow each other in one way. But with threading you can run them simultaneously. It's especially useful when a call lasts a lot of time, with threading, you don't waste this time.
+
+\vspace{5mm}
+
+For further explanations, see the \href{https://docs.python.org/3/library/threading.html}{official documentation}
+
+
+\subsection{Inspect}
+If you're interested in knowing how a class is built you can use the inspect module. It prints out the full code from the class. You can't use this function on built-in module like math, os, ... because it's not written in python.
+\begin{lstlisting}[language=Python]
+import inspect
+from queue import Queue
+print(f"Code source : \n{inspect.getsource(Queue)}")
+\end{lstlisting} \vspace{5mm}
+
+\subsection{Operator}
+\label{subsec:Operator}
 
 \end{document}
