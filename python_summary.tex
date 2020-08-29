@@ -74,7 +74,7 @@ This PDF is meant to be a summary of all the knowledge that I've acquired during
 
 \vspace{10mm}
 
-Thanks to Corey Schafer, Tech with Tim, Kalle Hallden and Openclassroom because I've learnt everything with them and I've used some of their code into this PDF.
+Thanks to Corey Schafer, Tech with Tim, Kalle Hallden and Openclassroom because I've learned everything with them and I've used some of their code into this PDF.
 
 \newpage
 
@@ -126,7 +126,7 @@ In python 3, there are some reserved words that you can't use in your program as
 Python offers different basics types that are often enough for your program.
 
 \subsection{Immutable}
-Immutable means that you can't directly modify your variable after you've assigned it. You have to reassign or create a new variable to work on a previous one
+Immutable means that you can't directly modify your variable after you've assigned it. You have to reassign or create a new variable to work on a previous one.
 
 \subsubsection{String}
 Python string is an ordered collection of characters which is used to represent and store the text-based information. Strings are stored as individual characters in a contiguous memory location. It can be accessed from both directions: forward and backward. A string can be seen in some ways as a list of characters. \\It's better to use ' for as single character and " for a chain.
@@ -154,7 +154,7 @@ string = string.lower()
 \end{lstlisting} \vspace{5mm}
 
 \item Capital \\
-Return a string with the first Letter in uppercase and the rest in lowercase.
+Return a string with the first letter in uppercase and the rest in lowercase.
 \begin{lstlisting}[language=Python]
 string = string.capitalize()
 # Hello, world!
@@ -212,7 +212,7 @@ string = string.zfill(3)
 There is another way of doing it while printing argument with \hyperref[subsec:F-string]{\textbf{F-string}}.
 
 \item Encode \\
-It's possible to encode a string into bytes using a special string methods. You have to put a b for bytes in front of the first " of you string. Another way is to use encode function as my\_string.encode()
+It's possible to encode a string into bytes using a special string methods. You have to put a b for bytes in front of the first " of your string. Another way is to use encode function as my\_string.encode()
 \end{itemize}
 
 \subsubsection{Integer}
@@ -817,7 +817,7 @@ print(ClassVariables.nb_instance) # 1
 In this code, nb\_instance and percentage are my class variables, I access to them with ClassVariables.nb\_instance and self.percentage. I choose to write it like that so that I can possibly the percentage for each instance later but I won't be able to affect nb\_instance because it bellows to the class.
 
 \subsection{Inheritance}
-Inheritance is a concept of relation between classes. Some are parents, the other are children. A children inherit from every methods from the parent class but can overload them. A child class can have multiple parents.
+Inheritance is a concept of relation between classes. Some are parents, the other are children. A children inherit from every method from the parent class but can overload them. A child class can have multiple parents.
 
 \vspace{5mm}
 
@@ -1343,7 +1343,7 @@ tableau[::-1]
 \end{lstlisting} \vspace{5mm}
 
 \subsection{Sort}
-You can sort your container if they contains comparable elements with a powerful method in python. \textbf{sorted(my\_container, key, reverse = False)}. Sorted return a new list so you might have to cast it later. You have the possibility to add parameters into these functions with a \textit{key} to specify what you want to sort and \textit{reverse} to sort in the opposite order. The key can be a function, a lambda function or a type if it is possible to cast each element in this type.
+You can sort your container if they contain comparable elements with a powerful method in python. \textbf{sorted(my\_container, key, reverse = False)}. Sorted return a new list so you might have to cast it later. You have the possibility to add parameters into these functions with a \textit{key} to specify what you want to sort and \textit{reverse} to sort in the opposite order. The key can be a function, a lambda function or a type if it is possible to cast each element in this type.
 
 \vspace{5mm}
 
@@ -1745,6 +1745,16 @@ while True:
     #my_task
 \end{lstlisting} \vspace{5mm}
 
+\subsection{Requirements.txt}
+create a new environment : python3 -m venv my\_project/venv
+activate venv : source my\_project/venv/bin/activate
+see it : which python
+export in requirements.txt : pip3 freeze > requirements.txt
+install requirements.txt : pip3 install -r requirements.txt
+deactivate venv : deactivate
+delete venv : rm -rf my\_project
+
+You should leave the main files into the directory and not into the venv environment.
 
 \newpage
 \section{Modules}
@@ -1755,7 +1765,7 @@ Modules are Python programs that contain functions that we often reuse (we also 
 
 \subsubsection{Import module as}
 \label{As}
-Sometimes you import modules but it's very long to write methods from a long module name. Plus, it's not good to use the \textit{import * from module} because it can creates conflicts between function and class that have the same name in two different modules. Rather than writing module.class you can use the key word \textbf{as}. It very used for libraries like numpy as np, matplotlib.pyplot as plt and scipy.signal as sig
+Sometimes you import modules but it's very long to write methods from a long module name. Plus, it's not good to use the \textit{import * from module} because it can create conflicts between function and class that have the same name in two different modules. Rather than writing module.class you can use the key word \textbf{as}. It very used for libraries like numpy as np, matplotlib.pyplot as plt and scipy.signal as sig
 
 
 \subsection{Time}
@@ -2159,7 +2169,7 @@ For further explanations, see the \href{https://docs.python.org/3/library/thread
 
 
 \subsection{Inspect}
-If you're interested in knowing how a class is built you can use the inspect module. It prints out the full code from the class. You can't use this function on built-in module like math, os, ... because it's not written in python.
+If you're interested in knowing how a class is built you can use inspect module. It prints out the full code from the class. You can't use this function on built-in module like math, os, ... because it's not written in python.
 \begin{lstlisting}[language=Python]
 import inspect
 from queue import Queue
