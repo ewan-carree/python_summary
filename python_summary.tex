@@ -1733,9 +1733,6 @@ You can precise path to your python compiler in the second line of your .py docu
 # !/usr/bin/python3
 \end{lstlisting} \vspace{5mm}
 
-\subsection{Environment path Variables}
-\label{subsec:PathVariables}
-
 \subsection{Infinite loop}
 \label{subsec:While}
 You can create infinite loop in many case to run tasks in continue while your program is running. \\
@@ -1812,6 +1809,14 @@ cmd.read()
 \end{lstlisting} \vspace{5mm}
 
 \subsection{Sys}
+\subsubsection{Executable}
+You may need to know the location of the python executable you are currently using. 
+
+You can do this with :
+\begin{lstlisting}[language=Python]
+location = sys.executable
+\end{lstlisting} \vspace{5mm}
+
 \subsubsection{Import module from another repertory}
 Sometimes you need to import a module that isn't into you actual repertory, rather than copy this module into you repertory you can import it by another way. 
 
@@ -1833,7 +1838,7 @@ sys.path.append("./Test")
 import test # .py file (module)
 \end{lstlisting} \vspace{5mm}
 
-Another way to do this in a more effective way is to set \hyperref[subsec:PathVariables]{\textbf{path variables}}.
+Another way to do this in a more effective way is to set \hyperref[subsec:EnvironmentVariables]{\textbf{path variables}}.
 
 \subsubsection{Memory used by a variable}
 Control you memory while programming. 
@@ -2169,6 +2174,7 @@ print(f"Code source : \n{inspect.getsource(Queue)}")
 \label{subsec:Operator}
 For further explanations, see the \href{https://docs.python.org/3/library/operator.html}{official documentation}
 
+\newpage
 \section{Developer tools}
 \subsection{Git}
 Git is a distributed version-control system for tracking changes in source code during software development. It is designed for coordinating work among programmers, but it can be used to track changes in any set of files. Its goals include speed, data integrity, and support for distributed, non-linear workflows.
@@ -2244,5 +2250,19 @@ delete venv : \textit{rm -rf my\_project}
 \vspace{5mm}
 
 You must leave the main files into the directory and not into the venv environment. The venv environment is only use for packages.
+
+\subsection{Environment variables}
+\label{subsec:EnvironmentVariables}
+Environment variables are highly recommended when it comes to work in team and share your program between each other. Indeed, it allows the user to hide password and secret data into hidden variables into your terminal.
+
+To do that, you need to edit your \textit{.profile} file in the root of you terminal accessible with \textit{cd ~/.profile} :
+\begin{lstlisting}[language=Python]
+export PASSWORD="my_password"
+\end{lstlisting} \vspace{5mm}
+
+Then, launch your editor and access to this hidden password with :
+\begin{lstlisting}[language=Python]
+password = os.environ.get("PASSWORD")
+\end{lstlisting} \vspace{5mm}
 
 \end{document}
