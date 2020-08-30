@@ -1745,17 +1745,6 @@ while True:
     #my_task
 \end{lstlisting} \vspace{5mm}
 
-\subsection{Requirements.txt}
-create a new environment : python3 -m venv my\_project/venv
-activate venv : source my\_project/venv/bin/activate
-see it : which python
-export in requirements.txt : pip3 freeze > requirements.txt
-install requirements.txt : pip3 install -r requirements.txt
-deactivate venv : deactivate
-delete venv : rm -rf my\_project
-
-You should leave the main files into the directory and not into the venv environment.
-
 \newpage
 \section{Modules}
 Modules are Python programs that contain functions that we often reuse (we also call them libraries or libraries). These are “toolboxes” that will be very useful to you.
@@ -2179,5 +2168,81 @@ print(f"Code source : \n{inspect.getsource(Queue)}")
 \subsection{Operator}
 \label{subsec:Operator}
 For further explanations, see the \href{https://docs.python.org/3/library/operator.html}{official documentation}
+
+\section{Developer tools}
+\subsection{Git}
+Git is a distributed version-control system for tracking changes in source code during software development. It is designed for coordinating work among programmers, but it can be used to track changes in any set of files. Its goals include speed, data integrity, and support for distributed, non-linear workflows.
+
+It's very useful as a developer for each project created because it's used in every enterprise.
+
+\vspace{5mm}
+
+Here are some commandlines to use Git in a project :
+
+create the online repository on Github.
+
+create the local repository: \textit{mkdir pathTOproject/myProject}
+
+go to this local repository: \textit{cd pathTOproject/myProject}
+
+initialize the project (to be done once): \textit{git init}
+
+add the files to the repository.
+
+look at the status of the local repository: \textit{git status}
+
+have the file recognized in the local repository: \textit{git add pathTOproject/myProject/myFile} or \textit{git add .} to add every file.
+
+save a change: \textit{git commit -m "description of the change"}
+
+link the local repository to the online one (to be done once): \textit{git remote add origin https://github.com/ewan-carree/MonProjet.git}
+
+check link: \textit{git remote -v}
+
+send project online: \textit{git push} or another command for first push.
+
+see our commit history: \textit{git log}
+
+go to an old commit: \textit{git checkout SHADuCommit}
+
+modify last commit message (before pushing): \textit{git commit --amend -m "Your new message"}
+
+\vspace{5mm}
+
+BRANCHES:
+
+create a branch: \textit{git checkout -b myBranch}
+
+see all branches: \textit{git branch -a}
+
+change branch: \textit{git checkout master}
+
+merge a sub-branch in the master (be in the master): \textit{git merge myBranch --no-ff}
+
+\subsection{Venv}
+The venv module provides support for creating lightweight “virtual environments” with their own site directories, optionally isolated from system site directories. Each virtual environment has its own Python binary (which matches the version of the binary that was used to create this environment) and can have its own independent set of installed Python packages in its site directories.
+
+It's very useful as a developer for each project created. You can also create a requirements.txt file to distribute your program to everyone with the right libraries with the right version of package.
+
+\vspace{5mm}
+
+Here are some commandlines to use Venv in a project :
+
+create a new environment : \textit{python3 -m venv my\_project/venv}
+
+activate venv : \textit{source my\_project/venv/bin/activate}
+
+see it : \textit{which python3}
+export in requirements.txt : \textit{pip3 freeze > requirements.txt}
+
+install requirements.txt : \textit{pip3 install -r requirements.txt}
+
+deactivate venv : \textit{deactivate}
+
+delete venv : \textit{rm -rf my\_project}
+
+\vspace{5mm}
+
+You must leave the main files into the directory and not into the venv environment. The venv environment is only use for packages.
 
 \end{document}
