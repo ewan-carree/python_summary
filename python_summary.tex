@@ -606,6 +606,40 @@ def people_generator(num_people):
         yield person
 \end{lstlisting} \vspace{5mm}
 
+\subsubsection{Co-routine}
+Co-routine may be interesting if you want to interact with your generator, it's a way to send and receive data while looping on your generator. 
+
+There are two methods : \textit{close()} and \textit{send()} :
+
+\begin{lstlisting}[language=Python]
+def co_routine(nb):
+	for i in range(nb):
+		rv = (yield i) #don't forget ()
+		if rv is None:
+			nb += 1
+		elif rv:
+			print(rv)
+		else:
+			return
+
+my_gen = co_routine(10)
+
+for nb in my_gen:
+	print(nb)
+	if nb > 4:
+		my_gen.close()
+	if nb == 2:
+		my_gen.send("I'm 2")
+		
+# 0
+# 1
+# 2
+# I'm 2
+# 4
+# 5
+\end{lstlisting} \vspace{5mm}
+
+
 \subsection{Map}
 Map function is a special function used to apply a function for each element of a container. \textbf{map(function\_to\_apply, list)}
 \begin{lstlisting}[language=Python]
@@ -1730,7 +1764,7 @@ Notice that you have to be coherent in your type transformation. For example, yo
 \subsection{Hash-Bang}
 You can precise path to your python compiler in the second line of your .py document.
 \begin{lstlisting}[language=Python]
-# !/usr/bin/python3
+#! /usr/bin/python3
 \end{lstlisting} \vspace{5mm}
 
 \subsection{Infinite loop}
