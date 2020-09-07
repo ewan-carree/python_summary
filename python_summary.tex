@@ -257,7 +257,7 @@ a, _ = my_tuple #1
 
 #Another example :
 for _ in range(2):
-	print("I don't care about i")
+  print("I don't care about i")
 #I don't care about i
 #I don't care about i
 
@@ -294,16 +294,16 @@ Everything can be considered as True if it different from 0 or False.
 a = "Salut"
 b = 0
 if a:
-	print("a fonctionne")
-	# a fonctionne
+  print("a fonctionne")
+  # a fonctionne
 else:
-	print("a ne fonctionne pas")
+  print("a ne fonctionne pas")
 
 if b:
-	print("b fonctionne")
+  print("b fonctionne")
 else:
-	print("b ne fonctionne pas")
-	# b ne fonctionne pas
+  print("b ne fonctionne pas")
+  # b ne fonctionne pas
 \end{lstlisting} \vspace{5mm}
 
 \subsection{Mutable}
@@ -526,7 +526,7 @@ Default arguments are used for arguments that don't necessarily need a value. We
 
 \begin{lstlisting}[language=Python]
 def func(age, name="Jerome"):
-	print(f"You are {age} years old and your name is {nom}")
+  print(f"You are {age} years old and your name is {nom}")
 
 func(20, "Antoine")
 func(20)
@@ -556,8 +556,8 @@ Sometimes you don't know how many arguments a function is going to receive. Also
 \textbf{* means unnamed arguments \\ ** means named arguments}
 \begin{lstlisting}[language=Python]
 def parameters(*args, **kwargs):
-	print(f"I received these unnamed args : {args}")
-	print(f"I received these named args : {kwargs}")
+  print(f"I received these unnamed args : {args}")
+  print(f"I received these named args : {kwargs}")
 parameters(1,"azerty",[1,2], color="red", length_in_cm=172)
 
 # I received these unnamed args : (1, 'azerty', [1, 2])
@@ -569,8 +569,8 @@ parameters(1,"azerty",[1,2], color="red", length_in_cm=172)
 Lambda function are very small function, it's very simple to create them and very often better than a function. \textbf{function\_name = lambda parameter : return\_value}
 \begin{lstlisting}[language=Python]
 def equivalent_lambda(x):
-	return x+5
-	
+  return x+5
+  
 real_lambda = lambda x : x+5
 
 # equivalent_lambda : 10 and real_lambda : 10
@@ -613,24 +613,24 @@ There are two methods : \textit{close()} and \textit{send()} :
 
 \begin{lstlisting}[language=Python]
 def co_routine(nb):
-	for i in range(nb):
-		rv = (yield i) #don't forget ()
-		if rv is None:
-			nb += 1
-		elif rv:
-			print(rv)
-		else:
-			return
+  for i in range(nb):
+    rv = (yield i) #don't forget ()
+    if rv is None:
+      nb += 1
+    elif rv:
+      print(rv)
+    else:
+      return
 
 my_gen = co_routine(10)
 
 for nb in my_gen:
-	print(nb)
-	if nb > 4:
-		my_gen.close()
-	if nb == 2:
-		my_gen.send("I'm 2")
-		
+  print(nb)
+  if nb > 4:
+    my_gen.close()
+  if nb == 2:
+    my_gen.send("I'm 2")
+    
 # 0
 # 1
 # 2
@@ -645,7 +645,7 @@ Map function is a special function used to apply a function for each element of 
 \begin{lstlisting}[language=Python]
 my_list = [1,2,3]
 def map_function(x):
-	return x**x
+  return x**x
 mapped_list = list(map(map_function, my_list)) #No () for argument function
 
 # before : [1, 2, 3] and now : [1, 4, 27]
@@ -657,7 +657,7 @@ Filter function is a special function used to apply a selection for each element
 \begin{lstlisting}[language=Python]
 my_list = [1,2,3]
 def filter_function(x):
-	return x%2!=0
+  return x%2!=0
 filtered_list = list(filter(filter_function, my_list))
 
 # before : [1, 2, 3] and now : [1, 3]
@@ -675,8 +675,8 @@ Each instance can have its own attributes, which defines its state. \\
 An instance can also use methods from the class to modify its state.
 \begin{lstlisting}[language=Python]
 class MyClass(object):
-	def __init__(self):
-		pass
+  def __init__(self):
+    pass
 
 my_instance = MyClass()
 \end{lstlisting} \vspace{5mm}
@@ -691,15 +691,15 @@ Except for class methods where \textbf{My\_class.my\_method()} is better.
 Here is a simple example of some methods from the class Rectangle : 
 \begin{lstlisting}[language=Python]
 class Rectangle(object):
-	def __init__(self,length,width):
-		self.length = length
-		self.width = width
+  def __init__(self,length,width):
+    self.length = length
+    self.width = width
 
-	def perimeter(self):
-		return (self.length + self.width)*2
+  def perimeter(self):
+    return (self.length + self.width)*2
 
-	def area(self):
-		return self.length * self.width
+  def area(self):
+    return self.length * self.width
 \end{lstlisting} \vspace{5mm}
 
 \subsubsection{Static methods}
@@ -707,25 +707,25 @@ Static methods have a link with the class but don't use any attribute from it. T
 
 \begin{lstlisting}[language=Python]
 class Static(object):
-	def __init__(self, position):
-		self.position = position
+  def __init__(self, position):
+    self.position = position
 
-	@staticmethod
-	def DMS_to_DD(data): #coordinates
-		for x in ['N', 'W','S','E']:
-			try:
-				if data[x] != '':
-					data[x] = (data[x][1]*60+data[x][2])/3600.0 + data[x][0]
-					if x == 'W' or x == 'S':
-						data[x] = round(-data[x],5)
-					else:
-						data[x] = round(data[x],5)
-				else:
-					data[x] = ""
-			except Exception as e:
-				data[x] = ""
-				print("Unable to convert " + data["name"] + " :" + e)
-		return data
+  @staticmethod
+  def DMS_to_DD(data): #coordinates
+    for x in ['N', 'W','S','E']:
+      try:
+        if data[x] != '':
+          data[x] = (data[x][1]*60+data[x][2])/3600.0 + data[x][0]
+          if x == 'W' or x == 'S':
+            data[x] = round(-data[x],5)
+          else:
+            data[x] = round(data[x],5)
+        else:
+          data[x] = ""
+      except Exception as e:
+        data[x] = ""
+        print("Unable to convert " + data["name"] + " :" + e)
+    return data
 \end{lstlisting} \vspace{5mm}
 
 \subsubsection{Class methods}
@@ -733,13 +733,13 @@ Class methods concerns the class itself and class variables. There is no \textbf
 
 \begin{lstlisting}[language=Python]
 class Class(object):
-	nb_instance = 0
-	def __init__(self):
-		nb_instance+=1
+  nb_instance = 0
+  def __init__(self):
+    nb_instance+=1
 
-	@classmethod
-	def get_nb_instance(cls):
-		return cls.nb_instance
+  @classmethod
+  def get_nb_instance(cls):
+    return cls.nb_instance
 
 print(Class.get_nb_instance()) #0
 \end{lstlisting} \vspace{5mm}
@@ -752,15 +752,15 @@ In this example, we apply the process of parsing the person before creating the 
 
 \begin{lstlisting}[language=Python]
 class ClassConstructor(object):
-	def __init__(self,first, last, age):
-		self.first = first
-		self.last = last
-		self.age = age
+  def __init__(self,first, last, age):
+    self.first = first
+    self.last = last
+    self.age = age
 
-	@classmethod
-	def init_person(cls, person):
-		first, last, age = person.split('-')
-		return cls(first, last, age)
+  @classmethod
+  def init_person(cls, person):
+    first, last, age = person.split('-')
+    return cls(first, last, age)
 
 person = "Ewan-Carree-20"
 p = ClassConstructor.init_person(person)
@@ -772,76 +772,76 @@ It can be used by the instance as follow : \textbf{my\_instance.\_\_dunder\_meth
 It's better whenever it's possible with : \textbf{dunder\_method(my\_instance)}
 \begin{lstlisting}[language=Python]
 class Point(object):
-	def __init__(self, x=0,y=0):
-		self.x = x
-		self.y = y
-		self.container = [1,2,3,4,5,6,7]
+  def __init__(self, x=0,y=0):
+    self.x = x
+    self.y = y
+    self.container = [1,2,3,4,5,6,7]
 
-	def __str__(self):
-		print("I'm the class Point")
+  def __str__(self):
+    print("I'm the class Point")
 
-	def __add__(self, p):
-		"""add overload the operator +"""
-		return Point(self.x + p.x, self.y + p.y)
+  def __add__(self, p):
+    """add overload the operator +"""
+    return Point(self.x + p.x, self.y + p.y)
 
-#	def __getattr__(self, name):
-#		print(f"{name} didn't found")
+# def __getattr__(self, name):
+#   print(f"{name} didn't found")
 
-	def __setattr__(self, name, value):
-	    """We modify the parent class directly instead of just calling setattr of this class and loop on the same method"""
-		object.__setattr__(self, name, value) #Each created class basicly inherits from the class "object"
+  def __setattr__(self, name, value):
+      """We modify the parent class directly instead of just calling setattr of this class and loop on the same method"""
+    object.__setattr__(self, name, value) #Each created class basicly inherits from the class "object"
 
-	def __delattr__(self, name):
-		print(f"Deleting {name} ...")
+  def __delattr__(self, name):
+    print(f"Deleting {name} ...")
 
-	def __getitem__(self, index):
-		return self.container[index]
+  def __getitem__(self, index):
+    return self.container[index]
 
-	def __setitem__(self, index, value):
-		self.container[index] = value
+  def __setitem__(self, index, value):
+    self.container[index] = value
 
-	def __contains__(self, value): # 8 in my_list  <==>  my_list.__contains__(8)
-		return True if value in self.container else False
+  def __contains__(self, value): # 8 in my_list  <==>  my_list.__contains__(8)
+    return True if value in self.container else False
 
-	def __len__(self):
-		return len(self.container)
+  def __len__(self):
+    return len(self.container)
 
-	"""Other overload : 
+  """Other overload : 
 
-	__sub__(self,p) : -
-	__mul__(self,p) : *
-	__truediv__(self, p) : /
-	__floordiv__(self, p) : //
-	__mod__(self, p) : %
-	__pow__(self, p) : **
+  __sub__(self,p) : -
+  __mul__(self,p) : *
+  __truediv__(self, p) : /
+  __floordiv__(self, p) : //
+  __mod__(self, p) : %
+  __pow__(self, p) : **
 
-	__gt__(self,p)  : >
-	__ge__(self,p) 	: >=
-	__lt__(self,p)  : <
-	__le__(self,p)  : <=
-	__eq__(self,p) : == 
+  __gt__(self,p)  : >
+  __ge__(self,p)  : >=
+  __lt__(self,p)  : <
+  __le__(self,p)  : <=
+  __eq__(self,p) : == 
 
-	__iadd__(self,p) : +=
-	__isub__(self,p) : -=
-	__imul__(self,p) : *=
-	__itruediv__(self, p) : /=	
-	...
-	"""
+  __iadd__(self,p) : +=
+  __isub__(self,p) : -=
+  __imul__(self,p) : *=
+  __itruediv__(self, p) : /=  
+  ...
+  """
 \end{lstlisting} \vspace{5mm}
 
 \subsection{Class variables}
 Class variables are useful in some cases. Imagine a variable that would always be used in the class and that the class always access. They are variables that the instance don't necessarily need.
 \begin{lstlisting}[language=Python]
 class ClassVariables(object):
-	nb_instance = 0
-	percentage = 1.1
+  nb_instance = 0
+  percentage = 1.1
 
-	def __init__(self, price):
-		self.price = price
-		ClassVariables.nb_instance += 1
+  def __init__(self, price):
+    self.price = price
+    ClassVariables.nb_instance += 1
 
-	def raise_price(self):
-		self.price = round(self.price * self.percentage,2)
+  def raise_price(self):
+    self.price = round(self.price * self.percentage,2)
 
 a = ClassVariables(100)
 a.raise_price()
@@ -880,16 +880,16 @@ Here is another example with multiple inheritance :
 
 \begin{lstlisting}[language=Python]
 class Dog(object):
-	def __init__(self, age):
-		self.age = age
-	def speak(self):
-		print("Waf")
+  def __init__(self, age):
+    self.age = age
+  def speak(self):
+    print("Waf")
 class Cat(Dog, Animal): #multiple inheritance : Cat have some attributes from Dog but is also an Animal
-	def __init__(self, age, name):
-		super().__init__(age)
-		self.nom = name
-	def speak(self):
-		print("Miaou")
+  def __init__(self, age, name):
+    super().__init__(age)
+    self.nom = name
+  def speak(self):
+    print("Miaou")
 \end{lstlisting} \vspace{5mm}
 
 \subsection{Property}
@@ -903,18 +903,18 @@ It needs : a getter, a setter, a deleter (optional), an helper (optional)
 """
 
 class Test(object):
-	def __init__(self, x=0, y=0):
-		self.x = x
-		self.y = y
-		self._dimension = 2 #Private attribute
+  def __init__(self, x=0, y=0):
+    self.x = x
+    self.y = y
+    self._dimension = 2 #Private attribute
 
-	def _get_dimension(self):
-		return self._dimension
+  def _get_dimension(self):
+    return self._dimension
 
-	def _set_dimension(self,value):
-		self._dimension = value
-		
-	dimension = property(_get_dimension, _set_dimension) #Whenever we call object.dimension, property will redirect to private getters/setters.
+  def _set_dimension(self,value):
+    self._dimension = value
+    
+  dimension = property(_get_dimension, _set_dimension) #Whenever we call object.dimension, property will redirect to private getters/setters.
 \end{lstlisting} \vspace{5mm}
 
 There is another way of doing it in a more readable and better way with \hyperref[subsec:Property]{\textbf{property decorator}}.
@@ -939,17 +939,17 @@ my_instance = MyClass()
 Now, this is the way to create your own metaclasses with methods that overwrite the methods from \textbf{type} :
 \begin{lstlisting}[language=Python]
 class Meta(type):
-	def __new__(self, class_name, bases, attributes):
-		print(attributes)
-		return type(class_name, bases, attributes)
+  def __new__(self, class_name, bases, attributes):
+    print(attributes)
+    return type(class_name, bases, attributes)
 
 class MyClass(metaclass = Meta):
-	def __init__(self,x,y):
-		self.x = x
-		self.y = y
+  def __init__(self,x,y):
+    self.x = x
+    self.y = y
 
-	def position(self):
-		print(f"My coordinates are : ({self.x},{self.y})")
+  def position(self):
+    print(f"My coordinates are : ({self.x},{self.y})")
 
 my_instance = MyClass(1, 2) # {'__module__': '__main__', '__qualname__': 'MyClass', '__init__': <function MyClass.__init__ at 0x7f3998be1f70>, 'position': <function MyClass.position at 0x7f3998c00160>}
 \end{lstlisting} \vspace{5mm}
@@ -989,18 +989,18 @@ A decorator can be a function applied to wrap another function and apply a proce
 \begin{lstlisting}[language=Python]
 import time
 def timer(func):
-	def wrapper(*args, **kwargs):
-		start = time.time()
-		rv = func(*args, **kwargs)
-		total = time.time() - start
-		print("Time to execute : "+ str(total))
-		return rv
-	return wrapper
+  def wrapper(*args, **kwargs):
+    start = time.time()
+    rv = func(*args, **kwargs)
+    total = time.time() - start
+    print("Time to execute : "+ str(total))
+    return rv
+  return wrapper
 
 @timer #we can chain decorators
 def example(x):
-	return "I'm "+str(x)
-	
+  return "I'm "+str(x)
+  
 rv = example(5)
 #Time to execute : 2.384185791015625e-06
 print(rv) #I'm 5
@@ -1019,15 +1019,15 @@ class timer(object):
         self.func = func
     def __call__(self, *args, **kwargs):
         start = time.time()
-		rv = self.func(*args, **kwargs)
-		total = time.time() - start
-		print("Time to execute : "+ str(total))
-		return rv
+    rv = self.func(*args, **kwargs)
+    total = time.time() - start
+    print("Time to execute : "+ str(total))
+    return rv
 
 @timer #we can chain decorators
 def example(x):
-	return "I'm "+str(x)
-	
+  return "I'm "+str(x)
+  
 example(5)
 #Time to execute : 2.384185791015625e-06
 print(rv) #I'm 5
@@ -1082,19 +1082,19 @@ import time
 from functools import wraps
 def timer(func):
     @wraps(func) #modification
-	def wrapper(*args, **kwargs):
-		start = time.time()
-		rv = func(*args, **kwargs)
-		total = time.time() - start
-		print("Time to execute : "+ str(total))
-		return rv
-	return wrapper
+  def wrapper(*args, **kwargs):
+    start = time.time()
+    rv = func(*args, **kwargs)
+    total = time.time() - start
+    print("Time to execute : "+ str(total))
+    return rv
+  return wrapper
 
 #possibly another decorators here
 @timer
 def example(x):
-	return "I'm "+str(x)
-	
+  return "I'm "+str(x)
+  
 rv = example(5)
 #Time to execute : 2.384185791015625e-06
 print(rv) #I'm 5
@@ -1111,14 +1111,14 @@ The way to manage it is by using property decorator into methods as attributes t
 For example :
 \begin{lstlisting}[language=Python]
 class Myclass(object):
-	def __init__(self, first, last):
-		self.first = first
-		self.last = last
-		self.email = self.first + '.' + self.last + "@gmail.com"
+  def __init__(self, first, last):
+    self.first = first
+    self.last = last
+    self.email = self.first + '.' + self.last + "@gmail.com"
 
-	def fullname(self):
-		return f"{self.first} {self.last}"
-		
+  def fullname(self):
+    return f"{self.first} {self.last}"
+    
 p1 = Myclass("Ewan", "Carree")
 p1.first = "Lou-Anne"
 
@@ -1129,34 +1129,34 @@ Will become :
 \label{Del}
 \begin{lstlisting}[language=Python]
 class Myclass(object):
-	def __init__(self, first, last):
-		self.first = first
-		self.last = last
+  def __init__(self, first, last):
+    self.first = first
+    self.last = last
 
-	@property
-	def email(self):
-		 return self.first + '.' + self.last + "@gmail.com"
+  @property
+  def email(self):
+     return self.first + '.' + self.last + "@gmail.com"
 
-	@property
-	def fullname(self):
-		pass#return f"{self.first} {self.last}"
+  @property
+  def fullname(self):
+    pass#return f"{self.first} {self.last}"
 
-	@fullname.setter
-	def fullname(self, name):
-		first,last = name.split(' ')
-		self.first = first
-		self.last = last
+  @fullname.setter
+  def fullname(self, name):
+    first,last = name.split(' ')
+    self.first = first
+    self.last = last
 
-	@fullname.getter
-	def fullname(self):
-		return f"{self.first} {self.last}"
+  @fullname.getter
+  def fullname(self):
+    return f"{self.first} {self.last}"
 
-	@fullname.deleter
-	def fullname(self):
-		print("deleting ...")
-		# delete attributes, unable to use them later
-		del self.first 
-		del self.last
+  @fullname.deleter
+  def fullname(self):
+    print("deleting ...")
+    # delete attributes, unable to use them later
+    del self.first 
+    del self.last
 
 p1 = Myclass("Ewan", "Carree")
 p1.fullname = "Lou-Anne Le_Bras"
@@ -1176,19 +1176,19 @@ Here is an example :
 import time
 def add_prefix(prefix): #every function nested have access to that prefix : enclosing
     def timer(func):
-    	def wrapper(*args, **kwargs):
-    		start = time.time()
-    		rv = func(*args, **kwargs)
-    		total = time.time() - start
-    		print(prefix + "Time to execute : "+ str(total))
-    		return rv
-    	return wrapper
+      def wrapper(*args, **kwargs):
+        start = time.time()
+        rv = func(*args, **kwargs)
+        total = time.time() - start
+        print(prefix + "Time to execute : "+ str(total))
+        return rv
+      return wrapper
     return timer
 
 @add_prefix("example : ")
 def example(x):
-	return "I'm "+str(x)
-	
+  return "I'm "+str(x)
+  
 rv = example(5)
 # example : Time to execute : 2.384185791015625e-06
 print(rv) #I'm 5
@@ -1231,7 +1231,7 @@ Range allows user to loop a certain times. \textbf{range(start,end, step)}
 
 \begin{lstlisting}[language=Python]
 for x in range(2):
-	print(x)
+  print(x)
 #0
 #1
 \end{lstlisting} \vspace{5mm}
@@ -1242,7 +1242,7 @@ Enumerate is a very good way to work with for loop. You can access simultaneousl
 \begin{lstlisting}[language=Python]
 my_list = ['a', 'b', 'c']
 for index, elem in enumerate(my_list):
-	print(f"{elem} at position {index}")
+  print(f"{elem} at position {index}")
 # a at position 0
 # b at position 1
 # c at position 2
@@ -1257,8 +1257,8 @@ heroes = ["Spiderman", "Superman", "Deadpool", "Batman"]
 universes = ["Marvel", "DC", "Marvel", "DC"]
 
 for name, hero, universe in zip(names, heroes, universes):
-	print(f"{name} is actually {hero} from {universe}")
-	
+  print(f"{name} is actually {hero} from {universe}")
+  
 # Peter Parker is actually Spiderman from Marvel
 # Clark Kent is actually Superman from DC
 # Wade Wilson is actually Deadpool from Marvel
@@ -1270,7 +1270,7 @@ We can iterate through a file to get every lines into a for loop.
 
 \begin{lstlisting}[language=Python]
 for line in f:
-	print(line, end = '') # because the end of the line is already \n
+  print(line, end = '') # because the end of the line is already \n
 \end{lstlisting} \vspace{5mm}
 
 \subsubsection{Generator}
@@ -1432,18 +1432,18 @@ if True:
 
 #return is used in function to give a response to a call.
 def func():
-	"""this is a docstring, use help(func) to know more about this function."""
-	return "This is my sentence"
+  """this is a docstring, use help(func) to know more about this function."""
+  return "This is my sentence"
 
 #break and continue are used in loop to modify the way the loop is looping.
 nb = 3
 while nb != 20:
-	if nb>6:
-		break #End the loop
-	nb+=1
-	if nb==5:
-		continue #Go to the top of the loop without executing the rest.	
-	print(nb)
+  if nb>6:
+    break #End the loop
+  nb+=1
+  if nb==5:
+    continue #Go to the top of the loop without executing the rest. 
+  print(nb)
 
 #4
 #6
@@ -1480,9 +1480,9 @@ Global variables can be used by everyone, both inside of functions and outside.
 a = b = 5
 #a = 5 and b = 5
 def modify(b):
-	global a #modify the variable outside the function
-	a*=2
-	b*=2
+  global a #modify the variable outside the function
+  a*=2
+  b*=2
 
 modify(b)
 #a = 10 et b = 5
@@ -1538,10 +1538,10 @@ condition = False
 
 #Bad way :
 if condition:
-	x=1
+  x=1
 else:
-	x=0
-	#0
+  x=0
+  #0
 
 #Good way :
 x = 1 if condition else 0
@@ -1556,14 +1556,14 @@ This is the basic structure to handle exception :
 \begin{lstlisting}[language=Python]
 name = "Jerome"
 try:
-	key = int(name)
+  key = int(name)
 except ValueError:
-	print("Your name cannot be converted into integer!")
+  print("Your name cannot be converted into integer!")
 else: #done if try is validated
-	print("Key as been validated")
+  print("Key as been validated")
 finally: #always done
-	print("end ...")
-	
+  print("end ...")
+  
 #Your name cannot be converted into integer!
 #end ...
 \end{lstlisting} \vspace{5mm}
@@ -1666,21 +1666,21 @@ If you want to write into a file that doesn't exist in your repertory, then it w
 Here is an example of the most common use with files :
 \begin{lstlisting}[language=Python]
 with open("test.txt", "r") as f:
-	f_contents = f.read()
-	f_contents_lines = f.readlines() #list
-	f_contents_line = f.readline()
+  f_contents = f.read()
+  f_contents_lines = f.readlines() #list
+  f_contents_line = f.readline()
 
 with open("test.txt", "w") as f:
-	f.write("Test")
+  f.write("Test")
 \end{lstlisting} \vspace{5mm}
 
 You can also open multiple files in different modes to work with them. \\
 For example, if we want to copy a file to another, we can do this :
 \begin{lstlisting}[language=Python]
 with open("test.txt", "r") as rf:
-	with open("test_copy.txt", "w") as wf:
-		for line in rf:
-			wf.write(line)
+  with open("test_copy.txt", "w") as wf:
+    for line in rf:
+      wf.write(line)
 \end{lstlisting} \vspace{5mm}
 
 An other aspect of file is that it's not always .txt files. You can also work with other types of file. To do that you need to manipulate the data with bytes. Also, your need to use your files in binary mode.
@@ -1690,17 +1690,62 @@ An other aspect of file is that it's not always .txt files. You can also work wi
 Here is an example of file to work with a picture :
 \begin{lstlisting}[language=Python]
 with open("my_picture.jpg", "rb") as rf:
-	with open("my_picture_copy.jpg", "wb") as wf:
-		for line in rf:
-			wf.write(line)
+  with open("my_picture_copy.jpg", "wb") as wf:
+    for line in rf:
+      wf.write(line)
 \end{lstlisting} \vspace{5mm}
+
+\subsection{Logging}
+Logging is a way to capture information into a specific file with a .log extension. It's useful when we need to capture info while the program is running.
+
+\vspace{5mm}
+
+There are 5 levels of logging :
+
+First, there are the non default levels :
+\begin{itemize}
+    \item DEBUG
+    
+    Detailed information, typically of interest only when diagnosing problems.
+    
+    \item INFO
+    
+    Confirmation that things are working as expected.
+\end{itemize} \vspace{5mm}
+
+You can change your level to non default level by using : 
+\begin{lstlisting}[language=Python]
+logging.basicConfig(filename='my_file.log', level=logging.DEBUG) # or level=logging.INFO
+\end{lstlisting} \vspace{5mm}
+
+Then, there are the default level :
+\begin{itemize}
+    \item WARNING
+    
+    An indication that something unexpected happened, or indicative of some problem in the near future (e.g. ‘disk space low’). The software is still working as expected.
+    
+    \item ERROR
+    
+    Due to a more serious problem, the software has not been able to perform some function.
+    
+    \item CRITICAL
+    
+    A serious error, indicating that the program itself may be unable to continue running.
+\end{itemize} \vspace{5mm}
+
+You can change the way to write information by adding an argument to the \textit{basicConfig()} methods which is \textit{format='\%(asctime)s:\%(levelname)s:\%(message)s'}, you can find other way to format information \href{https://docs.python.org/3/library/logging.html#logrecord-attributes}{here}
+
+\vspace{5mm}
+
+To write into your file, simply replace \textit{print()} by \textit{logging.info/debug/warning/error/critical()}.
+
 
 \subsection{F-string}
 \label{subsec:F-string}
 There is a simple way to write argument in you print() function. It's called F-string. A lot of methods come with it. \textbf{print(f"blabla \{my\_argument\} blabla")}
 \begin{lstlisting}[language=Python]
 for n in range(2):
-	print(f"n = {n:03}")
+  print(f"n = {n:03}")
 #n = 000
 #n = 001
 
